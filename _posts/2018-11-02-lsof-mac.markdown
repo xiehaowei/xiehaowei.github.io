@@ -2,7 +2,7 @@
 layout: post
 title:  "lsof"
 date:   2018-11-02 15:07:01 +0800
-categories: lsof mac
+categories: [lsof, mac,shell]
 ---
 
 {% highlight shell %}
@@ -24,6 +24,3 @@ sudo lsof -nP -iTCP -sTCP:LISTEN
 1. -n 表示不显示主机名
 2. -P 表示不显示端口名称 
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/

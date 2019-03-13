@@ -2,8 +2,12 @@
 layout: post
 title:  "go tool pprof"
 date:   2018-11-01 11:13:01 +0800
-categories: go
+categories: [go]
+tags: [go]
 ---
+
+
+
 *  siege -c 10 -t 100s  -b  -H 'header-key: header-value'   -f ~/urls
 *  go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile
 
@@ -57,9 +61,3 @@ func ProfileHandler() gin.HandlerFunc {
 	}
 }
 {% endhighlight %}
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
