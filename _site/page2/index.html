@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Page 2 of 3 for Xie Haowei | A Blog for Study &amp; Record</title>
+<title>Page 2 of 2 for Xie Haowei | A Blog for Study &amp; Record</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Xie Haowei" />
 <meta property="og:locale" content="en_US" />
@@ -13,7 +13,6 @@
 <meta property="og:url" content="https://xiehaowei.github.io//page2/" />
 <meta property="og:site_name" content="Xie Haowei" />
 <link rel="prev" href="https://xiehaowei.github.io//" />
-<link rel="next" href="https://xiehaowei.github.io//page3" />
 <script type="application/ld+json">
 {"@type":"WebPage","url":"https://xiehaowei.github.io//page2/","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -82,30 +81,6 @@
 <a href="/shell/2017/07/11/shell-variable.html"> >>> Read More </a>
 <br /><br /><br />
 
-<h1><a href="/jekyll/test/2017/01/16/test.html">test</a></h1>
-<p class="author">
-<span class="date">2017-01-16 11:13:01 +0800</span>
-</p>
-<div class="content" style="">
-    You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.
-
-
-</div>
-<a href="/jekyll/test/2017/01/16/test.html"> >>> Read More </a>
-<br /><br /><br />
-
-<h1><a href="/jekyll/update/2017/01/16/welcome-to-jekyll.html">Welcome to Jekyll!</a></h1>
-<p class="author">
-<span class="date">2017-01-16 10:46:12 +0800</span>
-</p>
-<div class="content" style="">
-    You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.
-
-
-</div>
-<a href="/jekyll/update/2017/01/16/welcome-to-jekyll.html"> >>> Read More </a>
-<br /><br /><br />
-
 <h1><a href="/tcp/2016/11/06/TCP.html">TCP</a></h1>
 <p class="author">
 <span class="date">2016-11-06 23:42:50 +0800</span>
@@ -130,15 +105,148 @@
 <a href="/algorithm/2016/09/18/algorithm.html"> >>> Read More </a>
 <br /><br /><br />
 
+<h1><a href="/nginx/2016/09/17/nginx-X-sendfile.html">Nginx X-Sendfile</a></h1>
+<p class="author">
+<span class="date">2016-09-17 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
+    <h3 id="常见php-下载文件">常见PHP 下载文件</h3>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 用户身份认证，若验证失败跳转</span>
+<span class="nx">authenticate</span><span class="p">();</span>
+<span class="c1">// 获取需要下载的文件，若文件不存在跳转</span>
+<span class="nv">$file</span><span class="o">=</span> <span class="nx">determine_file</span><span class="p">();</span>
+<span class="c1">// 读取文件内容</span>
+<span class="nv">$content</span><span class="o">=</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+<span class="c1">// 发送合适的 HTTP 头</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/octet-stream"</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename="'</span><span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span><span class="s1">'"'</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Length: "</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
+<span class="k">echo</span><span class="nv">$content</span><span class="p">;</span> <span class="c1">// 或者 readfile($file);</span>
+<span class="cp">?&gt;</span></code></pre></figure>
+
+<h3 id="开启nginx-x-sendfile">开启Nginx X-Sendfile</h3>
+
+<figure class="highlight"><pre><code class="language-conf" data-lang="conf"><span class="n">location</span> /<span class="n">protected</span>/ {
+ <span class="n">internal</span>;
+ <span class="n">root</span>  /<span class="n">some</span>/<span class="n">path</span>;
+}</code></pre></figure>
+
+
+</div>
+<a href="/nginx/2016/09/17/nginx-X-sendfile.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/algorithm/2016/09/17/quicksort.html">quicksort</a></h1>
+<p class="author">
+<span class="date">2016-09-17 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
+    
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="c1">//快排的实现</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">quikSort</span><span class="o">{</span>
+	
+   <span class="c1">//(1)递归实现快速排序</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">s</span><span class="o">,</span><span class="kt">int</span> <span class="n">l</span><span class="o">,</span><span class="kt">int</span> <span class="n">r</span><span class="o">){</span>
+	 
+	 <span class="k">if</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="o">)</span>
+	 <span class="o">{</span>
+	 	 <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">l</span><span class="o">;</span>
+	     <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">r</span><span class="o">;</span>
+	     <span class="kt">int</span> <span class="n">pivot</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">l</span><span class="o">];</span> <span class="c1">//取每个子数组的第一个数为基点</span>
+	     <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">)</span>
+	     <span class="o">{</span>
+           <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">]&gt;</span><span class="n">pivot</span><span class="o">)</span> <span class="c1">//从右向左</span>
+         	<span class="n">j</span><span class="o">--;</span>
+           <span class="k">if</span><span class="o">(</span><span class="n">j</span><span class="o">&gt;</span><span class="n">i</span><span class="o">)</span>
+           <span class="o">{</span>
+            <span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">++]=</span><span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>    
+           <span class="o">}</span>
+          <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">pivot</span><span class="o">)</span>   <span class="c1">//从左向右</span>
+            <span class="n">i</span><span class="o">++;</span>
+           <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">)</span>
+           <span class="o">{</span>
+         	<span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">--]=</span><span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> 
+           <span class="o">}</span>
+	     <span class="o">}</span>
+	     <span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">pivot</span><span class="o">;</span>
+         <span class="n">quickSort</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="n">l</span><span class="o">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+         <span class="n">quickSort</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span><span class="n">r</span><span class="o">);</span>   
+         
+	 <span class="o">}</span>
+ 
+   <span class="o">}</span>
+   <span class="c1">//非递归实现快速排序</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">NonRecQuickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span><span class="kt">int</span> <span class="n">start</span><span class="o">,</span><span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>  <span class="c1">//用栈模拟</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">end</span><span class="o">);</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">start</span><span class="o">);</span>
+            <span class="k">while</span><span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">pivot</span><span class="o">)</span>
+                <span class="n">end</span><span class="o">--;</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">];</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="o">)</span>
+                <span class="n">start</span><span class="o">++;</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="n">pivot</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
+    <span class="o">}</span>
+   <span class="c1">//打印数组的值</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">PrintArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">arr</span><span class="o">)</span>
+   <span class="o">{</span>
+   	  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span>
+   	  <span class="o">{</span>
+   	  	 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="s">" "</span><span class="o">);</span>
+   	  <span class="o">}</span>
+   	   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+ 
+   <span class="o">}</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="o">)</span>
+   <span class="o">{</span>
+       <span class="kt">int</span><span class="o">[]</span><span class="n">arr</span><span class="o">={</span><span class="mi">3</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">8</span><span class="o">};</span>
+       <span class="n">PrintArray</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+       <span class="c1">//quickSort(arr,0,arr.length-1);</span>
+       <span class="n">NonRecQuickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+       <span class="n">PrintArray</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+   <span class="o">}</span>
+ <span class="o">}</span></code></pre></figure>
+
+
+</div>
+<a href="/algorithm/2016/09/17/quicksort.html"> >>> Read More </a>
+<br /><br /><br />
+
 
 <!-- 分页链接 -->
 <div class="pagination">
 
 <a href="/page1" class="previous">Previous</a>
 
-<span class="page_number ">Page: 2 of 3</span>
+<span class="page_number ">Page: 2 of 2</span>
 
-<a href="/page3" class="next">Next</a>
+<span class="next ">Next</span>
 
 </div>
   </div>
