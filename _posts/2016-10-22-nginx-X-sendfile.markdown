@@ -20,7 +20,6 @@ header('Content-Disposition: attachment; filename="'. basename($file) .'"');
 header("Content-Length: ".filesize($file));
 echo$content; // 或者 readfile($file);
 ?>
-
 {% endhighlight %}
 ### 开启Nginx X-Sendfile
 {% highlight conf %}
