@@ -2,7 +2,10 @@
 layout: post
 title:  "mac network port"
 date:   2018-11-02 15:07:01 +0800
-categories: [lsof,telnet,nc]
+categories: [network]
+tags: [lsof,telnet,nc]
+excerpt: "Mac 下常用网络命令、工具 
+lsof telnet nc "
 ---
 ### lsof
 {% highlight shell %}

@@ -2,7 +2,8 @@
 layout: post
 title:  "Nginx X-Sendfile"
 date:   2016-09-17 22:07:11 +0800
-categories: [nginx]
+categories: [nginx] 
+tags: [nginx]
 ---
 
 ### 常见PHP 下载文件

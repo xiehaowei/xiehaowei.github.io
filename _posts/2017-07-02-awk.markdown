@@ -2,7 +2,8 @@
 layout: post
 title:  "awk"
 date:   2017-07-27 14:21:01 +0800
-categories: [awk,shell]
+categories: [shell]
+tags: [awk]
 ---
 
 ### 输出单引号

@@ -2,7 +2,8 @@
 layout: post
 title:  "TCP"
 date:   2016-11-06 23:42:50 +0800
-categories: [tcp]
+categories: [TCP]
+tags: [TCP]
 ---
 
 一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：

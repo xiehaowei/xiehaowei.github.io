@@ -3,7 +3,8 @@ layout: post
 title:  "go tool pprof"
 date:   2018-11-01 11:13:01 +0800
 categories: [go]
-tags: [go]
+tags: [go,profile]
+excerpt: "go tool pprof"
 ---
 
 

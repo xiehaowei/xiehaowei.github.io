@@ -9,11 +9,11 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A Blog for Study &amp; Record" />
 <meta property="og:description" content="A Blog for Study &amp; Record" />
-<link rel="canonical" href="https://xiehaowei.github.io//404.html" />
-<meta property="og:url" content="https://xiehaowei.github.io//404.html" />
+<link rel="canonical" href="https://xiehaowei.github.io//index.md2" />
+<meta property="og:url" content="https://xiehaowei.github.io//index.md2" />
 <meta property="og:site_name" content="Xie Haowei" />
 <script type="application/ld+json">
-{"@type":"WebPage","url":"https://xiehaowei.github.io//404.html","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
+{"@type":"WebPage","url":"https://xiehaowei.github.io//index.md2","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -33,26 +33,70 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+        <div class="home"><h2 class="post-list-heading">Posts</h2>
+    <ul class="post-list"><li><span class="post-meta">Nov 2, 2018</span>
+        <h3>
+          <a class="post-link" href="/network/2018/11/02/mac-network.html">
+            mac network port
+          </a>
+        </h3></li><li><span class="post-meta">Nov 1, 2018</span>
+        <h3>
+          <a class="post-link" href="/go/2018/11/01/go-tool-pprof.html">
+            go tool pprof
+          </a>
+        </h3></li><li><span class="post-meta">Jun 24, 2018</span>
+        <h3>
+          <a class="post-link" href="/mysql/2018/06/24/MySQL.html">
+            MySQL
+          </a>
+        </h3></li><li><span class="post-meta">Jul 27, 2017</span>
+        <h3>
+          <a class="post-link" href="/shell/2017/07/27/awk.html">
+            awk
+          </a>
+        </h3></li><li><span class="post-meta">Jul 14, 2017</span>
+        <h3>
+          <a class="post-link" href="/network/2017/07/14/ip-number.html">
+            IP Number
+          </a>
+        </h3></li><li><span class="post-meta">Jul 11, 2017</span>
+        <h3>
+          <a class="post-link" href="/shell/2017/07/11/shell-variable.html">
+            shell variable
+          </a>
+        </h3></li><li><span class="post-meta">Jan 16, 2017</span>
+        <h3>
+          <a class="post-link" href="/jekyll/test/2017/01/16/test.html">
+            test
+          </a>
+        </h3></li><li><span class="post-meta">Jan 16, 2017</span>
+        <h3>
+          <a class="post-link" href="/jekyll/update/2017/01/16/welcome-to-jekyll.html">
+            Welcome to Jekyll!
+          </a>
+        </h3></li><li><span class="post-meta">Nov 6, 2016</span>
+        <h3>
+          <a class="post-link" href="/tcp/2016/11/06/TCP.html">
+            TCP
+          </a>
+        </h3></li><li><span class="post-meta">Sep 18, 2016</span>
+        <h3>
+          <a class="post-link" href="/algorithm/2016/09/18/algorithm.html">
+            algorithm
+          </a>
+        </h3></li><li><span class="post-meta">Sep 17, 2016</span>
+        <h3>
+          <a class="post-link" href="/nginx/2016/09/17/nginx-X-sendfile.html">
+            Nginx X-Sendfile
+          </a>
+        </h3></li><li><span class="post-meta">Sep 17, 2016</span>
+        <h3>
+          <a class="post-link" href="/algorithm/2016/09/17/quicksort.html">
+            quicksort
+          </a>
+        </h3></li></ul>
+   
+    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p></div>
 
       </div>
       

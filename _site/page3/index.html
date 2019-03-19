@@ -3,19 +3,18 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>quicksort | Xie Haowei</title>
+<title>Page 3 of 3 for Xie Haowei | A Blog for Study &amp; Record</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="quicksort" />
+<meta property="og:title" content="Xie Haowei" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="import java.util.*; //快排的实现 public class quikSort{ //(1)递归实现快速排序 public static void quickSort(int[]s,int l,int r){ if(l&lt;r) { int i=l; int j=r; int pivot=s[l]; //取每个子数组的第一个数为基点 while(i&lt;j) { while(i&lt;j&amp;&amp;s[j]&gt;pivot) //从右向左 j--; if(j&gt;i) { s[i++]=s[j]; } while(i&lt;j&amp;&amp;s[i]&lt;pivot) //从左向右 i++; if(i&lt;j) { s[j--]=s[i]; } } s[i]=pivot; quickSort(s,l,i-1); quickSort(s,i+1,r); } } //非递归实现快速排序 public static void NonRecQuickSort(int[] a,int start,int end) { LinkedList&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;(); //用栈模拟 if(start &lt; end) { stack.push(end); stack.push(start); while(!stack.isEmpty()) { int l = stack.pop(); int r = stack.pop(); int index = partition(a, l, r); if(l &lt; index - 1) { stack.push(index-1); stack.push(l); } if(r &gt; index + 1) { stack.push(r); stack.push(index+1); } } } } public static int partition(int[] a, int start, int end) { int pivot = a[start]; while(start &lt; end) { while(start &lt; end &amp;&amp; a[end] &gt;= pivot) end--; a[start] = a[end]; while(start &lt; end &amp;&amp; a[start] &lt;= pivot) start++; a[end] = a[start]; } a[start] = pivot; return start; } //打印数组的值 public static void PrintArray(int[]arr) { for(int i=0;i&lt;arr.length;i++) { System.out.print(arr[i]+&quot; &quot;); } System.out.println(); } public static void main(String[]args) { int[]arr={3,6,5,2,5,4,3,8}; PrintArray(arr); //quickSort(arr,0,arr.length-1); NonRecQuickSort(arr,0,arr.length-1); PrintArray(arr); } }" />
-<meta property="og:description" content="import java.util.*; //快排的实现 public class quikSort{ //(1)递归实现快速排序 public static void quickSort(int[]s,int l,int r){ if(l&lt;r) { int i=l; int j=r; int pivot=s[l]; //取每个子数组的第一个数为基点 while(i&lt;j) { while(i&lt;j&amp;&amp;s[j]&gt;pivot) //从右向左 j--; if(j&gt;i) { s[i++]=s[j]; } while(i&lt;j&amp;&amp;s[i]&lt;pivot) //从左向右 i++; if(i&lt;j) { s[j--]=s[i]; } } s[i]=pivot; quickSort(s,l,i-1); quickSort(s,i+1,r); } } //非递归实现快速排序 public static void NonRecQuickSort(int[] a,int start,int end) { LinkedList&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;(); //用栈模拟 if(start &lt; end) { stack.push(end); stack.push(start); while(!stack.isEmpty()) { int l = stack.pop(); int r = stack.pop(); int index = partition(a, l, r); if(l &lt; index - 1) { stack.push(index-1); stack.push(l); } if(r &gt; index + 1) { stack.push(r); stack.push(index+1); } } } } public static int partition(int[] a, int start, int end) { int pivot = a[start]; while(start &lt; end) { while(start &lt; end &amp;&amp; a[end] &gt;= pivot) end--; a[start] = a[end]; while(start &lt; end &amp;&amp; a[start] &lt;= pivot) start++; a[end] = a[start]; } a[start] = pivot; return start; } //打印数组的值 public static void PrintArray(int[]arr) { for(int i=0;i&lt;arr.length;i++) { System.out.print(arr[i]+&quot; &quot;); } System.out.println(); } public static void main(String[]args) { int[]arr={3,6,5,2,5,4,3,8}; PrintArray(arr); //quickSort(arr,0,arr.length-1); NonRecQuickSort(arr,0,arr.length-1); PrintArray(arr); } }" />
-<link rel="canonical" href="https://xiehaowei.github.io//algorithm/2016/09/17/quicksort.html" />
-<meta property="og:url" content="https://xiehaowei.github.io//algorithm/2016/09/17/quicksort.html" />
+<meta name="description" content="A Blog for Study &amp; Record" />
+<meta property="og:description" content="A Blog for Study &amp; Record" />
+<link rel="canonical" href="https://xiehaowei.github.io//page3/" />
+<meta property="og:url" content="https://xiehaowei.github.io//page3/" />
 <meta property="og:site_name" content="Xie Haowei" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-09-17T22:07:11+08:00" />
+<link rel="prev" href="https://xiehaowei.github.io//page2" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//algorithm/2016/09/17/quicksort.html"},"url":"https://xiehaowei.github.io//algorithm/2016/09/17/quicksort.html","description":"import java.util.*; //快排的实现 public class quikSort{ //(1)递归实现快速排序 public static void quickSort(int[]s,int l,int r){ if(l&lt;r) { int i=l; int j=r; int pivot=s[l]; //取每个子数组的第一个数为基点 while(i&lt;j) { while(i&lt;j&amp;&amp;s[j]&gt;pivot) //从右向左 j--; if(j&gt;i) { s[i++]=s[j]; } while(i&lt;j&amp;&amp;s[i]&lt;pivot) //从左向右 i++; if(i&lt;j) { s[j--]=s[i]; } } s[i]=pivot; quickSort(s,l,i-1); quickSort(s,i+1,r); } } //非递归实现快速排序 public static void NonRecQuickSort(int[] a,int start,int end) { LinkedList&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;(); //用栈模拟 if(start &lt; end) { stack.push(end); stack.push(start); while(!stack.isEmpty()) { int l = stack.pop(); int r = stack.pop(); int index = partition(a, l, r); if(l &lt; index - 1) { stack.push(index-1); stack.push(l); } if(r &gt; index + 1) { stack.push(r); stack.push(index+1); } } } } public static int partition(int[] a, int start, int end) { int pivot = a[start]; while(start &lt; end) { while(start &lt; end &amp;&amp; a[end] &gt;= pivot) end--; a[start] = a[end]; while(start &lt; end &amp;&amp; a[start] &lt;= pivot) start++; a[end] = a[start]; } a[start] = pivot; return start; } //打印数组的值 public static void PrintArray(int[]arr) { for(int i=0;i&lt;arr.length;i++) { System.out.print(arr[i]+&quot; &quot;); } System.out.println(); } public static void main(String[]args) { int[]arr={3,6,5,2,5,4,3,8}; PrintArray(arr); //quickSort(arr,0,arr.length-1); NonRecQuickSort(arr,0,arr.length-1); PrintArray(arr); } }","headline":"quicksort","dateModified":"2016-09-17T22:07:11+08:00","datePublished":"2016-09-17T22:07:11+08:00","@context":"http://schema.org"}</script>
+{"@type":"WebPage","url":"https://xiehaowei.github.io//page3/","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -35,18 +34,53 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">quicksort</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2016-09-17T22:07:11+08:00" itemprop="datePublished">Sep 17, 2016
-      </time></p>
-
-     
+    <h1 class="post-title"></h1>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  <div class="post-content">
+    <!-- 遍历分页后的文章 -->
+
+<h1><a href="/nginx/2016/09/17/nginx-X-sendfile.html">Nginx X-Sendfile</a></h1>
+<p class="author">
+<span class="date">2016-09-17 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
+    <h3 id="常见php-下载文件">常见PHP 下载文件</h3>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 用户身份认证，若验证失败跳转</span>
+<span class="nx">authenticate</span><span class="p">();</span>
+<span class="c1">// 获取需要下载的文件，若文件不存在跳转</span>
+<span class="nv">$file</span><span class="o">=</span> <span class="nx">determine_file</span><span class="p">();</span>
+<span class="c1">// 读取文件内容</span>
+<span class="nv">$content</span><span class="o">=</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+<span class="c1">// 发送合适的 HTTP 头</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/octet-stream"</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename="'</span><span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span><span class="s1">'"'</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Length: "</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
+<span class="k">echo</span><span class="nv">$content</span><span class="p">;</span> <span class="c1">// 或者 readfile($file);</span>
+<span class="cp">?&gt;</span></code></pre></figure>
+
+<h3 id="开启nginx-x-sendfile">开启Nginx X-Sendfile</h3>
+
+<figure class="highlight"><pre><code class="language-conf" data-lang="conf"><span class="n">location</span> /<span class="n">protected</span>/ {
+ <span class="n">internal</span>;
+ <span class="n">root</span>  /<span class="n">some</span>/<span class="n">path</span>;
+}</code></pre></figure>
+
+
+</div>
+<a href="/nginx/2016/09/17/nginx-X-sendfile.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/algorithm/2016/09/17/quicksort.html">quicksort</a></h1>
+<p class="author">
+<span class="date">2016-09-17 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
     
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 <span class="c1">//快排的实现</span>
@@ -138,7 +172,23 @@
  <span class="o">}</span></code></pre></figure>
 
 
-  </div><a class="u-url" href="/algorithm/2016/09/17/quicksort.html" hidden></a>
+</div>
+<a href="/algorithm/2016/09/17/quicksort.html"> >>> Read More </a>
+<br /><br /><br />
+
+
+<!-- 分页链接 -->
+<div class="pagination">
+
+<a href="/page2" class="previous">Previous</a>
+
+<span class="page_number ">Page: 3 of 3</span>
+
+<span class="next ">Next</span>
+
+</div>
+  </div>
+
 </article>
 
       </div>

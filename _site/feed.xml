@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://xiehaowei.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://xiehaowei.github.io//" rel="alternate" type="text/html" /><updated>2019-03-19T19:04:17+08:00</updated><id>https://xiehaowei.github.io//feed.xml</id><title type="html">Xie Haowei</title><subtitle>A Blog for Study &amp; Record</subtitle><entry><title type="html">mac network port</title><link href="https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network.html" rel="alternate" type="text/html" title="mac network port" /><published>2018-11-02T15:07:01+08:00</published><updated>2018-11-02T15:07:01+08:00</updated><id>https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network</id><content type="html" xml:base="https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network.html">&lt;h3 id=&quot;lsof&quot;&gt;lsof&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://xiehaowei.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://xiehaowei.github.io//" rel="alternate" type="text/html" /><updated>2019-03-19T19:55:04+08:00</updated><id>https://xiehaowei.github.io//feed.xml</id><title type="html">Xie Haowei</title><subtitle>A Blog for Study &amp; Record</subtitle><entry><title type="html">mac network port</title><link href="https://xiehaowei.github.io//network/2018/11/02/mac-network.html" rel="alternate" type="text/html" title="mac network port" /><published>2018-11-02T15:07:01+08:00</published><updated>2018-11-02T15:07:01+08:00</updated><id>https://xiehaowei.github.io//network/2018/11/02/mac-network</id><content type="html" xml:base="https://xiehaowei.github.io//network/2018/11/02/mac-network.html">&lt;h3 id=&quot;lsof&quot;&gt;lsof&lt;/h3&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsof
 &lt;span class=&quot;c&quot;&gt;#安装lsof&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -46,7 +46,7 @@ Connection to 127.0.0.1 port 1998 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
   &lt;li&gt;或者 最左上角的苹果标志 –&amp;gt; 关于本机 –&amp;gt;点按’系统报告’ –&amp;gt; 标题栏的’窗口’ –&amp;gt; 网络实用工具 –&amp;gt; 点按’端口扫描’&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/mac-network.png&quot; alt=&quot;网络实用工具截图&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">lsof brew install lsof #安装lsof</summary></entry><entry><title type="html">go tool pprof</title><link href="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html" rel="alternate" type="text/html" title="go tool pprof" /><published>2018-11-01T11:13:01+08:00</published><updated>2018-11-01T11:13:01+08:00</updated><id>https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof</id><content type="html" xml:base="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html">&lt;ul&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/mac-network.png&quot; alt=&quot;网络实用工具截图&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="lsof" /><category term="telnet" /><category term="nc" /><summary type="html">Mac 下常用网络命令、工具 lsof telnet nc</summary></entry><entry><title type="html">go tool pprof</title><link href="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html" rel="alternate" type="text/html" title="go tool pprof" /><published>2018-11-01T11:13:01+08:00</published><updated>2018-11-01T11:13:01+08:00</updated><id>https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof</id><content type="html" xml:base="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html">&lt;ul&gt;
   &lt;li&gt;siege -c 10 -t 100s  -b  -H ‘header-key: header-value’   -f ~/urls&lt;/li&gt;
   &lt;li&gt;go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile&lt;/li&gt;
 &lt;/ul&gt;
@@ -93,7 +93,7 @@ Connection to 127.0.0.1 port 1998 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
 	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 		&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pprof&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Profile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Writer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 	&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="go" /><summary type="html">siege -c 10 -t 100s -b -H ‘header-key: header-value’ -f ~/urls go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile</summary></entry><entry><title type="html">MySQL</title><link href="https://xiehaowei.github.io//mysql/2018/06/24/MySQL.html" rel="alternate" type="text/html" title="MySQL" /><published>2018-06-24T19:34:23+08:00</published><updated>2018-06-24T19:34:23+08:00</updated><id>https://xiehaowei.github.io//mysql/2018/06/24/MySQL</id><content type="html" xml:base="https://xiehaowei.github.io//mysql/2018/06/24/MySQL.html">&lt;p&gt;按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="go" /><category term="profile" /><summary type="html">go tool pprof</summary></entry><entry><title type="html">MySQL</title><link href="https://xiehaowei.github.io//mysql/2018/06/24/MySQL.html" rel="alternate" type="text/html" title="MySQL" /><published>2018-06-24T19:34:23+08:00</published><updated>2018-06-24T19:34:23+08:00</updated><id>https://xiehaowei.github.io//mysql/2018/06/24/MySQL</id><content type="html" xml:base="https://xiehaowei.github.io//mysql/2018/06/24/MySQL.html">&lt;p&gt;按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。
 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;isolation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;READ&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;UNCOMMITTED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;READ&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;COMMITTED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REPEATABLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;READ&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SERIALIZABLE&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -561,7 +561,7 @@ MySQL InnoDB的可重复读并不保证避免幻读，需要应用使用加锁�
 
 &lt;p&gt;总结:&lt;/p&gt;
 
-&lt;p&gt;四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用.记住4个隔离级别的特点(上面的例子);&lt;/p&gt;</content><author><name></name></author><summary type="html">按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：</summary></entry><entry><title type="html">awk</title><link href="https://xiehaowei.github.io//awk/shell/2017/07/27/awk.html" rel="alternate" type="text/html" title="awk" /><published>2017-07-27T14:21:01+08:00</published><updated>2017-07-27T14:21:01+08:00</updated><id>https://xiehaowei.github.io//awk/shell/2017/07/27/awk</id><content type="html" xml:base="https://xiehaowei.github.io//awk/shell/2017/07/27/awk.html">&lt;h3 id=&quot;输出单引号&quot;&gt;输出单引号&lt;/h3&gt;
+&lt;p&gt;四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用.记住4个隔离级别的特点(上面的例子);&lt;/p&gt;</content><author><name></name></author><category term="MySQL" /><summary type="html">按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：</summary></entry><entry><title type="html">awk</title><link href="https://xiehaowei.github.io//shell/2017/07/27/awk.html" rel="alternate" type="text/html" title="awk" /><published>2017-07-27T14:21:01+08:00</published><updated>2017-07-27T14:21:01+08:00</updated><id>https://xiehaowei.github.io//shell/2017/07/27/awk</id><content type="html" xml:base="https://xiehaowei.github.io//shell/2017/07/27/awk.html">&lt;h3 id=&quot;输出单引号&quot;&gt;输出单引号&lt;/h3&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;ps|awk &lt;span class=&quot;s1&quot;&gt;'{print &quot;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&quot;}'&lt;/span&gt;    
 &lt;span class=&quot;c&quot;&gt;#使用一个双引号&quot;&quot;，然后在双引号里面加入两个单引号''&lt;/span&gt;
@@ -603,7 +603,7 @@ MySQL InnoDB的可重复读并不保证避免幻读，需要应用使用加锁�
 &lt;ul&gt;
   &lt;li&gt;5 B&lt;/li&gt;
   &lt;li&gt;3 A&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">输出单引号 ps|awk '{print &quot;'\''&quot;}' #使用一个双引号&quot;&quot;，然后在双引号里面加入两个单引号'' #接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</summary></entry><entry><title type="html">IP Number</title><link href="https://xiehaowei.github.io//ip/2017/07/14/ip-number.html" rel="alternate" type="text/html" title="IP Number" /><published>2017-07-14T14:21:01+08:00</published><updated>2017-07-14T14:21:01+08:00</updated><id>https://xiehaowei.github.io//ip/2017/07/14/ip-number</id><content type="html" xml:base="https://xiehaowei.github.io//ip/2017/07/14/ip-number.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/**   
+&lt;/ul&gt;</content><author><name></name></author><category term="awk" /><summary type="html">输出单引号 ps|awk '{print &quot;'\''&quot;}' #使用一个双引号&quot;&quot;，然后在双引号里面加入两个单引号'' #接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</summary></entry><entry><title type="html">IP Number</title><link href="https://xiehaowei.github.io//network/2017/07/14/ip-number.html" rel="alternate" type="text/html" title="IP Number" /><published>2017-07-14T14:21:01+08:00</published><updated>2017-07-14T14:21:01+08:00</updated><id>https://xiehaowei.github.io//network/2017/07/14/ip-number</id><content type="html" xml:base="https://xiehaowei.github.io//network/2017/07/14/ip-number.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/**   
   * ip地址转成整数.   
   * @param ip   
   * @return   
@@ -630,7 +630,7 @@ MySQL InnoDB的可重复读并不保证避免幻读，需要应用使用加锁�
          &lt;span class=&quot;n&quot;&gt;ipInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;     
      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;     
      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ipInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;     
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">/** * ip地址转成整数. * @param ip * @return */ public static long ip2long(String ip) { String[] ips = ip.split(&quot;[.]&quot;); long num = 16777216L*Long.parseLong(ips[0]) + 65536L*Long.parseLong(ips[1]) + 256*Long.parseLong(ips[2]) + Long.parseLong(ips[3]); return num; } /** * 整数转成ip地址. * @param ipLong * @return */ public static String long2ip(long ipLong) { //long ipLong = 1037591503; long mask[] = {0x000000FF,0x0000FF00,0x00FF0000,0xFF000000}; long num = 0; StringBuffer ipInfo = new StringBuffer(); for(int i=0;i&amp;lt;4;i++){ num = (ipLong &amp;amp; mask[i])&amp;gt;&amp;gt;(i*8); if(i&amp;gt;0) ipInfo.insert(0,&quot;.&quot;); ipInfo.insert(0,Long.toString(num,10)); } return ipInfo.toString(); }</summary></entry><entry><title type="html">shell variable</title><link href="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html" rel="alternate" type="text/html" title="shell variable" /><published>2017-07-11T10:23:01+08:00</published><updated>2017-07-11T10:23:01+08:00</updated><id>https://xiehaowei.github.io//shell/2017/07/11/shell-variable</id><content type="html" xml:base="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dir1/dir2/dir3/my.file.txt
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="ip" /><summary type="html">/** * ip地址转成整数. * @param ip * @return */ public static long ip2long(String ip) { String[] ips = ip.split(&quot;[.]&quot;); long num = 16777216L*Long.parseLong(ips[0]) + 65536L*Long.parseLong(ips[1]) + 256*Long.parseLong(ips[2]) + Long.parseLong(ips[3]); return num; } /** * 整数转成ip地址. * @param ipLong * @return */ public static String long2ip(long ipLong) { //long ipLong = 1037591503; long mask[] = {0x000000FF,0x0000FF00,0x00FF0000,0xFF000000}; long num = 0; StringBuffer ipInfo = new StringBuffer(); for(int i=0;i&amp;lt;4;i++){ num = (ipLong &amp;amp; mask[i])&amp;gt;&amp;gt;(i*8); if(i&amp;gt;0) ipInfo.insert(0,&quot;.&quot;); ipInfo.insert(0,Long.toString(num,10)); } return ipInfo.toString(); }</summary></entry><entry><title type="html">shell variable</title><link href="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html" rel="alternate" type="text/html" title="shell variable" /><published>2017-07-11T10:23:01+08:00</published><updated>2017-07-11T10:23:01+08:00</updated><id>https://xiehaowei.github.io//shell/2017/07/11/shell-variable</id><content type="html" xml:base="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dir1/dir2/dir3/my.file.txt
 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;#*/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;##*/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉最后一个 /  及其左边的字符串：my.file.txt
 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;#*.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  及其左边的字符串：file.txt
@@ -692,7 +692,7 @@ ahahahha&lt;/p&gt;
     
   &lt;/ul&gt;
 
-&lt;h3&gt;tcp&lt;/h3&gt;
+&lt;h3&gt;TCP&lt;/h3&gt;
 &lt;ul&gt;
     
       &lt;li&gt;&lt;a href=&quot;/tcp/2016/11/06/TCP.html&quot;&gt;TCP&lt;/a&gt;&lt;/li&gt;
@@ -725,23 +725,18 @@ ahahahha&lt;/p&gt;
 &lt;h3&gt;shell&lt;/h3&gt;
 &lt;ul&gt;
     
-      &lt;li&gt;&lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;&lt;/li&gt;
     
       &lt;li&gt;&lt;a href=&quot;/shell/2017/07/11/shell-variable.html&quot;&gt;shell variable&lt;/a&gt;&lt;/li&gt;
     
   &lt;/ul&gt;
 
-&lt;h3&gt;ip&lt;/h3&gt;
+&lt;h3&gt;network&lt;/h3&gt;
 &lt;ul&gt;
     
-      &lt;li&gt;&lt;a href=&quot;/ip/2017/07/14/ip-number.html&quot;&gt;IP Number&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/network/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
     
-  &lt;/ul&gt;
-
-&lt;h3&gt;awk&lt;/h3&gt;
-&lt;ul&gt;
-    
-      &lt;li&gt;&lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/network/2017/07/14/ip-number.html&quot;&gt;IP Number&lt;/a&gt;&lt;/li&gt;
     
   &lt;/ul&gt;
 
@@ -759,33 +754,12 @@ ahahahha&lt;/p&gt;
     
   &lt;/ul&gt;
 
-&lt;h3&gt;lsof&lt;/h3&gt;
-&lt;ul&gt;
-    
-      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
-    
-  &lt;/ul&gt;
-
-&lt;h3&gt;telnet&lt;/h3&gt;
-&lt;ul&gt;
-    
-      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
-    
-  &lt;/ul&gt;
-
-&lt;h3&gt;nc&lt;/h3&gt;
-&lt;ul&gt;
-    
-      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
-    
-  &lt;/ul&gt;
-
 &lt;h2 id=&quot;post-list&quot;&gt;post list&lt;/h2&gt;
 
 &lt;ul&gt;
   
     &lt;li&gt;
-      &lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;
+      &lt;a href=&quot;/network/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
@@ -797,11 +771,11 @@ ahahahha&lt;/p&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
-      &lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;
+      &lt;a href=&quot;/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
-      &lt;a href=&quot;/ip/2017/07/14/ip-number.html&quot;&gt;IP Number&lt;/a&gt;
+      &lt;a href=&quot;/network/2017/07/14/ip-number.html&quot;&gt;IP Number&lt;/a&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
@@ -1092,7 +1066,7 @@ A等待2倍MSL时间后，确认连接关闭，也进入CLOSED状态
 &lt;p&gt;双方处于已连接的状态
 A和B同时发起关闭连接操作，双方同时向对方发送FIN关闭请求
 双方都进入CLOSING状态，同时给对方响应ACK消息
-双方都进入TIME-WAIT状态，各自等待2倍MSL时间后进入CLOSED状态&lt;/p&gt;</content><author><name></name></author><summary type="html">一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：</summary></entry><entry><title type="html">algorithm</title><link href="https://xiehaowei.github.io//algorithm/2016/09/18/algorithm.html" rel="alternate" type="text/html" title="algorithm" /><published>2016-09-18T22:07:11+08:00</published><updated>2016-09-18T22:07:11+08:00</updated><id>https://xiehaowei.github.io//algorithm/2016/09/18/algorithm</id><content type="html" xml:base="https://xiehaowei.github.io//algorithm/2016/09/18/algorithm.html">&lt;h3 id=&quot;1-合并排序将两个已经排序的数组合并成一个数组其中一个数组能容下两个数组的所有元素&quot;&gt;1. 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素&lt;/h3&gt;
+双方都进入TIME-WAIT状态，各自等待2倍MSL时间后进入CLOSED状态&lt;/p&gt;</content><author><name></name></author><category term="TCP" /><summary type="html">一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：</summary></entry><entry><title type="html">algorithm</title><link href="https://xiehaowei.github.io//algorithm/2016/09/18/algorithm.html" rel="alternate" type="text/html" title="algorithm" /><published>2016-09-18T22:07:11+08:00</published><updated>2016-09-18T22:07:11+08:00</updated><id>https://xiehaowei.github.io//algorithm/2016/09/18/algorithm</id><content type="html" xml:base="https://xiehaowei.github.io//algorithm/2016/09/18/algorithm.html">&lt;h3 id=&quot;1-合并排序将两个已经排序的数组合并成一个数组其中一个数组能容下两个数组的所有元素&quot;&gt;1. 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素&lt;/h3&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素&lt;/span&gt;
 &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MergeArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
