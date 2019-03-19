@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>TCP | Xie Haowei</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="TCP" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：" />
+<meta property="og:description" content="一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：" />
+<link rel="canonical" href="https://xiehaowei.github.io//tcp/2016/11/06/TCP.html" />
+<meta property="og:url" content="https://xiehaowei.github.io//tcp/2016/11/06/TCP.html" />
+<meta property="og:site_name" content="Xie Haowei" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-06T23:42:50+08:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//tcp/2016/11/06/TCP.html"},"url":"https://xiehaowei.github.io//tcp/2016/11/06/TCP.html","description":"一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：","headline":"TCP","dateModified":"2016-11-06T23:42:50+08:00","datePublished":"2016-11-06T23:42:50+08:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Xie Haowei</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/category/">category</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TCP</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2016-11-06T23:42:50+08:00" itemprop="datePublished">Nov 6, 2016
+      </time></p>
+
+     
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：</p>
+
+<p>LISTEN，SYN_SENT，SYN-RECEIVED，ESTABLISHED，FIN-WAIT-1，FIN-WAIT-2，CLOSE-WAIT，CLOSING，LAST-ACK，TIME-WAIT，CLOSED。其中CLOSED是一个虚构的状态，因为CLOSED的TCP连接的TCB（Transmission Control Block）已经释放掉了，所以此时这个TCP连接已经不存在了。关于各个状态的一个简要说明：</p>
+
+<ol>
+  <li>LISTEN：侦听并等待对端的TCP连接请求</li>
+  <li>SYN-SENT：发送SYN连接请求后，等待对端回复SYN请求</li>
+  <li>SYN-RECEIVED：收到来自对端的SYN请求，并回复SYN请求后，等待对端响应SYN请求的ACK消息</li>
+  <li>ESTABLISHED：代表连接建立，双方在这个状态下进行TCP数据交互</li>
+  <li>FIN-WAIT-1：发送FIN关闭连接请求后，等待对方响应FIN的ACK消息或者对端的FIN关闭请求</li>
+  <li>FIN-WAIT-2：等待对方FIN关闭请求</li>
+  <li>CLOSE-WAIT：等待本地用户（进程）发送FIN关闭请求给对端</li>
+  <li>CLOSING：当双方同时发送FIN关闭请求时，会进入CLOSING状态，等待对端发送FIN报文的响应ACK消息</li>
+  <li>LAST-ACK：收到对端FIN请求后，回复ACK及FIN并等待对方回复FIN的响应ACK消息，此时进入此状态</li>
+  <li>TIME-WAIT：该状态是为了确保对端收到了FIN请求的ACK响应，默认会等待两倍MSL时长（MSL：Maximum Segment Lifetime，即报文最大生存时间，超过这个时间的报文会被丢弃）</li>
+</ol>
+
+<p>对于上面的状态之间的变化关系，可以参考RFC-793中的TCP连接状态变化图：
+<img src="/assets/Tcp-connection-state.png" alt="网络实用工具截图" /></p>
+
+<p>注：</p>
+
+<p>图中“———”上下的内容表示状态变换的条件（例如snd SYN,ACK表示发送SYN和ACK报文，rcv FIN表示收到FIN报文等等）</p>
+
+<p>图中“+——-+”中框起来的是各个TCP连接的状态</p>
+
+<p>图中“——–&gt;”这类箭头表示状态之间变换的顺序（还有各种折线箭头）</p>
+
+<p> </p>
+
+<p> </p>
+
+<p>TCP三次握手的过程以及状态切换过程说明：</p>
+
+<p>    TCP A                                               TCP B</p>
+
+<p>1.  CLOSED                                              LISTEN</p>
+
+<p>2.  SYN-SENT    –&gt; &lt;SEQ=100&gt;&lt;FLAGS=SYN&gt;                 –&gt; SYN-RECEIVED</p>
+
+<p>3.  ESTABLISHED &lt;– &lt;SEQ=300&gt;&lt;ACK=101&gt;&lt;FLAGS=SYN,ACK&gt;    &lt;– SYN-RECEIVED</p>
+
+<p>4.  ESTABLISHED –&gt; &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;       –&gt; ESTABLISHED</p>
+
+<p>5.  ESTABLISHED –&gt; &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;<DATA> --&gt; ESTABLISHED</DATA></p>
+
+<p>过程说明：</p>
+
+<p>B作为服务器端处于LISTEN状态，侦听外部的TCP连接
+A发送SYN连接请求给B，进入SYN-SENT状态，B收到连接请求后，进入SYN-RECEIVED状态
+B回复SYN，ACK给A，A收到后进入ESTABLISHED状态
+A回复ACK给B，B收到后也进入ESTABLISHED状态
+双方开始进行数据交换
+ </p>
+
+<p> </p>
+
+<p>再来看一个更为复杂的握手过程，双方在CLOSED状态下同时发起到对方的TCP连接：</p>
+
+<p>    TCP A                                                TCP B</p>
+
+<p>1.  CLOSED                                               CLOSED</p>
+
+<p>2.  SYN-SENT     –&gt; &lt;SEQ=100&gt;&lt;FLAGS=SYN&gt;              …</p>
+
+<p>3.  SYN-RECEIVED &lt;– &lt;SEQ=300&gt;&lt;FLAGS=SYN&gt;              &lt;– SYN-SENT</p>
+
+<p>4.               … &lt;SEQ=100&gt;&lt;FLAGS=SYN&gt;              –&gt; SYN-RECEIVED</p>
+
+<p>5.  SYN-RECEIVED –&gt; &lt;SEQ=100&gt;&lt;ACK=301&gt;&lt;FLAGS=SYN,ACK&gt; …</p>
+
+<p>6.  ESTABLISHED  &lt;– &lt;SEQ=300&gt;&lt;ACK=101&gt;&lt;FLAGS=SYN,ACK&gt; &lt;– SYN-RECEIVED</p>
+
+<p>7.               … &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;     –&gt; ESTABLISHED</p>
+
+<p>过程说明：</p>
+
+<p>A和B均处于CLOSED状态
+A向B发送SYN连接请求，A进入SYN-SENT状态
+由于网络延迟，步骤2中A发送的SYN请求还未到达B，此时B发送SYN请求给A，进入SYN-SENT状态，A收到后进入SYN-RECEIVED状态
+第2步来自A的SYN请求刚到达B，B收到后，进入SYN-RECEIVED状态
+A回复SYN，ACK给B的SYN请求
+B回复SYN，ACK给A，由于A已经发过ACK响应B的SYN，所以A直接进入ESTABLISHED状态
+B收到SYN请求的ACK响应，进入ESTABLISHED状态
+整个过程中，由于双方同时发起建立连接的请求，所以过程中双方都发出了超过1个带有SYN的报文
+ </p>
+
+<p> </p>
+
+<p>为了避免一个延迟到达的SYN报文引起混乱，TCP中使用RST标记来重置连接状态：</p>
+
+<p>    TCP A                                              TCP B</p>
+
+<p>1.  CLOSED                                             LISTEN</p>
+
+<p>2.  SYN-SENT    –&gt; &lt;SEQ=100&gt;&lt;FLAGS=SYN&gt;               …</p>
+
+<p>3.  (duplicate) … &lt;SEQ=90&gt;&lt;FLAGS=SYN&gt;                 –&gt; SYN-RECEIVED</p>
+
+<p>4.  SYN-SENT    &lt;– &lt;SEQ=300&gt;&lt;ACK=91&gt;&lt;FLAGS=SYN,ACK&gt;    &lt;– SYN-RECEIVED</p>
+
+<p>5.  SYN-SENT    –&gt; &lt;SEQ=91&gt;&lt;FLAGS=RST&gt;                 –&gt; LISTEN</p>
+
+<p>6.              … &lt;SEQ=100&gt;&lt;FLAGS=SYN&gt;               –&gt; SYN-RECEIVED</p>
+
+<p>7.  SYN-SENT    &lt;– &lt;SEQ=400&gt;&lt;ACK=101&gt;&lt;FLAGS=SYN,ACK&gt;  &lt;– SYN-RECEIVED</p>
+
+<p>8.  ESTABLISHED –&gt; &lt;SEQ=101&gt;&lt;ACK=401&gt;&lt;FLAGS=ACK&gt;      –&gt; ESTABLISHED</p>
+
+<p>过程说明：</p>
+
+<p>B处于LISTEN状态，等待连接
+A发起SYN请求，准备与B建立连接
+B收到一个之前从A发出的延迟到达的SYN请求（可能是由于网络延迟，导致该请求滞后了很久才到达B），进入SYN-RECEIVED状态
+B回复SYN，ACK报文给A，注意这里B回复的是第2步中A延迟到达的SYN请求
+A收到后发现ACK字段的值（91）并不是之前自己发起请求时SEQUENCE的值+1（101），所以A判断此时报文顺序异常，于是A发送RST报文给B，B收到后重新进入LISTEN状态
+A在第1步发出的SYN报文到达B，B正确进入SYN-RECEIVED状态
+B回复SYN，ACK给A
+A回复ACK给B，双方均进入ESTABLISHED状态
+ </p>
+
+<p> </p>
+
+<p>半开连接（Half-open）和一些非正常的连接情况举例：</p>
+
+<p>当TCP连接中的一方在未通知对方的情况下关闭或者终止了连接，或者双方不同时地出现异常导致连接失效，这种情况下，如果某一方仍然尝试通过此TCP连接发送数据，则会收到RST报文。</p>
+
+<p>下面是一方系统异常的一个例子：</p>
+
+<p>    TCP A                                                 TCP B</p>
+
+<p>1.  (CRASH)                                    (send 300,receive 100)</p>
+
+<p>2.  CLOSED                                                ESTABLISHED</p>
+
+<p>3.  SYN-SENT –&gt; &lt;SEQ=400&gt;&lt;FLAGS=SYN&gt;              –&gt; (??)</p>
+
+<p>4.  (!!)     &lt;– &lt;SEQ=300&gt;&lt;ACK=100&gt;&lt;FLAGS=ACK&gt;     &lt;– ESTABLISHED</p>
+
+<p>5.  SYN-SENT –&gt; &lt;SEQ=100&gt;&lt;FLAGS=RST&gt;              –&gt; (Abort!!)</p>
+
+<p>6.  SYN-SENT                                              CLOSED</p>
+
+<p>7.  SYN-SENT –&gt; &lt;SEQ=400&gt;&lt;FLAGS=SYN&gt;              –&gt;</p>
+
+<p>过程说明：</p>
+
+<p>B的SEQ=300，ACK=100，此时A遇到异常TCP连接中断
+A的TCP连接由于异常被动关闭，B仍然是ESTABLISHED状态
+A从异常中恢复后，应用并未意识到连接已经断开，再次尝试通过这个TCP连接发送数据，此时会受到“连接已关闭”的消息
+B发送SQL=300，ACK=100的报文指明下一个要接收的报文和自己的序号
+A收到第4步的报文后，判断出这是一个半开连接，会给B回复一个RST报文，B收到后退出，关闭连接
+ </p>
+
+<p>下面的过程是当一方异常之后，另一方尝试通过半开连接发送数据时的状态变化情况：</p>
+
+<p>     TCP A                                              TCP B</p>
+
+<p>1.  (CRASH)                                   (send 300,receive 100)</p>
+
+<p>2.  (??)    &lt;– &lt;SEQ=300&gt;&lt;ACK=100&gt;&lt;DATA=10&gt;&lt;FLAGS=ACK&gt; &lt;– ESTABLISHED</p>
+
+<p>3.          –&gt; &lt;SEQ=100&gt;&lt;FLAGS=RST&gt;                   –&gt; (ABORT!!)</p>
+
+<p> </p>
+
+<p>下面的过程是当一方受到一个延迟到达的SYN连接请求时的状态变化情况：</p>
+
+<p>    TCP A                                              TCP B</p>
+
+<p>1.  LISTEN                                             LISTEN</p>
+
+<p>2.       … &lt;SEQ=Z&gt;&lt;FLAGS=SYN&gt;                –&gt;  SYN-RECEIVED</p>
+
+<p>3.  (??) &lt;– &lt;SEQ=X&gt;&lt;ACK=Z+1&gt;&lt;FLAGS=SYN,ACK&gt;   &lt;–  SYN-RECEIVED</p>
+
+<p>4.       –&gt; &lt;SEQ=Z+1&gt;&lt;FLAGS=RST&gt;              –&gt;  (return to LISTEN!)</p>
+
+<p>5.  LISTEN                                             LISTEN</p>
+
+<p> </p>
+
+<p>关于RST报文的补充说明，在以下三种情况下，会发送RST报文：</p>
+
+<p>当任何非RST报文到达，而该报文所对应的连接不存在时，会向对端发送RST报文
+如果当前的TCP连接状态处于非同步状态（LISTEN，SYN-SENT，SYN-RECEIVED），此时收到一个ACK报文确认一个未发送过的消息，或者收到的报文的安全级别或者分隔与当前连接不匹配，此时会向对端发送RST报文
+如果当前的TCP连接处于同步状态（ESTABLISHED，FIN-WAIT-1，FIN-WAIT-2，CLOSE-WAIT，CLOSING，LAST-ACK，TIME-WAIT），任何不被接受的报文（在SEQ号窗口之外或者不被接受的ACK号）必须是仅包含当前SEQ号和期望接收的ACK号的ACK报文，并保持当前连接状态不变。如果接收到的报文要求的安全级别，分隔与当前连接不匹配，则发送RST报文。
+ </p>
+
+<p> </p>
+
+<p>TCP连接关闭的两种状态变化情况：</p>
+
+<p>一方先关闭连接：</p>
+
+<p>    TCP A                                                     TCP B</p>
+
+<p>1.  ESTABLISHED                                               ESTABLISHED</p>
+
+<p>2.  (Close)
+    FIN-WAIT-1  –&gt; &lt;SEQ=100&gt;&lt;ACK=300&gt;&lt;FLAGS=FIN,ACK&gt;  –&gt;  CLOSE-WAIT</p>
+
+<p>3.  FIN-WAIT-2  &lt;– &lt;SEQ=300&gt;&lt;ACK=101&gt;&lt;FLAGS=ACK&gt;      &lt;–  CLOSE-WAIT</p>
+
+<p>4.                                                            (Close)
+    TIME-WAIT   &lt;– &lt;SEQ=300&gt;&lt;ACK=101&gt;&lt;FLAGS=FIN,ACK&gt;  &lt;–  LAST-ACK</p>
+
+<p>5.  TIME-WAIT   –&gt; &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;      –&gt;  CLOSED</p>
+
+<p>6.  (Wait for 2 MSL)
+    CLOSED</p>
+
+<p>过程说明：</p>
+
+<p>双方处于已连接的状态
+A发起关闭连接操作，发送FIN关闭请求给B，并进入FIN-WAIT-1状态，B收到后进入CLOSE-WAIT状态
+B发送ACK给A，A收到后进入FIN-WAIT-2状态
+B没有其他数据要发送给A，于是B发起关闭连接操作，发送FIN，ACK给A并进入LAST-ACK状态，等待最后的ACK确认，A收到后进入TIME-WAIT状态
+A回复ACK给B，B进入CLOSED状态
+A等待2倍MSL时间后，确认连接关闭，也进入CLOSED状态
+ </p>
+
+<p>双方同时发起关闭连接：</p>
+
+<p>    TCP A                                                    TCP B</p>
+
+<p>1.  ESTABLISHED                                              ESTABLISHED</p>
+
+<p>2.  (Close)                                                  (Close)
+    FIN-WAIT-1  –&gt; &lt;SEQ=100&gt;&lt;ACK=300&gt;&lt;FLAGS=FIN,ACK&gt;  … FIN-WAIT-1
+                 &lt;– &lt;SEQ=300&gt;&lt;ACK=100&gt;&lt;FLAGS=FIN,ACK&gt;  &lt;–
+                … &lt;SEQ=100&gt;&lt;ACK=300&gt;&lt;FLAGS=FIN,ACK&gt;  –&gt;</p>
+
+<p>3.  CLOSING     –&gt; &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;      … CLOSING
+                &lt;– &lt;SEQ=301&gt;&lt;ACK=101&gt;&lt;FLAGS=ACK&gt;      &lt;–
+                … &lt;SEQ=101&gt;&lt;ACK=301&gt;&lt;FLAGS=ACK&gt;      –&gt;</p>
+
+<p>4.  TIME-WAIT                                                TIME-WAIT
+    (2 MSL)                                                  (2 MSL)
+    CLOSED                                                   CLOSED</p>
+
+<p>过程说明：</p>
+
+<p>双方处于已连接的状态
+A和B同时发起关闭连接操作，双方同时向对方发送FIN关闭请求
+双方都进入CLOSING状态，同时给对方响应ACK消息
+双方都进入TIME-WAIT状态，各自等待2倍MSL时间后进入CLOSED状态</p>
+
+  </div><a class="u-url" href="/tcp/2016/11/06/TCP.html" hidden></a>
+</article>
+
+      </div>
+      
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Xie Haowei</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Xie Haowei</li><li><a class="u-email" href="mailto:haoweixie@gmail.com">haoweixie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiehaowei"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiehaowei</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Blog for Study &amp; Record</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

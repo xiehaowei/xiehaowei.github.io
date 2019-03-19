@@ -1,0 +1,253 @@
+---
+layout: post
+title:  "TCP"
+date:   2016-11-06 23:42:50 +0800
+categories: [tcp]
+---
+
+一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：
+
+LISTEN，SYN_SENT，SYN-RECEIVED，ESTABLISHED，FIN-WAIT-1，FIN-WAIT-2，CLOSE-WAIT，CLOSING，LAST-ACK，TIME-WAIT，CLOSED。其中CLOSED是一个虚构的状态，因为CLOSED的TCP连接的TCB（Transmission Control Block）已经释放掉了，所以此时这个TCP连接已经不存在了。关于各个状态的一个简要说明：
+
+1. LISTEN：侦听并等待对端的TCP连接请求
+2. SYN-SENT：发送SYN连接请求后，等待对端回复SYN请求
+3. SYN-RECEIVED：收到来自对端的SYN请求，并回复SYN请求后，等待对端响应SYN请求的ACK消息
+4. ESTABLISHED：代表连接建立，双方在这个状态下进行TCP数据交互
+5. FIN-WAIT-1：发送FIN关闭连接请求后，等待对方响应FIN的ACK消息或者对端的FIN关闭请求
+6. FIN-WAIT-2：等待对方FIN关闭请求
+7. CLOSE-WAIT：等待本地用户（进程）发送FIN关闭请求给对端
+8. CLOSING：当双方同时发送FIN关闭请求时，会进入CLOSING状态，等待对端发送FIN报文的响应ACK消息
+9. LAST-ACK：收到对端FIN请求后，回复ACK及FIN并等待对方回复FIN的响应ACK消息，此时进入此状态
+10. TIME-WAIT：该状态是为了确保对端收到了FIN请求的ACK响应，默认会等待两倍MSL时长（MSL：Maximum Segment Lifetime，即报文最大生存时间，超过这个时间的报文会被丢弃）
+
+对于上面的状态之间的变化关系，可以参考RFC-793中的TCP连接状态变化图：
+![网络实用工具截图](/assets/Tcp-connection-state.png)
+
+
+注：
+
+图中“---------”上下的内容表示状态变换的条件（例如snd SYN,ACK表示发送SYN和ACK报文，rcv FIN表示收到FIN报文等等）
+
+图中“+-------+”中框起来的是各个TCP连接的状态
+
+图中“-------->”这类箭头表示状态之间变换的顺序（还有各种折线箭头）
+
+ 
+
+ 
+
+TCP三次握手的过程以及状态切换过程说明：
+
+    TCP A                                               TCP B
+
+1.  CLOSED                                              LISTEN
+
+2.  SYN-SENT    --> <SEQ=100><FLAGS=SYN>                 --> SYN-RECEIVED
+
+3.  ESTABLISHED <-- <SEQ=300><ACK=101><FLAGS=SYN,ACK>    <-- SYN-RECEIVED
+
+4.  ESTABLISHED --> <SEQ=101><ACK=301><FLAGS=ACK>       --> ESTABLISHED
+
+5.  ESTABLISHED --> <SEQ=101><ACK=301><FLAGS=ACK><DATA> --> ESTABLISHED
+
+过程说明：
+
+B作为服务器端处于LISTEN状态，侦听外部的TCP连接
+A发送SYN连接请求给B，进入SYN-SENT状态，B收到连接请求后，进入SYN-RECEIVED状态
+B回复SYN，ACK给A，A收到后进入ESTABLISHED状态
+A回复ACK给B，B收到后也进入ESTABLISHED状态
+双方开始进行数据交换
+ 
+
+ 
+
+再来看一个更为复杂的握手过程，双方在CLOSED状态下同时发起到对方的TCP连接：
+
+    TCP A                                                TCP B
+
+1.  CLOSED                                               CLOSED
+
+2.  SYN-SENT     --> <SEQ=100><FLAGS=SYN>              ...
+
+3.  SYN-RECEIVED <-- <SEQ=300><FLAGS=SYN>              <-- SYN-SENT
+
+4.               ... <SEQ=100><FLAGS=SYN>              --> SYN-RECEIVED
+
+5.  SYN-RECEIVED --> <SEQ=100><ACK=301><FLAGS=SYN,ACK> ...
+
+6.  ESTABLISHED  <-- <SEQ=300><ACK=101><FLAGS=SYN,ACK> <-- SYN-RECEIVED
+
+7.               ... <SEQ=101><ACK=301><FLAGS=ACK>     --> ESTABLISHED
+
+过程说明：
+
+A和B均处于CLOSED状态
+A向B发送SYN连接请求，A进入SYN-SENT状态
+由于网络延迟，步骤2中A发送的SYN请求还未到达B，此时B发送SYN请求给A，进入SYN-SENT状态，A收到后进入SYN-RECEIVED状态
+第2步来自A的SYN请求刚到达B，B收到后，进入SYN-RECEIVED状态
+A回复SYN，ACK给B的SYN请求
+B回复SYN，ACK给A，由于A已经发过ACK响应B的SYN，所以A直接进入ESTABLISHED状态
+B收到SYN请求的ACK响应，进入ESTABLISHED状态
+整个过程中，由于双方同时发起建立连接的请求，所以过程中双方都发出了超过1个带有SYN的报文
+ 
+
+ 
+
+为了避免一个延迟到达的SYN报文引起混乱，TCP中使用RST标记来重置连接状态：
+
+    TCP A                                              TCP B
+
+1.  CLOSED                                             LISTEN
+
+2.  SYN-SENT    --> <SEQ=100><FLAGS=SYN>               ...
+
+3.  (duplicate) ... <SEQ=90><FLAGS=SYN>                 --> SYN-RECEIVED
+
+4.  SYN-SENT    <-- <SEQ=300><ACK=91><FLAGS=SYN,ACK>    <-- SYN-RECEIVED
+
+5.  SYN-SENT    --> <SEQ=91><FLAGS=RST>                 --> LISTEN
+
+6.              ... <SEQ=100><FLAGS=SYN>               --> SYN-RECEIVED
+
+7.  SYN-SENT    <-- <SEQ=400><ACK=101><FLAGS=SYN,ACK>  <-- SYN-RECEIVED
+
+8.  ESTABLISHED --> <SEQ=101><ACK=401><FLAGS=ACK>      --> ESTABLISHED
+
+过程说明：
+
+B处于LISTEN状态，等待连接
+A发起SYN请求，准备与B建立连接
+B收到一个之前从A发出的延迟到达的SYN请求（可能是由于网络延迟，导致该请求滞后了很久才到达B），进入SYN-RECEIVED状态
+B回复SYN，ACK报文给A，注意这里B回复的是第2步中A延迟到达的SYN请求
+A收到后发现ACK字段的值（91）并不是之前自己发起请求时SEQUENCE的值+1（101），所以A判断此时报文顺序异常，于是A发送RST报文给B，B收到后重新进入LISTEN状态
+A在第1步发出的SYN报文到达B，B正确进入SYN-RECEIVED状态
+B回复SYN，ACK给A
+A回复ACK给B，双方均进入ESTABLISHED状态
+ 
+
+ 
+
+半开连接（Half-open）和一些非正常的连接情况举例：
+
+当TCP连接中的一方在未通知对方的情况下关闭或者终止了连接，或者双方不同时地出现异常导致连接失效，这种情况下，如果某一方仍然尝试通过此TCP连接发送数据，则会收到RST报文。
+
+下面是一方系统异常的一个例子：
+
+    TCP A                                                 TCP B
+
+1.  (CRASH)                                    (send 300,receive 100)
+
+2.  CLOSED                                                ESTABLISHED
+
+3.  SYN-SENT --> <SEQ=400><FLAGS=SYN>              --> (??)
+
+4.  (!!)     <-- <SEQ=300><ACK=100><FLAGS=ACK>     <-- ESTABLISHED
+
+5.  SYN-SENT --> <SEQ=100><FLAGS=RST>              --> (Abort!!)
+
+6.  SYN-SENT                                              CLOSED
+
+7.  SYN-SENT --> <SEQ=400><FLAGS=SYN>              -->
+
+过程说明：
+
+B的SEQ=300，ACK=100，此时A遇到异常TCP连接中断
+A的TCP连接由于异常被动关闭，B仍然是ESTABLISHED状态
+A从异常中恢复后，应用并未意识到连接已经断开，再次尝试通过这个TCP连接发送数据，此时会受到“连接已关闭”的消息
+B发送SQL=300，ACK=100的报文指明下一个要接收的报文和自己的序号
+A收到第4步的报文后，判断出这是一个半开连接，会给B回复一个RST报文，B收到后退出，关闭连接
+ 
+
+下面的过程是当一方异常之后，另一方尝试通过半开连接发送数据时的状态变化情况：
+
+     TCP A                                              TCP B
+
+1.  (CRASH)                                   (send 300,receive 100)
+
+2.  (??)    <-- <SEQ=300><ACK=100><DATA=10><FLAGS=ACK> <-- ESTABLISHED
+
+3.          --> <SEQ=100><FLAGS=RST>                   --> (ABORT!!)
+
+ 
+
+下面的过程是当一方受到一个延迟到达的SYN连接请求时的状态变化情况：
+
+    TCP A                                              TCP B
+
+1.  LISTEN                                             LISTEN
+
+2.       ... <SEQ=Z><FLAGS=SYN>                -->  SYN-RECEIVED
+
+3.  (??) <-- <SEQ=X><ACK=Z+1><FLAGS=SYN,ACK>   <--  SYN-RECEIVED
+
+4.       --> <SEQ=Z+1><FLAGS=RST>              -->  (return to LISTEN!)
+
+5.  LISTEN                                             LISTEN
+
+ 
+
+关于RST报文的补充说明，在以下三种情况下，会发送RST报文：
+
+当任何非RST报文到达，而该报文所对应的连接不存在时，会向对端发送RST报文
+如果当前的TCP连接状态处于非同步状态（LISTEN，SYN-SENT，SYN-RECEIVED），此时收到一个ACK报文确认一个未发送过的消息，或者收到的报文的安全级别或者分隔与当前连接不匹配，此时会向对端发送RST报文
+如果当前的TCP连接处于同步状态（ESTABLISHED，FIN-WAIT-1，FIN-WAIT-2，CLOSE-WAIT，CLOSING，LAST-ACK，TIME-WAIT），任何不被接受的报文（在SEQ号窗口之外或者不被接受的ACK号）必须是仅包含当前SEQ号和期望接收的ACK号的ACK报文，并保持当前连接状态不变。如果接收到的报文要求的安全级别，分隔与当前连接不匹配，则发送RST报文。
+ 
+
+ 
+
+TCP连接关闭的两种状态变化情况：
+
+一方先关闭连接：
+
+    TCP A                                                     TCP B
+
+1.  ESTABLISHED                                               ESTABLISHED
+
+2.  (Close)
+    FIN-WAIT-1  --> <SEQ=100><ACK=300><FLAGS=FIN,ACK>  -->  CLOSE-WAIT
+
+3.  FIN-WAIT-2  <-- <SEQ=300><ACK=101><FLAGS=ACK>      <--  CLOSE-WAIT
+
+4.                                                            (Close)
+    TIME-WAIT   <-- <SEQ=300><ACK=101><FLAGS=FIN,ACK>  <--  LAST-ACK
+
+5.  TIME-WAIT   --> <SEQ=101><ACK=301><FLAGS=ACK>      -->  CLOSED
+
+6.  (Wait for 2 MSL)
+    CLOSED
+
+过程说明：
+
+双方处于已连接的状态
+A发起关闭连接操作，发送FIN关闭请求给B，并进入FIN-WAIT-1状态，B收到后进入CLOSE-WAIT状态
+B发送ACK给A，A收到后进入FIN-WAIT-2状态
+B没有其他数据要发送给A，于是B发起关闭连接操作，发送FIN，ACK给A并进入LAST-ACK状态，等待最后的ACK确认，A收到后进入TIME-WAIT状态
+A回复ACK给B，B进入CLOSED状态
+A等待2倍MSL时间后，确认连接关闭，也进入CLOSED状态
+ 
+
+双方同时发起关闭连接：
+
+    TCP A                                                    TCP B
+
+1.  ESTABLISHED                                              ESTABLISHED
+
+2.  (Close)                                                  (Close)
+    FIN-WAIT-1  --> <SEQ=100><ACK=300><FLAGS=FIN,ACK>  ... FIN-WAIT-1
+                 <-- <SEQ=300><ACK=100><FLAGS=FIN,ACK>  <--
+                ... <SEQ=100><ACK=300><FLAGS=FIN,ACK>  -->
+
+3.  CLOSING     --> <SEQ=101><ACK=301><FLAGS=ACK>      ... CLOSING
+                <-- <SEQ=301><ACK=101><FLAGS=ACK>      <--
+                ... <SEQ=101><ACK=301><FLAGS=ACK>      -->
+
+4.  TIME-WAIT                                                TIME-WAIT
+    (2 MSL)                                                  (2 MSL)
+    CLOSED                                                   CLOSED
+
+过程说明：
+
+双方处于已连接的状态
+A和B同时发起关闭连接操作，双方同时向对方发送FIN关闭请求
+双方都进入CLOSING状态，同时给对方响应ACK消息
+双方都进入TIME-WAIT状态，各自等待2倍MSL时间后进入CLOSED状态

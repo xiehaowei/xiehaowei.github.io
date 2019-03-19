@@ -4,6 +4,7 @@ title:  "awk"
 date:   2017-07-27 14:21:01 +0800
 categories: [awk,shell]
 ---
+
 ### 输出单引号
 {% highlight shell %}
 ps|awk '{print "'\''"}'    
