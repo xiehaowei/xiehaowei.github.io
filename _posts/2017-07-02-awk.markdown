@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "awk"
+date:   2017-07-27 14:21:01 +0800
+categories: [awk,shell]
+---
+### 输出单引号
+{% highlight shell %}
+ps|awk '{print "'\''"}'    
+#使用一个双引号""，然后在双引号里面加入两个单引号''
+#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。
+{% endhighlight %}
+
+### 输出双引号
+{% highlight shell %}
+ps|awk '{print "\""}'
+
+#使用""双引号把一个双引号括起来
+# 然后用转义字符\对双引号进行转义，输出双引号。
+{% endhighlight %}
+
+### 把一个文件合并成一行 
+{% highlight shell %}
+awk BEGIN{RS=EOF}'{gsub(/\n/,",");print}' aa.txt
+#awk默认将记录分隔符（record separator即RS）设置为\n
+#此行代码将RS设置为EOF（文件结束），也就是把文件视为一个记录
+#然后通过gsub函数将\n替换成","，最后输出
+{% endhighlight %}
+
+
+### 两个文件，相同key 累加，并倒序输出
+{% highlight shell %}
+cat a1 a2 | awk  '{a[$2]+=$1;}END{for(i in a){print a[i]" "i;}}' |sort -k1 -nr
+# END
+{% endhighlight %}
+
+#### 示例
+file a1: 
+* 1 A 
+* 2 B  
+
+file a2: 
+* 2 A 
+* 3 B 
+
+
+#### 输出 
+* 5 B
+* 3 A

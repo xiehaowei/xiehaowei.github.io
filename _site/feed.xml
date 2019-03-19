@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://xiehaowei.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://xiehaowei.github.io//" rel="alternate" type="text/html" /><updated>2019-03-13T16:57:00+08:00</updated><id>https://xiehaowei.github.io//feed.xml</id><title type="html">Xie Haowei</title><subtitle>A Blog for Study &amp; Record</subtitle><entry><title type="html">lsof</title><link href="https://xiehaowei.github.io//lsof/mac/shell/2018/11/02/lsof-mac.html" rel="alternate" type="text/html" title="lsof" /><published>2018-11-02T15:07:01+08:00</published><updated>2018-11-02T15:07:01+08:00</updated><id>https://xiehaowei.github.io//lsof/mac/shell/2018/11/02/lsof-mac</id><content type="html" xml:base="https://xiehaowei.github.io//lsof/mac/shell/2018/11/02/lsof-mac.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsof
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://xiehaowei.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://xiehaowei.github.io//" rel="alternate" type="text/html" /><updated>2019-03-19T12:05:58+08:00</updated><id>https://xiehaowei.github.io//feed.xml</id><title type="html">Xie Haowei</title><subtitle>A Blog for Study &amp; Record</subtitle><entry><title type="html">mac network port</title><link href="https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network.html" rel="alternate" type="text/html" title="mac network port" /><published>2018-11-02T15:07:01+08:00</published><updated>2018-11-02T15:07:01+08:00</updated><id>https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network</id><content type="html" xml:base="https://xiehaowei.github.io//lsof/telnet/nc/2018/11/02/mac-network.html">&lt;h3 id=&quot;lsof&quot;&gt;lsof&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsof
 &lt;span class=&quot;c&quot;&gt;#安装lsof&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;lsof &lt;span class=&quot;nt&quot;&gt;-nP&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-iTCP&lt;/span&gt;:端口号 &lt;span class=&quot;nt&quot;&gt;-sTCP&lt;/span&gt;:LISTEN
@@ -8,9 +10,43 @@
 &lt;span class=&quot;c&quot;&gt;# 查看端口监听情况 类似 netstat -tlnp&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;-n 表示不显示主机名&lt;/li&gt;
-  &lt;li&gt;-P 表示不显示端口名称&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">brew install lsof #安装lsof</summary></entry><entry><title type="html">go tool pprof</title><link href="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html" rel="alternate" type="text/html" title="go tool pprof" /><published>2018-11-01T11:13:01+08:00</published><updated>2018-11-01T11:13:01+08:00</updated><id>https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof</id><content type="html" xml:base="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html">&lt;ul&gt;
+  &lt;li&gt;-n 表示主机以ip地址显示&lt;/li&gt;
+  &lt;li&gt;-P 表示端口以数字形式显示，默认为端口名称&lt;/li&gt;
+  &lt;li&gt;-i 意义较多，具体 man lsof, 主要是用来过滤lsof的输出结果&lt;/li&gt;
+  &lt;li&gt;-s 和 -i 配合使用，用于过滤输出&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;telnet-命令&quot;&gt;telnet 命令&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#检查本机的3306端口是否打开， 如下&lt;/span&gt;
+telnet 127.0.0.1 3306  
+&lt;span class=&quot;c&quot;&gt;#若该端口没有打开，则会自动退出，并显示如下内容：&lt;/span&gt;
+Trying 127.0.0.1...
+telnet: connect to address 127.0.0.1: Connection refused
+telnet: Unable to connect to remote host&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;nc-命令&quot;&gt;nc 命令&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;nc  &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 10 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; 127.0.0.1 1990-1999
+Connection to 127.0.0.1 port 1997 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; succeeded!
+Connection to 127.0.0.1 port 1998 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; succeeded!&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;-w 10  表示等待连接时间为10秒&lt;/li&gt;
+  &lt;li&gt;-n 尽量将端口号名称转换为端口号数字&lt;/li&gt;
+  &lt;li&gt;-z 对需要检查的端口没有输入输出，用于端口扫描模式&lt;/li&gt;
+  &lt;li&gt;127.0.0.1  需要检查的ip地址&lt;/li&gt;
+  &lt;li&gt;1990-1999  可以是一个端口，也可以是一段端口,返回结果为开放的端口， 如本例中的 1997 和 1998 端口&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;使用网络实用工具&quot;&gt;使用网络实用工具&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;网络实用工具是苹果自带的网络分析工具&lt;/li&gt;
+  &lt;li&gt;通过 spotlight 搜索 网络实用工具&lt;/li&gt;
+  &lt;li&gt;或者 最左上角的苹果标志 –&amp;gt; 关于本机 –&amp;gt;点按’系统报告’ –&amp;gt; 标题栏的’窗口’ –&amp;gt; 网络实用工具 –&amp;gt; 点按’端口扫描’&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/mac-network.png&quot; alt=&quot;网络实用工具截图&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">lsof brew install lsof #安装lsof</summary></entry><entry><title type="html">go tool pprof</title><link href="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html" rel="alternate" type="text/html" title="go tool pprof" /><published>2018-11-01T11:13:01+08:00</published><updated>2018-11-01T11:13:01+08:00</updated><id>https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof</id><content type="html" xml:base="https://xiehaowei.github.io//go/2018/11/01/go-tool-pprof.html">&lt;ul&gt;
   &lt;li&gt;siege -c 10 -t 100s  -b  -H ‘header-key: header-value’   -f ~/urls&lt;/li&gt;
   &lt;li&gt;go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile&lt;/li&gt;
 &lt;/ul&gt;
@@ -57,7 +93,74 @@
 	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 		&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pprof&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Profile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Writer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 	&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="go" /><summary type="html">siege -c 10 -t 100s -b -H ‘header-key: header-value’ -f ~/urls go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile</summary></entry><entry><title type="html">test</title><link href="https://xiehaowei.github.io//jekyll/test/2017/01/16/test.html" rel="alternate" type="text/html" title="test" /><published>2017-01-16T11:13:01+08:00</published><updated>2017-01-16T11:13:01+08:00</updated><id>https://xiehaowei.github.io//jekyll/test/2017/01/16/test</id><content type="html" xml:base="https://xiehaowei.github.io//jekyll/test/2017/01/16/test.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="go" /><summary type="html">siege -c 10 -t 100s -b -H ‘header-key: header-value’ -f ~/urls go tool pprof -http=:9999 http://127.0.0.1:3860/debug/pprof/profile</summary></entry><entry><title type="html">awk</title><link href="https://xiehaowei.github.io//awk/shell/2017/07/27/awk.html" rel="alternate" type="text/html" title="awk" /><published>2017-07-27T14:21:01+08:00</published><updated>2017-07-27T14:21:01+08:00</updated><id>https://xiehaowei.github.io//awk/shell/2017/07/27/awk</id><content type="html" xml:base="https://xiehaowei.github.io//awk/shell/2017/07/27/awk.html">&lt;h3 id=&quot;输出单引号&quot;&gt;输出单引号&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;ps|awk &lt;span class=&quot;s1&quot;&gt;'{print &quot;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&quot;}'&lt;/span&gt;    
+&lt;span class=&quot;c&quot;&gt;#使用一个双引号&quot;&quot;，然后在双引号里面加入两个单引号''&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;输出双引号&quot;&gt;输出双引号&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;ps|awk &lt;span class=&quot;s1&quot;&gt;'{print &quot;\&quot;&quot;}'&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#使用&quot;&quot;双引号把一个双引号括起来&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 然后用转义字符\对双引号进行转义，输出双引号。&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;把一个文件合并成一行&quot;&gt;把一个文件合并成一行&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;awk &lt;/span&gt;BEGIN&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;EOF&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'{gsub(/\n/,&quot;,&quot;);print}'&lt;/span&gt; aa.txt
+&lt;span class=&quot;c&quot;&gt;#awk默认将记录分隔符（record separator即RS）设置为\n&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#此行代码将RS设置为EOF（文件结束），也就是把文件视为一个记录&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#然后通过gsub函数将\n替换成&quot;,&quot;，最后输出&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;两个文件相同key-累加并倒序输出&quot;&gt;两个文件，相同key 累加，并倒序输出&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;a1 a2 | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt;  &lt;span class=&quot;s1&quot;&gt;'{a[$2]+=$1;}END{for(i in a){print a[i]&quot; &quot;i;}}'&lt;/span&gt; |sort &lt;span class=&quot;nt&quot;&gt;-k1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nr&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# END&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;示例&quot;&gt;示例&lt;/h4&gt;
+&lt;p&gt;file a1:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;1 A&lt;/li&gt;
+  &lt;li&gt;2 B&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;file a2:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;2 A&lt;/li&gt;
+  &lt;li&gt;3 B&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;输出&quot;&gt;输出&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;5 B&lt;/li&gt;
+  &lt;li&gt;3 A&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">输出单引号 ps|awk '{print &quot;'\''&quot;}' #使用一个双引号&quot;&quot;，然后在双引号里面加入两个单引号'' #接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</summary></entry><entry><title type="html">shell variable</title><link href="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html" rel="alternate" type="text/html" title="shell variable" /><published>2017-07-11T10:23:01+08:00</published><updated>2017-07-11T10:23:01+08:00</updated><id>https://xiehaowei.github.io//shell/2017/07/11/shell-variable</id><content type="html" xml:base="https://xiehaowei.github.io//shell/2017/07/11/shell-variable.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dir1/dir2/dir3/my.file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;#*/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;##*/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉最后一个 /  及其左边的字符串：my.file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;#*.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  及其左边的字符串：file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;##*.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉最后一个 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  及其左边的字符串：txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%/*&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%%/*&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个 /  及其右边的字符串：&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;空值&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%.*&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉最后一个  &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  及其右边的字符串：/dir1/dir2/dir3/my.file
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%%.*&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：删掉第一个  &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;   及其右边的字符串：/dir1/dir2/dir3/my
+ &lt;span class=&quot;c&quot;&gt;# 是 去掉左边（键盘上#在 $ 的左边）&lt;/span&gt;
+%是去掉右边（键盘上% 在&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;的右边）
+单一符号是最小匹配；两个符号是最大匹配
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;:0:5&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：提取最左边的 5 个字节：/dir1
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;:5:5&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：提取第 5 个字节右边的连续5个字节：/dir2
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/dir/path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;//dir/path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;-my.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：假如 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 沒有设定，則使用 my.file.txt 作传回值。&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;空值及非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：假如 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 沒有設定或為空值，則使用 my.file.txt 作傳回值。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;+my.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：假如 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 設為空值或非空值，均使用 my.file.txt 作傳回值。&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;沒設定時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;:+my.file.txt&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：若 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 為非空值，則使用 my.file.txt 作傳回值。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;沒設定及空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=my.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：若 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 沒設定，則使用 my.file.txt 作傳回值，同時將 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 賦值為 my.file.txt 。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;空值及非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;:&lt;span class=&quot;p&quot;&gt;=my.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：若 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 賦值為my.file.txt 。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?my.file.txt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：若 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 沒設定，則將 my.file.txt 輸出至 STDERR。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;空值及非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;:?my.file.txt&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; ：若 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; 没设定或为空值，则将 my.file.txt 输出至 STDERR。 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;非空值時不作处理&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; 可计算出变量值的长度：
+&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">file=/dir1/dir2/dir3/my.file.txt ${file#*/}：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt ${file##*/}：删掉最后一个 / 及其左边的字符串：my.file.txt ${file#*.}：删掉第一个 . 及其左边的字符串：file.txt ${file##*.}：删掉最后一个 . 及其左边的字符串：txt ${file%/*}：删掉最后一个 / 及其右边的字符串：/dir1/dir2/dir3 ${file%%/*}：删掉第一个 / 及其右边的字符串：(空值) ${file%.*}：删掉最后一个 . 及其右边的字符串：/dir1/dir2/dir3/my.file ${file%%.*}：删掉第一个 . 及其右边的字符串：/dir1/dir2/dir3/my # 是 去掉左边（键盘上#在 $ 的左边） %是去掉右边（键盘上% 在$ 的右边） 单一符号是最小匹配；两个符号是最大匹配 ${file:0:5}：提取最左边的 5 个字节：/dir1 ${file:5:5}：提取第 5 个字节右边的连续5个字节：/dir2 ${file/dir/path}：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt ${file//dir/path}：将全部dir 替换为 path：/path1/path2/path3/my.file.txt ${file-my.file.txt} ：假如 $file 沒有设定，則使用 my.file.txt 作传回值。(空值及非空值時不作处理) ${file:-my.file.txt} ：假如 $file 沒有設定或為空值，則使用 my.file.txt 作傳回值。 (非空值時不作处理) ${file+my.file.txt} ：假如 $file 設為空值或非空值，均使用 my.file.txt 作傳回值。(沒設定時不作处理) ${file:+my.file.txt} ：若 $file 為非空值，則使用 my.file.txt 作傳回值。 (沒設定及空值時不作处理) ${file=my.file.txt} ：若 $file 沒設定，則使用 my.file.txt 作傳回值，同時將 $file 賦值為 my.file.txt 。 (空值及非空值時不作处理) ${file:=my.file.txt} ：若 $file 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 $file 賦值為my.file.txt 。 (非空值時不作处理) ${file?my.file.txt} ：若 $file 沒設定，則將 my.file.txt 輸出至 STDERR。 (空值及非空值時不作处理) ${file:?my.file.txt} ：若 $file 没设定或为空值，则将 my.file.txt 输出至 STDERR。 (非空值時不作处理) ${#var} 可计算出变量值的长度： ${#file} 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节</summary></entry><entry><title type="html">test</title><link href="https://xiehaowei.github.io//jekyll/test/2017/01/16/test.html" rel="alternate" type="text/html" title="test" /><published>2017-01-16T11:13:01+08:00</published><updated>2017-01-16T11:13:01+08:00</updated><id>https://xiehaowei.github.io//jekyll/test/2017/01/16/test</id><content type="html" xml:base="https://xiehaowei.github.io//jekyll/test/2017/01/16/test.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
@@ -101,6 +204,22 @@ ahahahha&lt;/p&gt;
     
   &lt;/ul&gt;
 
+&lt;h3&gt;shell&lt;/h3&gt;
+&lt;ul&gt;
+    
+      &lt;li&gt;&lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;&lt;/li&gt;
+    
+      &lt;li&gt;&lt;a href=&quot;/shell/2017/07/11/shell-variable.html&quot;&gt;shell variable&lt;/a&gt;&lt;/li&gt;
+    
+  &lt;/ul&gt;
+
+&lt;h3&gt;awk&lt;/h3&gt;
+&lt;ul&gt;
+    
+      &lt;li&gt;&lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;&lt;/li&gt;
+    
+  &lt;/ul&gt;
+
 &lt;h3&gt;go&lt;/h3&gt;
 &lt;ul&gt;
     
@@ -111,21 +230,21 @@ ahahahha&lt;/p&gt;
 &lt;h3&gt;lsof&lt;/h3&gt;
 &lt;ul&gt;
     
-      &lt;li&gt;&lt;a href=&quot;/lsof/mac/shell/2018/11/02/lsof-mac.html&quot;&gt;lsof&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
     
   &lt;/ul&gt;
 
-&lt;h3&gt;mac&lt;/h3&gt;
+&lt;h3&gt;telnet&lt;/h3&gt;
 &lt;ul&gt;
     
-      &lt;li&gt;&lt;a href=&quot;/lsof/mac/shell/2018/11/02/lsof-mac.html&quot;&gt;lsof&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
     
   &lt;/ul&gt;
 
-&lt;h3&gt;shell&lt;/h3&gt;
+&lt;h3&gt;nc&lt;/h3&gt;
 &lt;ul&gt;
     
-      &lt;li&gt;&lt;a href=&quot;/lsof/mac/shell/2018/11/02/lsof-mac.html&quot;&gt;lsof&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;&lt;/li&gt;
     
   &lt;/ul&gt;
 
@@ -134,11 +253,19 @@ ahahahha&lt;/p&gt;
 &lt;ul&gt;
   
     &lt;li&gt;
-      &lt;a href=&quot;/lsof/mac/shell/2018/11/02/lsof-mac.html&quot;&gt;lsof&lt;/a&gt;
+      &lt;a href=&quot;/lsof/telnet/nc/2018/11/02/mac-network.html&quot;&gt;mac network port&lt;/a&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
       &lt;a href=&quot;/go/2018/11/01/go-tool-pprof.html&quot;&gt;go tool pprof&lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;a href=&quot;/awk/shell/2017/07/27/awk.html&quot;&gt;awk&lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;a href=&quot;/shell/2017/07/11/shell-variable.html&quot;&gt;shell variable&lt;/a&gt;
     &lt;/li&gt;
   
     &lt;li&gt;
