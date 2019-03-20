@@ -1,0 +1,98 @@
+---
+layout: post
+title:  "The Go scheduler"
+date:   2018-09-16 19:34:23 +0800
+categories: [Go,goroutine]
+tags: [Go]
+---
+From [http://morsmachine.dk/go-scheduler](http://morsmachine.dk/go-scheduler "The Go scheduler") 
+
+Go的垃圾回收需要所有的goroutine停止，使得内存在一个一致的状态。垃圾回收的时间点是不确定的，如果依靠OS自身的scheduler来调度，那么会有大量的线程需要停止工作。 
+
+单独的开发一个GO得调度器，可以是其知道在什么时候内存状态是一致的，也就是说，当开始垃圾回收时，运行时只需要为当时正在CPU核上运行的那个线程等待即可，而不是等待所有的线程。
+
+用户空间线程和内核空间线程之间的映射关系有：N:1,1:1和 M:N
+1. N:1是说，多个（N）用户线程始终在一个内核线程上跑，context上下文切换确实很快，但是无法真正的利用多核。
+2. 1：1是说，一个用户线程就只在一个内核线程上跑，这时可以利用多核，但是上下文switch很慢。
+3. M:N是说， 多个goroutine在多个内核线程上跑，这个看似可以集齐上面两者的优势，但是无疑增加了调度的难度。
+
+### G-M-P
+
+Go语言采用两级线程模型，即用户线程与内核线程KSE（kernel scheduling entity）是M:N的。最终goroutine还是会交给OS线程执行，但是需要一个中介，提供上下文。这就是G-M-P模型
+
+
+![GPM1](/assets/gpm1.jpg)
+
+1. M:代表真正的内核OS线程，和POSIX里的thread差不多，真正干活的人
+2. G:代表一个goroutine，它有自己的栈，instruction pointer和其他信息（正在等待的channel等等），用于调度。
+3. P:代表调度的上下文，可以把它看做一个局部的调度器，使go代码在一个线程上跑，它是实现从N:1到N:M映射的关键。
+
+
+#### 队列
+Go调度器有两个不同的运行队列：
+
+1. GRQ，全局运行队列，尚未分配给P的G
+2. LRQ，本地运行队列，每个P都有一个LRQ，用于管理分配给P执行的G
+
+#### 状态
+go1.10\src\runtime\runtime2.go
+
+* _Gidle: 分配了G，但是没有初始化
+* _Grunnable: 在run queue运行队列中，LRQ或者GRQ
+* _Grunning: 正在运行指令，有自己的stack。不在runq运行队列中，分配给M和P
+* _Gsyscall: 正在执行syscall，而非用户指令，不在runq，分给M，P给找idle的M
+* _Gwaiting: block。不在RQ，但是可能会在channel的wait queue等待队列
+* _Gdead: unused。在P的gfree list中，不在runq。idle闲置状态
+* _Gcopystack: stack扩容或者gc收缩
+
+
+
+![GPM2](/assets/gpm2.jpg)
+
+图中看，有2个物理线程M，每一个M都拥有一个context（P），每一个也都有一个正在运行的goroutine。
+P的数量可以通过GOMAXPROCS()来设置，它其实也就代表了真正的并发度，即有多少个goroutine可以同时运行。图中灰色的那些goroutine并没有运行，而是出于ready的就绪态，正在等待被调度。P维护着这个队列（称之为runqueue）.
+Go语言里，启动一个goroutine很容易：
+{% highlight go %}
+go func(){
+    //do something
+} ()
+{% endhighlight %}
+所以每有一个go语句被执行，runqueue队列就在其末尾加入一个goroutine，在下一个调度点，就从runqueue中取出（如何决定取哪个goroutine？）一个goroutine执行。为何要维护多个上下文P？因为当一个OS线程被阻塞时，P可以转而投奔另一个OS线程！图中看到，当一个OS线程M0陷入阻塞时，P转而在OS线程M1上运行。调度器保证有足够的线程来运行所以的context P。
+
+
+![GPM3](/assets/gpm3.jpg)
+
+图中的M1可能是被创建，或者从线程缓存中取出。当MO返回时，它必须尝试取得一个context P来运行goroutine，一般情况下，它会从其他的OS线程那里steal偷一个context过来，如果没有偷到的话，它就把goroutine放在一个global runqueue里，然后自己就去睡大觉了（放入线程缓存里）。Contexts们也会周期性的检查global runqueue，否则global runqueue上的goroutine永远无法执行。
+
+![GPM4](/assets/gpm4.jpg)
+
+另一种情况是P所分配的任务G很快就执行完了（分配不均），这就导致了一个上下文P闲着没事儿干而系统却任然忙碌。但是如果global runqueue没有任务G了，那么P就不得不从其他的上下文P那里拿一些G来执行。一般来说，如果上下文P从其他的上下文P那里要偷一个任务的话，一般就‘偷’run queue的一半，这就确保了每个OS线程都能充分的使用。
+
+#### 异步调用
+Linux可以通过epoll实现网络调用，统称网络轮询器N（Net Poller）。
+
+1. G1在M上运行，P的LRQ有其他3个G，N空闲；
+2. G1进行网络IO，因此被移动到N，M继续从LRQ取其他的G执行。比如G2就被上下文切换到M上；
+3. G1结束网络请求，收到响应，G1被移回LRQ，等待切换到M执行。
+
+#### 同步调用
+文件IO操作
+
+1. G1在M1上运行，P的LRQ有其他3个G；
+2. G1进行同步调用，堵塞M；
+3. 调度器将M1与P分离，此时M1下只有G1，没有P。
+4. 将P与空闲M2绑定，并从LRQ选择G2切换
+5. G1结束堵塞操作，移回LRQ。M1空闲备用。
+
+#### 任务窃取
+上面都是防止M堵塞，任务窃取是防止M空闲
+
+两个P，P1，P2
+如果P1的G都执行完了，LRQ空，P1就开始任务窃取。
+第一种情况，P2 LRQ还有G，则P1从P2窃取了LRQ中一半的G
+第二种情况，P2也没有LRQ，P1从GRQ窃取。
+
+#### g0
+每个M都有一个特殊的G，g0。用于执行调度，gc，栈管理等任务，所以g0的栈称为调度栈。g0的栈不会自动增长，不会被gc，来自os线程的栈。
+
+

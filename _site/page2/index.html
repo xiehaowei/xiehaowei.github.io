@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Page 2 of 2 for Xie Haowei | A Blog for Study &amp; Record</title>
+<title>Page 2 of 3 for Xie Haowei | A Blog for Study &amp; Record</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Xie Haowei" />
 <meta property="og:locale" content="en_US" />
@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://xiehaowei.github.io//page2/" />
 <meta property="og:site_name" content="Xie Haowei" />
 <link rel="prev" href="https://xiehaowei.github.io//" />
+<link rel="next" href="https://xiehaowei.github.io//page3" />
 <script type="application/ld+json">
 {"@type":"WebPage","url":"https://xiehaowei.github.io//page2/","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -43,199 +44,94 @@
   <div class="post-content">
     <!-- 遍历分页后的文章 -->
 
-<h1><a href="/shell/2017/07/11/shell-variable.html">shell variable</a></h1>
+<h1><a href="/go/2018/10/20/go-tool-pprof.html">Go tool pprof</a></h1>
 <p class="author">
-<span class="date">2017-07-11 10:23:01 +0800</span>
+<span class="date">2018-10-20 11:13:01 +0800</span>
+</p>
+<div class="content" style="">
+    Go tool pprof
+</div>
+<a href="/go/2018/10/20/go-tool-pprof.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/go/goroutine/2018/09/16/Go-GPM.html">The Go scheduler</a></h1>
+<p class="author">
+<span class="date">2018-09-16 19:34:23 +0800</span>
+</p>
+<div class="content" style="">
+    From <a href="http://morsmachine.dk/go-scheduler" title="The Go scheduler">http://morsmachine.dk/go-scheduler</a>
+
+
+</div>
+<a href="/go/goroutine/2018/09/16/Go-GPM.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/mysql/2018/06/24/MySQL.html">MySQL</a></h1>
+<p class="author">
+<span class="date">2018-06-24 19:34:23 +0800</span>
+</p>
+<div class="content" style="">
+    按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。
+例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：
+
+
+</div>
+<a href="/mysql/2018/06/24/MySQL.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/shell/2017/07/27/awk.html">awk</a></h1>
+<p class="author">
+<span class="date">2017-07-27 14:21:01 +0800</span>
+</p>
+<div class="content" style="">
+    <h3 id="输出单引号">输出单引号</h3>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ps|awk <span class="s1">'{print "'</span><span class="se">\'</span><span class="s1">'"}'</span>    
+<span class="c">#使用一个双引号""，然后在双引号里面加入两个单引号''</span>
+<span class="c">#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</span></code></pre></figure>
+
+
+</div>
+<a href="/shell/2017/07/27/awk.html"> >>> Read More </a>
+<br /><br /><br />
+
+<h1><a href="/network/2017/07/14/ip-number.html">IP Number</a></h1>
+<p class="author">
+<span class="date">2017-07-14 14:21:01 +0800</span>
 </p>
 <div class="content" style="">
     
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">file</span><span class="o">=</span>/dir1/dir2/dir3/my.file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">#*/</span><span class="k">}</span>：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">##*/</span><span class="k">}</span>：删掉最后一个 /  及其左边的字符串：my.file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">#*.</span><span class="k">}</span>：删掉第一个 <span class="nb">.</span>  及其左边的字符串：file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">##*.</span><span class="k">}</span>：删掉最后一个 <span class="nb">.</span>  及其左边的字符串：txt
-<span class="k">${</span><span class="nv">file</span><span class="p">%/*</span><span class="k">}</span>：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
-<span class="k">${</span><span class="nv">file</span><span class="p">%%/*</span><span class="k">}</span>：删掉第一个 /  及其右边的字符串：<span class="o">(</span>空值<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span><span class="p">%.*</span><span class="k">}</span>：删掉最后一个  <span class="nb">.</span>  及其右边的字符串：/dir1/dir2/dir3/my.file
-<span class="k">${</span><span class="nv">file</span><span class="p">%%.*</span><span class="k">}</span>：删掉第一个  <span class="nb">.</span>   及其右边的字符串：/dir1/dir2/dir3/my
- <span class="c"># 是 去掉左边（键盘上#在 $ 的左边）</span>
-%是去掉右边（键盘上% 在<span class="nv">$ </span>的右边）
-单一符号是最小匹配；两个符号是最大匹配
-<span class="k">${</span><span class="nv">file</span>:0:5<span class="k">}</span>：提取最左边的 5 个字节：/dir1
-<span class="k">${</span><span class="nv">file</span>:5:5<span class="k">}</span>：提取第 5 个字节右边的连续5个字节：/dir2
-<span class="k">${</span><span class="nv">file</span><span class="p">/dir/path</span><span class="k">}</span>：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">//dir/path</span><span class="k">}</span>：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
-<span class="k">${</span><span class="nv">file</span><span class="p">-my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有设定，則使用 my.file.txt 作传回值。<span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span><span class="k">:-</span><span class="nv">my</span><span class="p">.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有設定或為空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span><span class="p">+my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 設為空值或非空值，均使用 my.file.txt 作傳回值。<span class="o">(</span>沒設定時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span>:+my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 為非空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>沒設定及空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span><span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為 my.file.txt 。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span>:<span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為my.file.txt 。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span><span class="p">?my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則將 my.file.txt 輸出至 STDERR。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
-<span class="k">${</span><span class="nv">file</span>:?my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 没设定或为空值，则将 my.file.txt 输出至 STDERR。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
-<span class="k">${#</span><span class="nv">var</span><span class="k">}</span> 可计算出变量值的长度：
-<span class="k">${#</span><span class="nv">file</span><span class="k">}</span> 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节</code></pre></figure>
-
-
-</div>
-<a href="/shell/2017/07/11/shell-variable.html"> >>> Read More </a>
-<br /><br /><br />
-
-<h1><a href="/tcp/2016/11/06/TCP.html">TCP</a></h1>
-<p class="author">
-<span class="date">2016-11-06 23:42:50 +0800</span>
-</p>
-<div class="content" style="">
-    一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：
-
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**   
+  * ip地址转成整数.   
+  * @param ip   
+  * @return   
+  */</span>    
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">ip2long</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">)</span> <span class="o">{</span>     
+     <span class="n">String</span><span class="o">[]</span> <span class="n">ips</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"[.]"</span><span class="o">);</span>     
+     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span>  <span class="mi">16777216L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">+</span> <span class="mi">65536L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">+</span> <span class="mi">256</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span> <span class="o">+</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>     
+     <span class="k">return</span> <span class="n">num</span><span class="o">;</span>     
+ <span class="o">}</span>     
+      
+ <span class="cm">/**   
+  * 整数转成ip地址.   
+  * @param ipLong   
+  * @return   
+  */</span>    
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">long2ip</span><span class="o">(</span><span class="kt">long</span> <span class="n">ipLong</span><span class="o">)</span> <span class="o">{</span>     
+     <span class="c1">//long ipLong = 1037591503;     </span>
+     <span class="kt">long</span> <span class="n">mask</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mh">0x000000FF</span><span class="o">,</span><span class="mh">0x0000FF00</span><span class="o">,</span><span class="mh">0x00FF0000</span><span class="o">,</span><span class="mh">0xFF000000</span><span class="o">};</span>     
+     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>     
+     <span class="n">StringBuffer</span> <span class="n">ipInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>     
+     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>     
+         <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="n">ipLong</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;&gt;(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="o">);</span>     
+         <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"."</span><span class="o">);</span>     
+         <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">,</span><span class="mi">10</span><span class="o">));</span>     
+     <span class="o">}</span>     
+     <span class="k">return</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>     
+<span class="o">}</span> </code></pre></figure>
 
 </div>
-<a href="/tcp/2016/11/06/TCP.html"> >>> Read More </a>
-<br /><br /><br />
-
-<h1><a href="/algorithm/2016/09/18/algorithm.html">algorithm</a></h1>
-<p class="author">
-<span class="date">2016-09-18 22:07:11 +0800</span>
-</p>
-<div class="content" style="">
-    <h3 id="1-合并排序将两个已经排序的数组合并成一个数组其中一个数组能容下两个数组的所有元素">1. 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素</h3>
-
-
-</div>
-<a href="/algorithm/2016/09/18/algorithm.html"> >>> Read More </a>
-<br /><br /><br />
-
-<h1><a href="/nginx/2016/09/17/nginx-X-sendfile.html">Nginx X-Sendfile</a></h1>
-<p class="author">
-<span class="date">2016-09-17 22:07:11 +0800</span>
-</p>
-<div class="content" style="">
-    <h3 id="常见php-下载文件">常见PHP 下载文件</h3>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
-<span class="c1">// 用户身份认证，若验证失败跳转</span>
-<span class="nx">authenticate</span><span class="p">();</span>
-<span class="c1">// 获取需要下载的文件，若文件不存在跳转</span>
-<span class="nv">$file</span><span class="o">=</span> <span class="nx">determine_file</span><span class="p">();</span>
-<span class="c1">// 读取文件内容</span>
-<span class="nv">$content</span><span class="o">=</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
-<span class="c1">// 发送合适的 HTTP 头</span>
-<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/octet-stream"</span><span class="p">);</span>
-<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename="'</span><span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span><span class="s1">'"'</span><span class="p">);</span>
-<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Length: "</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
-<span class="k">echo</span><span class="nv">$content</span><span class="p">;</span> <span class="c1">// 或者 readfile($file);</span>
-<span class="cp">?&gt;</span></code></pre></figure>
-
-<h3 id="开启nginx-x-sendfile">开启Nginx X-Sendfile</h3>
-
-<figure class="highlight"><pre><code class="language-conf" data-lang="conf"><span class="n">location</span> /<span class="n">protected</span>/ {
- <span class="n">internal</span>;
- <span class="n">root</span>  /<span class="n">some</span>/<span class="n">path</span>;
-}</code></pre></figure>
-
-
-</div>
-<a href="/nginx/2016/09/17/nginx-X-sendfile.html"> >>> Read More </a>
-<br /><br /><br />
-
-<h1><a href="/algorithm/2016/09/17/quicksort.html">quicksort</a></h1>
-<p class="author">
-<span class="date">2016-09-17 22:07:11 +0800</span>
-</p>
-<div class="content" style="">
-    
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
-<span class="c1">//快排的实现</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">quikSort</span><span class="o">{</span>
-	
-   <span class="c1">//(1)递归实现快速排序</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">s</span><span class="o">,</span><span class="kt">int</span> <span class="n">l</span><span class="o">,</span><span class="kt">int</span> <span class="n">r</span><span class="o">){</span>
-	 
-	 <span class="k">if</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="o">)</span>
-	 <span class="o">{</span>
-	 	 <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">l</span><span class="o">;</span>
-	     <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">r</span><span class="o">;</span>
-	     <span class="kt">int</span> <span class="n">pivot</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">l</span><span class="o">];</span> <span class="c1">//取每个子数组的第一个数为基点</span>
-	     <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">)</span>
-	     <span class="o">{</span>
-           <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">]&gt;</span><span class="n">pivot</span><span class="o">)</span> <span class="c1">//从右向左</span>
-         	<span class="n">j</span><span class="o">--;</span>
-           <span class="k">if</span><span class="o">(</span><span class="n">j</span><span class="o">&gt;</span><span class="n">i</span><span class="o">)</span>
-           <span class="o">{</span>
-            <span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">++]=</span><span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>    
-           <span class="o">}</span>
-          <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">pivot</span><span class="o">)</span>   <span class="c1">//从左向右</span>
-            <span class="n">i</span><span class="o">++;</span>
-           <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">)</span>
-           <span class="o">{</span>
-         	<span class="n">s</span><span class="o">[</span><span class="n">j</span><span class="o">--]=</span><span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> 
-           <span class="o">}</span>
-	     <span class="o">}</span>
-	     <span class="n">s</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">pivot</span><span class="o">;</span>
-         <span class="n">quickSort</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="n">l</span><span class="o">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-         <span class="n">quickSort</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span><span class="n">r</span><span class="o">);</span>   
-         
-	 <span class="o">}</span>
- 
-   <span class="o">}</span>
-   <span class="c1">//非递归实现快速排序</span>
- <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">NonRecQuickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span><span class="kt">int</span> <span class="n">start</span><span class="o">,</span><span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>  <span class="c1">//用栈模拟</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">end</span><span class="o">);</span>
-            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">start</span><span class="o">);</span>
-            <span class="k">while</span><span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-                <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-                <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-                <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
-                <span class="o">}</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
-                    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
-        <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">pivot</span><span class="o">)</span>
-                <span class="n">end</span><span class="o">--;</span>
-            <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">];</span>
-            <span class="k">while</span><span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="o">)</span>
-                <span class="n">start</span><span class="o">++;</span>
-            <span class="n">a</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
-        <span class="o">}</span>
-        <span class="n">a</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="n">pivot</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
-    <span class="o">}</span>
-   <span class="c1">//打印数组的值</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">PrintArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">arr</span><span class="o">)</span>
-   <span class="o">{</span>
-   	  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span>
-   	  <span class="o">{</span>
-   	  	 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="s">" "</span><span class="o">);</span>
-   	  <span class="o">}</span>
-   	   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
- 
-   <span class="o">}</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="o">)</span>
-   <span class="o">{</span>
-       <span class="kt">int</span><span class="o">[]</span><span class="n">arr</span><span class="o">={</span><span class="mi">3</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">8</span><span class="o">};</span>
-       <span class="n">PrintArray</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
-       <span class="c1">//quickSort(arr,0,arr.length-1);</span>
-       <span class="n">NonRecQuickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-       <span class="n">PrintArray</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
-   <span class="o">}</span>
- <span class="o">}</span></code></pre></figure>
-
-
-</div>
-<a href="/algorithm/2016/09/17/quicksort.html"> >>> Read More </a>
+<a href="/network/2017/07/14/ip-number.html"> >>> Read More </a>
 <br /><br /><br />
 
 
@@ -244,9 +140,9 @@
 
 <a href="/page1" class="previous">Previous</a>
 
-<span class="page_number ">Page: 2 of 2</span>
+<span class="page_number ">Page: 2 of 3</span>
 
-<span class="next ">Next</span>
+<a href="/page3" class="next">Next</a>
 
 </div>
   </div>
