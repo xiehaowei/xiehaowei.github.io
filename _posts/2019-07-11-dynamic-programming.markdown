@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "dynamic programming"
-date:   2019-03-20 16:45:27 +0800
+date:   2019-07-11 17:27:13 +0800
 categories: [algorithm]
 tags: [algorithm,dp]
 excerpt: "动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法"

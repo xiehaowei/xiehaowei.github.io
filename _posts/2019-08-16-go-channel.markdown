@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Go channel 分析"
-date:   2019-03-20 16:45:27 +0800
+date:   2019-08-16 22:15:50 +0800
 categories: [Go]
 tags: [Go,channel]
 excerpt: "gin middleware to automatically generate RESTful API documentation with Swagger 2.0."
