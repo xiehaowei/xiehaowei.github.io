@@ -13,9 +13,9 @@
 <meta property="og:url" content="https://xiehaowei.github.io//go/2019/08/24/go-trace.html" />
 <meta property="og:site_name" content="Xie Haowei" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-08-24T17:38:21+08:00" />
+<meta property="article:published_time" content="2019-08-24T09:38:21+00:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/08/24/go-trace.html"},"url":"https://xiehaowei.github.io//go/2019/08/24/go-trace.html","description":"只使用PProf有时候不一定足够完整，因为在真实的程序中还包含许多的隐藏动作，例如 Goroutine 在执行时会做哪些操作？执行/阻塞了多长时间？在什么时候阻止？在哪里被阻止的？谁又锁/解锁了它们？GC 是怎么影响到 Goroutine 的执行的？这些东西用 PProf 是很难分析出来的，这时候就轮到 go tool trace出马了","headline":"Go trace","dateModified":"2019-08-24T17:38:21+08:00","datePublished":"2019-08-24T17:38:21+08:00","@context":"http://schema.org"}</script>
+{"dateModified":"2019-08-24T09:38:21+00:00","datePublished":"2019-08-24T09:38:21+00:00","url":"https://xiehaowei.github.io//go/2019/08/24/go-trace.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/08/24/go-trace.html"},"description":"只使用PProf有时候不一定足够完整，因为在真实的程序中还包含许多的隐藏动作，例如 Goroutine 在执行时会做哪些操作？执行/阻塞了多长时间？在什么时候阻止？在哪里被阻止的？谁又锁/解锁了它们？GC 是怎么影响到 Goroutine 的执行的？这些东西用 PProf 是很难分析出来的，这时候就轮到 go tool trace出马了","@type":"BlogPosting","headline":"Go trace","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Go trace</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2019-08-24T17:38:21+08:00" itemprop="datePublished">Aug 24, 2019
+      <time class="dt-published" datetime="2019-08-24T09:38:21+00:00" itemprop="datePublished">Aug 24, 2019
       </time></p>
 
      

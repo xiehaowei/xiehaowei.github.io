@@ -29,7 +29,7 @@ theme: minima
 gems: [jekyll-paginate]
 paginate: 5
 
-timezone: +800 
+timezone: +0800
 plugins:
   - jekyll-feed
   - jekyll-paginate

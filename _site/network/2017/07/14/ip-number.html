@@ -13,9 +13,9 @@
 <meta property="og:url" content="https://xiehaowei.github.io//network/2017/07/14/ip-number.html" />
 <meta property="og:site_name" content="Xie Haowei" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-07-14T14:21:01+08:00" />
+<meta property="article:published_time" content="2017-07-14T06:21:01+00:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//network/2017/07/14/ip-number.html"},"url":"https://xiehaowei.github.io//network/2017/07/14/ip-number.html","description":"/** * ip地址转成整数. * @param ip * @return */ public static long ip2long(String ip) { String[] ips = ip.split(&quot;[.]&quot;); long num = 16777216L*Long.parseLong(ips[0]) + 65536L*Long.parseLong(ips[1]) + 256*Long.parseLong(ips[2]) + Long.parseLong(ips[3]); return num; } /** * 整数转成ip地址. * @param ipLong * @return */ public static String long2ip(long ipLong) { //long ipLong = 1037591503; long mask[] = {0x000000FF,0x0000FF00,0x00FF0000,0xFF000000}; long num = 0; StringBuffer ipInfo = new StringBuffer(); for(int i=0;i&lt;4;i++){ num = (ipLong &amp; mask[i])&gt;&gt;(i*8); if(i&gt;0) ipInfo.insert(0,&quot;.&quot;); ipInfo.insert(0,Long.toString(num,10)); } return ipInfo.toString(); }","headline":"IP Number","dateModified":"2017-07-14T14:21:01+08:00","datePublished":"2017-07-14T14:21:01+08:00","@context":"http://schema.org"}</script>
+{"dateModified":"2017-07-14T06:21:01+00:00","datePublished":"2017-07-14T06:21:01+00:00","url":"https://xiehaowei.github.io//network/2017/07/14/ip-number.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//network/2017/07/14/ip-number.html"},"description":"/** * ip地址转成整数. * @param ip * @return */ public static long ip2long(String ip) { String[] ips = ip.split(&quot;[.]&quot;); long num = 16777216L*Long.parseLong(ips[0]) + 65536L*Long.parseLong(ips[1]) + 256*Long.parseLong(ips[2]) + Long.parseLong(ips[3]); return num; } /** * 整数转成ip地址. * @param ipLong * @return */ public static String long2ip(long ipLong) { //long ipLong = 1037591503; long mask[] = {0x000000FF,0x0000FF00,0x00FF0000,0xFF000000}; long num = 0; StringBuffer ipInfo = new StringBuffer(); for(int i=0;i&lt;4;i++){ num = (ipLong &amp; mask[i])&gt;&gt;(i*8); if(i&gt;0) ipInfo.insert(0,&quot;.&quot;); ipInfo.insert(0,Long.toString(num,10)); } return ipInfo.toString(); }","@type":"BlogPosting","headline":"IP Number","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">IP Number</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2017-07-14T14:21:01+08:00" itemprop="datePublished">Jul 14, 2017
+      <time class="dt-published" datetime="2017-07-14T06:21:01+00:00" itemprop="datePublished">Jul 14, 2017
       </time></p>
 
      
