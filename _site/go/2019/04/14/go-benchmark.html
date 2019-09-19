@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Go benchmark | Xie Haowei</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Go benchmark" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="go自带的benchmark可以方便快捷地在测试一个函数方法在串行或并行环境下的基准表现。指定一个时间（默认是1秒），看测试对象在达到或超过时间上限时，最多能被执行多少次和在此期间测试对象内存分配情况。" />
+<meta property="og:description" content="go自带的benchmark可以方便快捷地在测试一个函数方法在串行或并行环境下的基准表现。指定一个时间（默认是1秒），看测试对象在达到或超过时间上限时，最多能被执行多少次和在此期间测试对象内存分配情况。" />
+<link rel="canonical" href="https://xiehaowei.github.io//go/2019/04/14/go-benchmark.html" />
+<meta property="og:url" content="https://xiehaowei.github.io//go/2019/04/14/go-benchmark.html" />
+<meta property="og:site_name" content="Xie Haowei" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-14T16:45:27+08:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/04/14/go-benchmark.html"},"url":"https://xiehaowei.github.io//go/2019/04/14/go-benchmark.html","description":"go自带的benchmark可以方便快捷地在测试一个函数方法在串行或并行环境下的基准表现。指定一个时间（默认是1秒），看测试对象在达到或超过时间上限时，最多能被执行多少次和在此期间测试对象内存分配情况。","headline":"Go benchmark","dateModified":"2019-04-14T16:45:27+08:00","datePublished":"2019-04-14T16:45:27+08:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Xie Haowei</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/category/">category</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Go benchmark</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-14T16:45:27+08:00" itemprop="datePublished">Apr 14, 2019
+      </time></p>
+
+     
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h4 id="benchmark常用api">benchmark常用API：</h4>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">b</span><span class="o">.</span><span class="n">StopTimer</span><span class="p">()</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">StartTimer</span><span class="p">()</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">ResetTimer</span><span class="p">()</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="n">name</span><span class="x"> </span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">f</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">B</span><span class="p">))</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">RunParallel</span><span class="p">(</span><span class="n">body</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="o">*</span><span class="n">PB</span><span class="p">))</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">ReportAllocs</span><span class="p">()</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">SetParallelism</span><span class="p">(</span><span class="n">p</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x">
+
+</span><span class="n">b</span><span class="o">.</span><span class="n">SetBytes</span><span class="p">(</span><span class="n">n</span><span class="x"> </span><span class="kt">int64</span><span class="p">)</span><span class="x">
+
+</span><span class="n">testing</span><span class="o">.</span><span class="n">Benchmark</span><span class="p">(</span><span class="n">f</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">B</span><span class="p">))</span><span class="x"> </span><span class="n">BenchmarkResult</span></code></pre></figure>
+
+<p>通过例子看它们之间的组合用法。benchtime默认为1秒。</p>
+
+<p>串行用法</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span><span class="x"> </span><span class="n">BenchmarkFoo</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="o">:=</span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">b</span><span class="o">.</span><span class="n">N</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">dosomething</span><span class="p">()</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>最基本用法，测试dosomething()在达到1秒或超过1秒时，总共执行多少次。b.N的值就是最大次数。</p>
+
+<p>并行用法</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span><span class="x"> </span><span class="n">BenchmarkFoo</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">b</span><span class="o">.</span><span class="n">RunParallel</span><span class="p">(</span><span class="k">func</span><span class="p">(</span><span class="n">pb</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">PB</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">pb</span><span class="o">.</span><span class="n">Next</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+      </span><span class="n">dosomething</span><span class="p">()</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+  </span><span class="p">})</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>如果代码只是像上例这样写，那么并行的goroutine个数是默认等于runtime.GOMAXPROCS(0)。</p>
+
+<p>创建P个goroutine之后，再把b.N打散到每个goroutine上执行。所以并行用法就比较适合IO型的测试对象。</p>
+
+<p>若想增大goroutine的个数，那就使用b.SetParallelism(p int)。</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">// 最终goroutine个数 <span class="o">=</span> 形参p的值 <span class="k">*</span> runtime.GOMAXPROCS<span class="o">(</span>0<span class="o">)</span>
+numProcs :<span class="o">=</span> b.parallelism <span class="k">*</span> runtime.GOMAXPROCS<span class="o">(</span>0<span class="o">)</span></code></pre></figure>
+
+<p>要注意，b.SetParallelism()的调用一定要放在b.RunParallel()之前。</p>
+
+<p>并行用法带来一些启示，注意到b.N是被RunParallel()接管的。意味着，开发者可以自己写一个RunParallel()方法，goroutine个数和b.N的打散机制自己控制。或接管b.N之后，定制自己的策略。</p>
+
+<p>要注意b.N会递增，这次b.N执行完，不满足终止条件，就会递增b.N，逼近上限，直至满足终止条件。</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="c">// 终止策略: 执行过程中没有竟   态问题 &amp; 时间没超出 &amp; 次数没达到上限</span><span class="x">
+</span><span class="c">// d := b.benchTime</span><span class="x">
+</span><span class="k">if</span><span class="x"> </span><span class="o">!</span><span class="n">b</span><span class="o">.</span><span class="n">failed</span><span class="x"> </span><span class="o">&amp;&amp;</span><span class="x"> </span><span class="n">b</span><span class="o">.</span><span class="n">duration</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="n">d</span><span class="x"> </span><span class="o">&amp;&amp;</span><span class="x"> </span><span class="n">n</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="m">1e9</span><span class="x"> </span><span class="p">{}</span></code></pre></figure>
+
+<p>Start/Stop/ResetTimer()
+这三个都是对 计时统计器 和 内存统计器 操作。</p>
+
+<p>benchmark中难免有一些初始化的工作，这些工作耗时不希望被计算进benchmark结果中。</p>
+
+<p>通常做法是</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="n">StartTimer</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="o">!</span><span class="n">b</span><span class="o">.</span><span class="n">timerOn</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">// 记录当前时间为开始时间 和 内存分配情况</span><span class="x">
+    </span><span class="n">b</span><span class="o">.</span><span class="n">timerOn</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="no">true</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="n">StopTimer</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">b</span><span class="o">.</span><span class="n">timerOn</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">// 累计记录执行的时间（当前时间 - 记录的开始时间）</span><span class="x">
+    </span><span class="c">// 累计记录内存分配次数和分配字节数</span><span class="x">
+    </span><span class="n">b</span><span class="o">.</span><span class="n">timerOn</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="no">false</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="n">ResetTimer</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">b</span><span class="o">.</span><span class="n">timerOn</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">// 记录当前时间为开始时间 和 内存分配情况</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+  </span><span class="c">// 清空所有的累计变量</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+<h4 id="brun">b.Run()</h4>
+<p>虽然这个方法被暴露了，但其实在源码内部它是被复用的(下文原理部分介绍)。</p>
+
+<p>它作用就是生成一个subbenchmark，每一个subbenchmark都被当成一个普通的Benchmark执行。</p>
+
+<p>有了它，表驱动法派上用场。</p>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span><span class="x"> </span><span class="n">BenchmarkGCMRead</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">tests</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">keyLength</span><span class="x">   </span><span class="kt">int</span><span class="x">
+    </span><span class="n">valueLength</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="n">expectStale</span><span class="x"> </span><span class="kt">bool</span><span class="x">
+  </span><span class="p">}{</span><span class="x">
+    </span><span class="p">{</span><span class="n">keyLength</span><span class="o">:</span><span class="x"> </span><span class="m">16</span><span class="p">,</span><span class="x"> </span><span class="n">valueLength</span><span class="o">:</span><span class="x"> </span><span class="m">1024</span><span class="p">,</span><span class="x"> </span><span class="n">expectStale</span><span class="o">:</span><span class="x"> </span><span class="no">false</span><span class="p">},</span><span class="x">
+    </span><span class="p">{</span><span class="n">keyLength</span><span class="o">:</span><span class="x"> </span><span class="m">32</span><span class="p">,</span><span class="x"> </span><span class="n">valueLength</span><span class="o">:</span><span class="x"> </span><span class="m">1024</span><span class="p">,</span><span class="x"> </span><span class="n">expectStale</span><span class="o">:</span><span class="x"> </span><span class="no">false</span><span class="p">},</span><span class="x">
+    </span><span class="c">// more</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">tests</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">name</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"%vKeyLength/%vValueLength/%vExpectStale"</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">keyLength</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">valueLength</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">expectStale</span><span class="p">)</span><span class="x">
+    </span><span class="n">b</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+      </span><span class="n">benchmarkGCMRead</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">keyLength</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">valueLength</span><span class="p">,</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">expectStale</span><span class="p">)</span><span class="x">
+    </span><span class="p">})</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+  </div><a class="u-url" href="/go/2019/04/14/go-benchmark.html" hidden></a>
+</article>
+
+      </div>
+      
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Xie Haowei</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Xie Haowei</li><li><a class="u-email" href="mailto:haoweixie@gmail.com">haoweixie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiehaowei"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiehaowei</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Blog for Study &amp; Record</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

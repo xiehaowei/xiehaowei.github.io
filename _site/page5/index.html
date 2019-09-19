@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Page 5 of 6 for Xie Haowei | A Blog for Study &amp; Record</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Xie Haowei" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A Blog for Study &amp; Record" />
+<meta property="og:description" content="A Blog for Study &amp; Record" />
+<link rel="canonical" href="https://xiehaowei.github.io//page5/" />
+<meta property="og:url" content="https://xiehaowei.github.io//page5/" />
+<meta property="og:site_name" content="Xie Haowei" />
+<link rel="prev" href="https://xiehaowei.github.io//page4" />
+<link rel="next" href="https://xiehaowei.github.io//page6" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"https://xiehaowei.github.io//page5/","description":"A Blog for Study &amp; Record","headline":"Xie Haowei","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Xie Haowei</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/category/">category</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <div class="post-content">
+    <!-- 遍历分页后的文章 -->
+
+<h1><a href="/network/2017/07/14/ip-number.html">IP Number</a></h1>
+<p class="author">
+<span class="date">2017-07-14 14:21:01 +0800</span>
+</p>
+<div class="content" style="">
+    
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**   
+  * ip地址转成整数.   
+  * @param ip   
+  * @return   
+  */</span>    
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">ip2long</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">)</span> <span class="o">{</span>     
+     <span class="n">String</span><span class="o">[]</span> <span class="n">ips</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"[.]"</span><span class="o">);</span>     
+     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span>  <span class="mi">16777216L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">+</span> <span class="mi">65536L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">+</span> <span class="mi">256</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span> <span class="o">+</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>     
+     <span class="k">return</span> <span class="n">num</span><span class="o">;</span>     
+ <span class="o">}</span>     
+      
+ <span class="cm">/**   
+  * 整数转成ip地址.   
+  * @param ipLong   
+  * @return   
+  */</span>    
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">long2ip</span><span class="o">(</span><span class="kt">long</span> <span class="n">ipLong</span><span class="o">)</span> <span class="o">{</span>     
+     <span class="c1">//long ipLong = 1037591503;     </span>
+     <span class="kt">long</span> <span class="n">mask</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mh">0x000000FF</span><span class="o">,</span><span class="mh">0x0000FF00</span><span class="o">,</span><span class="mh">0x00FF0000</span><span class="o">,</span><span class="mh">0xFF000000</span><span class="o">};</span>     
+     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>     
+     <span class="n">StringBuffer</span> <span class="n">ipInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>     
+     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>     
+         <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="n">ipLong</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;&gt;(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="o">);</span>     
+         <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"."</span><span class="o">);</span>     
+         <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">,</span><span class="mi">10</span><span class="o">));</span>     
+     <span class="o">}</span>     
+     <span class="k">return</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>     
+<span class="o">}</span> </code></pre></figure>
+
+</div>
+<br />
+<a href="/network/2017/07/14/ip-number.html"> >>> Read More </a>
+<br /><br />
+
+<h1><a href="/shell/2017/07/11/shell-variable.html">shell variable</a></h1>
+<p class="author">
+<span class="date">2017-07-11 10:23:01 +0800</span>
+</p>
+<div class="content" style="">
+    
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">file</span><span class="o">=</span>/dir1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">#*/</span><span class="k">}</span>：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">##*/</span><span class="k">}</span>：删掉最后一个 /  及其左边的字符串：my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">#*.</span><span class="k">}</span>：删掉第一个 <span class="nb">.</span>  及其左边的字符串：file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">##*.</span><span class="k">}</span>：删掉最后一个 <span class="nb">.</span>  及其左边的字符串：txt
+<span class="k">${</span><span class="nv">file</span><span class="p">%/*</span><span class="k">}</span>：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+<span class="k">${</span><span class="nv">file</span><span class="p">%%/*</span><span class="k">}</span>：删掉第一个 /  及其右边的字符串：<span class="o">(</span>空值<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">%.*</span><span class="k">}</span>：删掉最后一个  <span class="nb">.</span>  及其右边的字符串：/dir1/dir2/dir3/my.file
+<span class="k">${</span><span class="nv">file</span><span class="p">%%.*</span><span class="k">}</span>：删掉第一个  <span class="nb">.</span>   及其右边的字符串：/dir1/dir2/dir3/my
+ <span class="c"># 是 去掉左边（键盘上#在 $ 的左边）</span>
+%是去掉右边（键盘上% 在<span class="nv">$ </span>的右边）
+单一符号是最小匹配；两个符号是最大匹配
+<span class="k">${</span><span class="nv">file</span>:0:5<span class="k">}</span>：提取最左边的 5 个字节：/dir1
+<span class="k">${</span><span class="nv">file</span>:5:5<span class="k">}</span>：提取第 5 个字节右边的连续5个字节：/dir2
+<span class="k">${</span><span class="nv">file</span><span class="p">/dir/path</span><span class="k">}</span>：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">//dir/path</span><span class="k">}</span>：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">-my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有设定，則使用 my.file.txt 作传回值。<span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="k">:-</span><span class="nv">my</span><span class="p">.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有設定或為空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">+my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 設為空值或非空值，均使用 my.file.txt 作傳回值。<span class="o">(</span>沒設定時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:+my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 為非空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>沒設定及空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為 my.file.txt 。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:<span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為my.file.txt 。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">?my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則將 my.file.txt 輸出至 STDERR。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:?my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 没设定或为空值，则将 my.file.txt 输出至 STDERR。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${#</span><span class="nv">var</span><span class="k">}</span> 可计算出变量值的长度：
+<span class="k">${#</span><span class="nv">file</span><span class="k">}</span> 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节</code></pre></figure>
+
+
+</div>
+<br />
+<a href="/shell/2017/07/11/shell-variable.html"> >>> Read More </a>
+<br /><br />
+
+<h1><a href="/tcp/2016/11/06/TCP.html">TCP</a></h1>
+<p class="author">
+<span class="date">2016-11-06 23:42:50 +0800</span>
+</p>
+<div class="content" style="">
+    一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：
+
+
+</div>
+<br />
+<a href="/tcp/2016/11/06/TCP.html"> >>> Read More </a>
+<br /><br />
+
+<h1><a href="/algorithm/2016/09/18/algorithm.html">algorithm</a></h1>
+<p class="author">
+<span class="date">2016-09-18 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
+    <h3 id="1-合并排序将两个已经排序的数组合并成一个数组其中一个数组能容下两个数组的所有元素">1. 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素</h3>
+
+
+</div>
+<br />
+<a href="/algorithm/2016/09/18/algorithm.html"> >>> Read More </a>
+<br /><br />
+
+<h1><a href="/nginx/2016/09/17/nginx-X-sendfile.html">Nginx X-Sendfile</a></h1>
+<p class="author">
+<span class="date">2016-09-17 22:07:11 +0800</span>
+</p>
+<div class="content" style="">
+    <h3 id="常见php-下载文件">常见PHP 下载文件</h3>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 用户身份认证，若验证失败跳转</span>
+<span class="nx">authenticate</span><span class="p">();</span>
+<span class="c1">// 获取需要下载的文件，若文件不存在跳转</span>
+<span class="nv">$file</span><span class="o">=</span> <span class="nx">determine_file</span><span class="p">();</span>
+<span class="c1">// 读取文件内容</span>
+<span class="nv">$content</span><span class="o">=</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+<span class="c1">// 发送合适的 HTTP 头</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/octet-stream"</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename="'</span><span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span><span class="s1">'"'</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Length: "</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
+<span class="k">echo</span><span class="nv">$content</span><span class="p">;</span> <span class="c1">// 或者 readfile($file);</span>
+<span class="cp">?&gt;</span></code></pre></figure>
+
+<h3 id="开启nginx-x-sendfile">开启Nginx X-Sendfile</h3>
+
+<figure class="highlight"><pre><code class="language-conf" data-lang="conf"><span class="n">location</span> /<span class="n">protected</span>/ {
+ <span class="n">internal</span>;
+ <span class="n">root</span>  /<span class="n">some</span>/<span class="n">path</span>;
+}</code></pre></figure>
+
+
+</div>
+<br />
+<a href="/nginx/2016/09/17/nginx-X-sendfile.html"> >>> Read More </a>
+<br /><br />
+
+
+<!-- 分页链接 -->
+<div class="pagination">
+
+<a href="/page4" class="previous">Previous</a>
+
+<span class="page_number ">Page: 5 of 6</span>
+
+<a href="/page6" class="next">Next</a>
+
+</div>
+  </div>
+
+</article>
+
+      </div>
+      
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Xie Haowei</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Xie Haowei</li><li><a class="u-email" href="mailto:haoweixie@gmail.com">haoweixie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiehaowei"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiehaowei</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Blog for Study &amp; Record</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

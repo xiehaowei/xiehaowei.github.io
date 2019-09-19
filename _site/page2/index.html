@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Page 2 of 3 for Xie Haowei | A Blog for Study &amp; Record</title>
+<title>Page 2 of 6 for Xie Haowei | A Blog for Study &amp; Record</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Xie Haowei" />
 <meta property="og:locale" content="en_US" />
@@ -44,99 +44,59 @@
   <div class="post-content">
     <!-- 遍历分页后的文章 -->
 
-<h1><a href="/go/2018/10/20/go-tool-pprof.html">Go tool pprof</a></h1>
+<h1><a href="/mysql/2019/05/24/MySQL-lock.html">MySQL 常见锁分析</a></h1>
 <p class="author">
-<span class="date">2018-10-20 11:13:01 +0800</span>
+<span class="date">2019-05-24 16:45:27 +0800</span>
 </p>
 <div class="content" style="">
-    Go tool pprof
+    MySQL 常见锁分析
 </div>
 <br />
-<a href="/go/2018/10/20/go-tool-pprof.html"> >>> Read More </a>
+<a href="/mysql/2019/05/24/MySQL-lock.html"> >>> Read More </a>
 <br /><br />
 
-<h1><a href="/go/goroutine/2018/09/16/Go-GPM.html">The Go scheduler</a></h1>
+<h1><a href="/go/2019/04/14/go-benchmark.html">Go benchmark</a></h1>
 <p class="author">
-<span class="date">2018-09-16 19:34:23 +0800</span>
+<span class="date">2019-04-14 16:45:27 +0800</span>
 </p>
 <div class="content" style="">
-    From <a href="http://morsmachine.dk/go-scheduler" title="The Go scheduler">http://morsmachine.dk/go-scheduler</a>
-
-
+    go自带的benchmark可以方便快捷地在测试一个函数方法在串行或并行环境下的基准表现。指定一个时间（默认是1秒），看测试对象在达到或超过时间上限时，最多能被执行多少次和在此期间测试对象内存分配情况。
 </div>
 <br />
-<a href="/go/goroutine/2018/09/16/Go-GPM.html"> >>> Read More </a>
+<a href="/go/2019/04/14/go-benchmark.html"> >>> Read More </a>
 <br /><br />
 
-<h1><a href="/mysql/2018/06/24/MySQL.html">MySQL</a></h1>
+<h1><a href="/go/2019/03/30/go-memstats.html">Go MemStats</a></h1>
 <p class="author">
-<span class="date">2018-06-24 19:34:23 +0800</span>
+<span class="date">2019-03-30 21:16:32 +0800</span>
 </p>
 <div class="content" style="">
-    按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。
-例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：
-
-
+    Go内存泄漏学习
 </div>
 <br />
-<a href="/mysql/2018/06/24/MySQL.html"> >>> Read More </a>
+<a href="/go/2019/03/30/go-memstats.html"> >>> Read More </a>
 <br /><br />
 
-<h1><a href="/shell/2017/07/27/awk.html">awk</a></h1>
+<h1><a href="/curl/2019/03/23/curl.html">cURL</a></h1>
 <p class="author">
-<span class="date">2017-07-27 14:21:01 +0800</span>
+<span class="date">2019-03-23 22:27:16 +0800</span>
 </p>
 <div class="content" style="">
-    <h3 id="输出单引号">输出单引号</h3>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ps|awk <span class="s1">'{print "'</span><span class="se">\'</span><span class="s1">'"}'</span>    
-<span class="c">#使用一个双引号""，然后在双引号里面加入两个单引号''</span>
-<span class="c">#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</span></code></pre></figure>
-
-
+    curl是一个命令行工具，通过指定的URL来上传或下载数据，并将数据展示出来。curl中的c表示client，而URL，就是URL
 </div>
 <br />
-<a href="/shell/2017/07/27/awk.html"> >>> Read More </a>
+<a href="/curl/2019/03/23/curl.html"> >>> Read More </a>
 <br /><br />
 
-<h1><a href="/network/2017/07/14/ip-number.html">IP Number</a></h1>
+<h1><a href="/go/2019/03/20/go-channel.html">Go channel 分析</a></h1>
 <p class="author">
-<span class="date">2017-07-14 14:21:01 +0800</span>
+<span class="date">2019-03-20 16:45:27 +0800</span>
 </p>
 <div class="content" style="">
-    
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**   
-  * ip地址转成整数.   
-  * @param ip   
-  * @return   
-  */</span>    
- <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">ip2long</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">)</span> <span class="o">{</span>     
-     <span class="n">String</span><span class="o">[]</span> <span class="n">ips</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"[.]"</span><span class="o">);</span>     
-     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span>  <span class="mi">16777216L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">+</span> <span class="mi">65536L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">+</span> <span class="mi">256</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span> <span class="o">+</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>     
-     <span class="k">return</span> <span class="n">num</span><span class="o">;</span>     
- <span class="o">}</span>     
-      
- <span class="cm">/**   
-  * 整数转成ip地址.   
-  * @param ipLong   
-  * @return   
-  */</span>    
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">long2ip</span><span class="o">(</span><span class="kt">long</span> <span class="n">ipLong</span><span class="o">)</span> <span class="o">{</span>     
-     <span class="c1">//long ipLong = 1037591503;     </span>
-     <span class="kt">long</span> <span class="n">mask</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mh">0x000000FF</span><span class="o">,</span><span class="mh">0x0000FF00</span><span class="o">,</span><span class="mh">0x00FF0000</span><span class="o">,</span><span class="mh">0xFF000000</span><span class="o">};</span>     
-     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>     
-     <span class="n">StringBuffer</span> <span class="n">ipInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>     
-     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>     
-         <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="n">ipLong</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;&gt;(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="o">);</span>     
-         <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"."</span><span class="o">);</span>     
-         <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">,</span><span class="mi">10</span><span class="o">));</span>     
-     <span class="o">}</span>     
-     <span class="k">return</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>     
-<span class="o">}</span> </code></pre></figure>
-
+    gin middleware to automatically generate RESTful API documentation with Swagger 2.0.
 </div>
 <br />
-<a href="/network/2017/07/14/ip-number.html"> >>> Read More </a>
+<a href="/go/2019/03/20/go-channel.html"> >>> Read More </a>
 <br /><br />
 
 
@@ -145,7 +105,7 @@
 
 <a href="/page1" class="previous">Previous</a>
 
-<span class="page_number ">Page: 2 of 3</span>
+<span class="page_number ">Page: 2 of 6</span>
 
 <a href="/page3" class="next">Next</a>
 

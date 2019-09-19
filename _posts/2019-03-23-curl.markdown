@@ -1,0 +1,44 @@
+---
+layout: post
+title:  "cURL"
+date:   2019-03-23 22:27:16 +0800
+categories: [curl]
+tags: [curl,linux]
+excerpt: "curl是一个命令行工具，通过指定的URL来上传或下载数据，并将数据展示出来。curl中的c表示client，而URL，就是URL"
+---
+
+#### 1. 常用cURL 选项
+* -I 获取Get请求header
+* -i 同时获取header 和 body
+* -L location 跟踪跳转
+* -d POST application/x-www-form-urlencoded
+* -F POST multipart/form-data
+* -T PUT -T file  --upload-file 
+* -s 不输出任何程序的信息或者错误信息，但也会输出响应的结果
+* -H 设置header
+* -A  = --user-agent 设置UA
+* -D 输入header -D - 后面的 - 表示 输出到 stdin
+* -e = --referer 设置referer
+* -o 输出重定向
+* -r 只接受指定范围的内容
+* -b name=data --cookie name=data 设置cookie
+
+
+#### 2. 常用命令
+
+{% highlight shell %}
+//获取post 请求的header信息
+$ curl -s  -D- -o /dev/null -d a=b http://test.com
+{% endhighlight %}
+
+{% highlight shell %}
+//put 文件内容
+$ cat test.txt|curl "http://test.com/upload" -T - 
+{% endhighlight %}
+
+#### 3. cookie
+* -j --junk-session-cookies 放弃所有cookie
+* -c file 讲服务器返回的cookie 保存到file里
+
+#### 4. 断点续传
+-c <offset> ,如果offset 设置为- ，会自动获取

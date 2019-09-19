@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Go Module (Go 1.13) | Xie Haowei</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Go Module (Go 1.13)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Go Modules Golang 包管理方式" />
+<meta property="og:description" content="Go Modules Golang 包管理方式" />
+<link rel="canonical" href="https://xiehaowei.github.io//go/2019/09/07/go-module.html" />
+<meta property="og:url" content="https://xiehaowei.github.io//go/2019/09/07/go-module.html" />
+<meta property="og:site_name" content="Xie Haowei" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-07T11:27:27+08:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/09/07/go-module.html"},"url":"https://xiehaowei.github.io//go/2019/09/07/go-module.html","description":"Go Modules Golang 包管理方式","headline":"Go Module (Go 1.13)","dateModified":"2019-09-07T11:27:27+08:00","datePublished":"2019-09-07T11:27:27+08:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Xie Haowei</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/category/">category</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Go Module (Go 1.13)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-09-07T11:27:27+08:00" itemprop="datePublished">Sep 7, 2019
+      </time></p>
+
+     
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h4 id="go-包管理历史">Go 包管理历史</h4>
+<ul>
+  <li>在 1.5 版本之前，所有的依赖包都是存放在 GOPATH 下，没有版本控制。这个类似 Google 使用单一仓库来管理代码的方式。这种方式的最大的弊端就是无法实现包的多版本控制，比如项目 A 和项目 B 依赖于不同版本的 package，如果 package 没有做到完全的向前兼容，往往会导致一些问题。</li>
+  <li>1.5 版本推出了 vendor 机制。所谓 vendor 机制，就是每个项目的根目录下可以有一个 vendor 目录，里面存放了该项目的依赖的 package。go build 的时候会先去 vendor 目录查找依赖，如果没有找到会再去 GOPATH 目录下查找</li>
+  <li>1.9 版本推出了实验性质的包管理工具 dep</li>
+  <li>1.11 版本推出 modules 机制，简称go mod</li>
+  <li>1.13 Go module 进一步完善,modules 在 Go 1.13 的版本下是默认开启的</li>
+</ul>
+
+<h4 id="在-112-版本之前-需要-环境变量-go111module">在 1.12 版本之前 需要 环境变量 GO111MODULE:</h4>
+
+<blockquote>
+  <p>GO111MODULE=off: 不使用 modules 功能。</p>
+</blockquote>
+
+<blockquote>
+  <p>GO111MODULE=on: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。</p>
+</blockquote>
+
+<blockquote>
+  <p>GO111MODULE=auto: Golang 自己检测是不是使用 modules 功能。</p>
+</blockquote>
+
+<h4 id="goproxy">GoProxy</h4>
+
+<p>目前公开的 GOPROXY 有：</p>
+
+<ul>
+  <li>goproxy.io 官方</li>
+  <li>goproxy.cn: 由七牛云提供</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">go <span class="nb">env</span> <span class="nt">-w</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.io,direct
+<span class="c"># Set environment variable allow bypassing the proxy for selected modules</span>
+go <span class="nb">env</span> <span class="nt">-w</span> <span class="nv">GOPRIVATE</span><span class="o">=</span><span class="k">*</span>.corp.example.com</code></pre></figure>
+
+<h4 id="常用命令">常用命令</h4>
+<ul>
+  <li>在项目根目录执行命令  go mod init <module></module></li>
+  <li>go get package@version Go使用语义化版本 <a href="https://semver.org/" title="语义化版本">https://semver.org/</a></li>
+  <li>go mod tidy 清理 go.mod 中的依赖，会添加缺失的依赖，同时移除没有用到的依赖</li>
+  <li>go mod vendor</li>
+</ul>
+
+<blockquote>
+  <p>replace 主要为了解决某些包发生改名的问题，也可以解决个别包无法下载</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">replace golang.org/x/crypto v0.0.0-20181127143415-eb0de9b17e85 <span class="o">=&gt;</span> github.com/golang/crypto v0.0.0-20181127143415-eb0de9b17e85,replace 主要为了解决某些包发生改名的问题。</code></pre></figure>
+
+<h4 id="goprivate">GOPRIVATE</h4>
+<p>前面也说到对于一些内部的 package，GoProxy 并不能很好的处理，Go 1.13 推出了 GOPRIVATE 机制。只需要设置这个环境变量，然后标识出哪些 package 是 private 的，那么对于这个 package 的处理将不会从 proxy 下载。GOPRIVATE 的值是一个以逗号分隔的列表，支持正则（正则语法遵守 Golang 的 包 path.Match）。下面是一个 GOPRIVATE 的示例：</p>
+
+<blockquote>
+  <p>GOPRIVATE=*.corp.example.com,rsc.io/private</p>
+</blockquote>
+
+<p>上面的 GOPRIVATE 表示以 *.corp.example.com 或者 rsc.io/private 开头的 package 都是私有的。</p>
+
+<p>一般使用</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">  go <span class="nb">env</span> <span class="nt">-w</span> <span class="nv">GOPRIVATE</span><span class="o">=</span>gitlab.<span class="k">*</span>.com
+  go <span class="nb">env</span> <span class="nt">-w</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct</code></pre></figure>
+
+<h4 id="gosumdb">GOSUMDB</h4>
+<p>GOSUMDB 的全称为 Go CheckSum Database，用来下载的包的安全性校验问题。包的安全性在使用 GoProxy 之后更容易出现，比如我们引用了一个不安全的 GoProxy 之后然后下载了一个不安全的包，这个时候就出现了安全性问题。对于这种情况，可以通过 GOSUMDB 来对包的哈希值进行校验。当然如果想要关闭哈希校验，可以将 GOSUMDB 设置为 off；如果要对部分包关闭哈希校验，则可以将包的前缀设置到环境变量中 GONOSUMDB 中，设置规则类似 GOPRIVATE。</p>
+
+  </div><a class="u-url" href="/go/2019/09/07/go-module.html" hidden></a>
+</article>
+
+      </div>
+      
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Xie Haowei</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Xie Haowei</li><li><a class="u-email" href="mailto:haoweixie@gmail.com">haoweixie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiehaowei"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiehaowei</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Blog for Study &amp; Record</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

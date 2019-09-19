@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "MySQL"
+title:  "MySQL 事务隔离级别"
 date:   2018-06-24 19:34:23 +0800
 categories: [MySQL]
 tags: [MySQL]

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Go channel 分析 | Xie Haowei</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Go channel 分析" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="gin middleware to automatically generate RESTful API documentation with Swagger 2.0." />
+<meta property="og:description" content="gin middleware to automatically generate RESTful API documentation with Swagger 2.0." />
+<link rel="canonical" href="https://xiehaowei.github.io//go/2019/03/20/go-channel.html" />
+<meta property="og:url" content="https://xiehaowei.github.io//go/2019/03/20/go-channel.html" />
+<meta property="og:site_name" content="Xie Haowei" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-20T16:45:27+08:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/03/20/go-channel.html"},"url":"https://xiehaowei.github.io//go/2019/03/20/go-channel.html","description":"gin middleware to automatically generate RESTful API documentation with Swagger 2.0.","headline":"Go channel 分析","dateModified":"2019-03-20T16:45:27+08:00","datePublished":"2019-03-20T16:45:27+08:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Xie Haowei</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/category/">category</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Go channel 分析</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-03-20T16:45:27+08:00" itemprop="datePublished">Mar 20, 2019
+      </time></p>
+
+     
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h4 id="1-runtimechango">1. runtime/chan.go</h4>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span><span class="x"> </span><span class="n">hchan</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+	</span><span class="n">qcount</span><span class="x">   </span><span class="kt">uint</span><span class="x">           </span><span class="c">// total data in the queue</span><span class="x">
+	</span><span class="n">dataqsiz</span><span class="x"> </span><span class="kt">uint</span><span class="x">           </span><span class="c">// size of the circular queue</span><span class="x">
+	</span><span class="n">buf</span><span class="x">      </span><span class="n">unsafe</span><span class="o">.</span><span class="n">Pointer</span><span class="x"> </span><span class="c">// points to an array of dataqsiz elements</span><span class="x">
+	</span><span class="n">elemsize</span><span class="x"> </span><span class="kt">uint16</span><span class="x">
+	</span><span class="n">closed</span><span class="x">   </span><span class="kt">uint32</span><span class="x">
+	</span><span class="n">elemtype</span><span class="x"> </span><span class="o">*</span><span class="n">_type</span><span class="x"> </span><span class="c">// element type</span><span class="x">
+	</span><span class="n">sendx</span><span class="x">    </span><span class="kt">uint</span><span class="x">   </span><span class="c">// send index</span><span class="x">
+	</span><span class="n">recvx</span><span class="x">    </span><span class="kt">uint</span><span class="x">   </span><span class="c">// receive index</span><span class="x">
+	</span><span class="n">recvq</span><span class="x">    </span><span class="n">waitq</span><span class="x">  </span><span class="c">// list of recv waiters</span><span class="x">
+	</span><span class="n">sendq</span><span class="x">    </span><span class="n">waitq</span><span class="x">  </span><span class="c">// list of send waiters</span><span class="x">
+
+	</span><span class="c">// lock protects all fields in hchan, as well as several</span><span class="x">
+	</span><span class="c">// fields in sudogs blocked on this channel.</span><span class="x">
+	</span><span class="c">//</span><span class="x">
+	</span><span class="c">// Do not change another G's status while holding this lock</span><span class="x">
+	</span><span class="c">// (in particular, do not ready a G), as this can deadlock</span><span class="x">
+	</span><span class="c">// with stack shrinking.</span><span class="x">
+	</span><span class="n">lock</span><span class="x"> </span><span class="n">mutex</span><span class="x">
+</span><span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>
+    <p>buf是有缓冲的channel所特有的结构，用来存储缓存数据。是个循环链表</p>
+  </li>
+  <li>
+    <p>sendx和 recvx用于记录 buf这个循环链表中的~发送或者接收的~index</p>
+  </li>
+  <li>
+    <p>lock是个互斥锁。</p>
+  </li>
+  <li>
+    <p>recvq和 sendq分别是接收(&lt;-channel)或者发送(channel &lt;- xxx)的goroutine抽象出来的结构体(sudog)的队列。是个双向链表</p>
+  </li>
+</ul>
+
+<h4 id="2-我们首先创建一个channel">2. 我们首先创建一个channel。</h4>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="n">ch</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="m">3</span><span class="p">)</span></code></pre></figure>
+
+<p>创建channel实际上就是在内存中实例化了一个 hchan的结构体，并返回一个ch指针，我们使用过程中channel在函数之间的传递都是用的这个指针，这就是为什么函数传递中无需使用channel的指针，而直接用channel就行了，因为channel本身就是一个指针。</p>
+
+<p>channel中发送send(ch &lt;- xxx)和recv(&lt;- ch)接收
+先考虑一个问题，如果你想让goroutine以先进先出(FIFO)的方式进入一个结构体中，你会怎么操作？加锁！对的！channel就是用了一个锁。hchan本身包含一个互斥锁 mutex</p>
+
+<p>channel中队列是如何实现的
+channel中有个缓存buf，是用来缓存数据的(假如实例化了带缓存的channel的话)队列。</p>
+
+<p>当使用 send(ch&lt;-xx)或者 recv(&lt;-ch)的时候，首先要锁住 hchan这个结构体。</p>
+
+<p>recvx和 sendx是根据循环链表 buf的变动而改变的。至于为什么channel会使用循环链表作为缓存结构，我个人认为是在缓存列表在动态的 send和 recv过程中，定位当前 send或者 recvx的位置、选择 send的和 recvx的位置比较方便吧，只要顺着链表顺序一直旋转操作就好。</p>
+
+<p>缓存中按链表顺序存放，取数据的时候按链表顺序读取，符合FIFO的原则。</p>
+
+<p>send/recv的细化操作
+注意：缓存链表中以上每一步的操作，都是需要加锁操作的！</p>
+
+<p>每一步的操作的细节可以细化为：</p>
+
+<p>第一，加锁</p>
+
+<p>第二，把数据从goroutine中copy到“队列”中(或者从队列中copy到goroutine中）。</p>
+
+<p>第三，释放锁</p>
+
+<p>当channel缓存满了之后会发生什么？这其中的原理是怎样的？
+使用的时候，我们都知道，当channel缓存满了，或者没有缓存的时候，我们继续send(ch &lt;- xxx)或者recv(&lt;- ch)会阻塞当前goroutine，但是，是如何实现的呢？</p>
+
+<p>我们知道，Go的goroutine是用户态的线程( user-space threads)，用户态的线程是需要自己去调度的，Go有运行时的scheduler去帮我们完成调度这件事情。</p>
+
+  </div><a class="u-url" href="/go/2019/03/20/go-channel.html" hidden></a>
+</article>
+
+      </div>
+      
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Xie Haowei</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Xie Haowei</li><li><a class="u-email" href="mailto:haoweixie@gmail.com">haoweixie@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/xiehaowei"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">xiehaowei</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Blog for Study &amp; Record</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
