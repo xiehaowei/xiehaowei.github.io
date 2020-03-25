@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>The Go scheduler | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="The Go scheduler" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="From http://morsmachine.dk/go-scheduler" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-09-16T11:34:23+00:00" />
 <script type="application/ld+json">
-{"headline":"The Go scheduler","dateModified":"2018-09-16T11:34:23+00:00","datePublished":"2018-09-16T11:34:23+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/goroutine/2018/09/16/Go-GPM.html"},"description":"From http://morsmachine.dk/go-scheduler","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/goroutine/2018/09/16/Go-GPM.html","@context":"http://schema.org"}</script>
+{"datePublished":"2018-09-16T11:34:23+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/goroutine/2018/09/16/Go-GPM.html"},"dateModified":"2018-09-16T11:34:23+00:00","description":"From http://morsmachine.dk/go-scheduler","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/goroutine/2018/09/16/Go-GPM.html","headline":"The Go scheduler","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -99,9 +99,9 @@
 P的数量可以通过GOMAXPROCS()来设置，它其实也就代表了真正的并发度，即有多少个goroutine可以同时运行。图中灰色的那些goroutine并没有运行，而是出于ready的就绪态，正在等待被调度。P维护着这个队列（称之为runqueue）.
 Go语言里，启动一个goroutine很容易：</p>
 
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">go</span><span class="x"> </span><span class="k">func</span><span class="p">(){</span><span class="x">
-    </span><span class="c">//do something</span><span class="x">
-</span><span class="p">}</span><span class="x"> </span><span class="p">()</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">go</span> <span class="k">func</span><span class="p">(){</span>
+    <span class="c">//do something</span>
+<span class="p">}</span> <span class="p">()</span></code></pre></figure>
 
 <p>所以每有一个go语句被执行，runqueue队列就在其末尾加入一个goroutine，在下一个调度点，就从runqueue中取出（如何决定取哪个goroutine？）一个goroutine执行。为何要维护多个上下文P？因为当一个OS线程被阻塞时，P可以转而投奔另一个OS线程！图中看到，当一个OS线程M0陷入阻塞时，P转而在OS线程M1上运行。调度器保证有足够的线程来运行所以的context P。</p>
 

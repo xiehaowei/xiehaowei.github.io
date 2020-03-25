@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Go MemStats | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Go MemStats" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Go内存泄漏学习" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-03-30T13:16:32+00:00" />
 <script type="application/ld+json">
-{"headline":"Go MemStats","dateModified":"2019-03-30T13:16:32+00:00","datePublished":"2019-03-30T13:16:32+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/03/30/go-memstats.html"},"description":"Go内存泄漏学习","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/03/30/go-memstats.html","@context":"http://schema.org"}</script>
+{"datePublished":"2019-03-30T13:16:32+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/03/30/go-memstats.html"},"dateModified":"2019-03-30T13:16:32+00:00","description":"Go内存泄漏学习","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/03/30/go-memstats.html","headline":"Go MemStats","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -83,118 +83,118 @@
 
 <h4 id="3-go运行时的内存统计信息">3. Go运行时的内存统计信息</h4>
 
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span><span class="x"> </span><span class="n">MemStats</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="c">// 已分配的对象的字节数.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 和HeapAlloc相同.</span><span class="x">
-        </span><span class="n">Alloc</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 分配的字节数累积之和.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 所以对象释放的时候这个值不会减少.</span><span class="x">
-        </span><span class="n">TotalAlloc</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 从操作系统获得的内存总数.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// Sys是下面的XXXSys字段的数值的和, 是为堆、栈、其它内部数据保留的虚拟内存空间. </span><span class="x">
-        </span><span class="c">// 注意虚拟内存空间和物理内存的区别.</span><span class="x">
-        </span><span class="n">Sys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 运行时地址查找的次数，主要用在运行时内部调试上.</span><span class="x">
-        </span><span class="n">Lookups</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 堆对象分配的次数累积和.</span><span class="x">
-        </span><span class="c">// 活动对象的数量等于`Mallocs - Frees`.</span><span class="x">
-        </span><span class="n">Mallocs</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 释放的对象数.</span><span class="x">
-        </span><span class="n">Frees</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 分配的堆对象的字节数.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 包括所有可访问的对象以及还未被垃圾回收的不可访问的对象.</span><span class="x">
-        </span><span class="c">// 所以这个值是变化的，分配对象时会增加，垃圾回收对象时会减少.</span><span class="x">
-        </span><span class="n">HeapAlloc</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 从操作系统获得的堆内存大小.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 虚拟内存空间为堆保留的大小，包括还没有被使用的.</span><span class="x">
-        </span><span class="c">// HeapSys 可被估算为堆已有的最大尺寸.</span><span class="x">
-        </span><span class="n">HeapSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// HeapIdle是idle(未被使用的) span中的字节数.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// Idle span是指没有任何对象的span,这些span **可以**返还给操作系统，或者它们可以被重用,</span><span class="x">
-        </span><span class="c">// 或者它们可以用做栈内存.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// HeapIdle 减去 HeapReleased 的值可以当作"可以返回到操作系统但由运行时保留的内存量".</span><span class="x">
-        </span><span class="c">// 以便在不向操作系统请求更多内存的情况下增加堆，也就是运行时的"小金库".</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 如果这个差值明显比堆的大小大很多，说明最近在活动堆的上有一次尖峰.</span><span class="x">
-        </span><span class="n">HeapIdle</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 正在使用的span的字节大小.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 正在使用的span是值它至少包含一个对象在其中.</span><span class="x">
-        </span><span class="c">// HeapInuse 减去 HeapAlloc的值是为特殊大小保留的内存，但是当前还没有被使用.</span><span class="x">
-        </span><span class="n">HeapInuse</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// HeapReleased 是返还给操作系统的物理内存的字节数.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 它统计了从idle span中返还给操作系统，没有被重新获取的内存大小.</span><span class="x">
-        </span><span class="n">HeapReleased</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// HeapObjects 实时统计的分配的堆对象的数量,类似HeapAlloc.</span><span class="x">
-        </span><span class="n">HeapObjects</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 栈span使用的字节数。</span><span class="x">
-        </span><span class="c">// 正在使用的栈span是指至少有一个栈在其中.</span><span class="x">
-        </span><span class="c">//</span><span class="x">
-        </span><span class="c">// 注意并没有idle的栈span,因为未使用的栈span会被返还给堆(HeapIdle).</span><span class="x">
-        </span><span class="n">StackInuse</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 从操作系统取得的栈内存大小.</span><span class="x">
-        </span><span class="c">// 等于StackInuse 再加上为操作系统线程栈获得的内存.</span><span class="x">
-        </span><span class="n">StackSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 分配的mspan数据结构的字节数.</span><span class="x">
-        </span><span class="n">MSpanInuse</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 从操作系统为mspan获取的内存字节数.</span><span class="x">
-        </span><span class="n">MSpanSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 分配的mcache数据结构的字节数.</span><span class="x">
-        </span><span class="n">MCacheInuse</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 从操作系统为mcache获取的内存字节数.</span><span class="x">
-        </span><span class="n">MCacheSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 在profiling bucket hash tables中的内存字节数.</span><span class="x">
-        </span><span class="n">BuckHashSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 垃圾回收元数据使用的内存字节数.</span><span class="x">
-        </span><span class="n">GCSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x"> </span><span class="c">// Go 1.2</span><span class="x">
-        </span><span class="c">// off-heap的杂项内存字节数.</span><span class="x">
-        </span><span class="n">OtherSys</span><span class="x"> </span><span class="kt">uint64</span><span class="x"> </span><span class="c">// Go 1.2</span><span class="x">
-        </span><span class="c">// 下一次垃圾回收的目标大小，保证 HeapAlloc ≤ NextGC.</span><span class="x">
-        </span><span class="c">// 基于当前可访问的数据和GOGC的值计算而得.</span><span class="x">
-        </span><span class="n">NextGC</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 上一次垃圾回收的时间.</span><span class="x">
-        </span><span class="n">LastGC</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 自程序开始 STW 暂停的累积纳秒数.</span><span class="x">
-        </span><span class="c">// STW的时候除了垃圾回收器之外所有的goroutine都会暂停.</span><span class="x">
-        </span><span class="n">PauseTotalNs</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 一个循环buffer，用来记录最近的256个GC STW的暂停时间.</span><span class="x">
-        </span><span class="n">PauseNs</span><span class="x"> </span><span class="p">[</span><span class="m">256</span><span class="p">]</span><span class="kt">uint64</span><span class="x">
-        </span><span class="c">// 最近256个GC暂停截止的时间.</span><span class="x">
-        </span><span class="n">PauseEnd</span><span class="x"> </span><span class="p">[</span><span class="m">256</span><span class="p">]</span><span class="kt">uint64</span><span class="x"> </span><span class="c">// Go 1.4</span><span class="x">
-        </span><span class="c">// GC的总次数.</span><span class="x">
-        </span><span class="n">NumGC</span><span class="x"> </span><span class="kt">uint32</span><span class="x">
-        </span><span class="c">// 强制GC的次数.</span><span class="x">
-        </span><span class="n">NumForcedGC</span><span class="x"> </span><span class="kt">uint32</span><span class="x"> </span><span class="c">// Go 1.8</span><span class="x">
-        </span><span class="c">// 自程序启动后由GC占用的CPU可用时间，数值在 0 到 1 之间.</span><span class="x">
-        </span><span class="c">// 0代表GC没有消耗程序的CPU. GOMAXPROCS * 程序运行时间等于程序的CPU可用时间.</span><span class="x">
-        </span><span class="n">GCCPUFraction</span><span class="x"> </span><span class="kt">float64</span><span class="x"> </span><span class="c">// Go 1.5</span><span class="x">
-        </span><span class="c">// 是否允许GC.</span><span class="x">
-        </span><span class="n">EnableGC</span><span class="x"> </span><span class="kt">bool</span><span class="x">
-        </span><span class="c">// 未使用.</span><span class="x">
-        </span><span class="n">DebugGC</span><span class="x"> </span><span class="kt">bool</span><span class="x">
-        </span><span class="c">// 按照大小进行的内存分配的统计,具体可以看Go内存分配的文章介绍.</span><span class="x">
-        </span><span class="n">BySize</span><span class="x"> </span><span class="p">[</span><span class="m">61</span><span class="p">]</span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-                </span><span class="c">// Size is the maximum byte size of an object in this</span><span class="x">
-                </span><span class="c">// size class.</span><span class="x">
-                </span><span class="n">Size</span><span class="x"> </span><span class="kt">uint32</span><span class="x">
-                </span><span class="c">// Mallocs is the cumulative count of heap objects</span><span class="x">
-                </span><span class="c">// allocated in this size class. The cumulative bytes</span><span class="x">
-                </span><span class="c">// of allocation is Size*Mallocs. The number of live</span><span class="x">
-                </span><span class="c">// objects in this size class is Mallocs - Frees.</span><span class="x">
-                </span><span class="n">Mallocs</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-                </span><span class="c">// Frees is the cumulative count of heap objects freed</span><span class="x">
-                </span><span class="c">// in this size class.</span><span class="x">
-                </span><span class="n">Frees</span><span class="x"> </span><span class="kt">uint64</span><span class="x">
-        </span><span class="p">}</span><span class="x">
-</span><span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span> <span class="n">MemStats</span> <span class="k">struct</span> <span class="p">{</span>
+        <span class="c">// 已分配的对象的字节数.</span>
+        <span class="c">//</span>
+        <span class="c">// 和HeapAlloc相同.</span>
+        <span class="n">Alloc</span> <span class="kt">uint64</span>
+        <span class="c">// 分配的字节数累积之和.</span>
+        <span class="c">//</span>
+        <span class="c">// 所以对象释放的时候这个值不会减少.</span>
+        <span class="n">TotalAlloc</span> <span class="kt">uint64</span>
+        <span class="c">// 从操作系统获得的内存总数.</span>
+        <span class="c">//</span>
+        <span class="c">// Sys是下面的XXXSys字段的数值的和, 是为堆、栈、其它内部数据保留的虚拟内存空间. </span>
+        <span class="c">// 注意虚拟内存空间和物理内存的区别.</span>
+        <span class="n">Sys</span> <span class="kt">uint64</span>
+        <span class="c">// 运行时地址查找的次数，主要用在运行时内部调试上.</span>
+        <span class="n">Lookups</span> <span class="kt">uint64</span>
+        <span class="c">// 堆对象分配的次数累积和.</span>
+        <span class="c">// 活动对象的数量等于`Mallocs - Frees`.</span>
+        <span class="n">Mallocs</span> <span class="kt">uint64</span>
+        <span class="c">// 释放的对象数.</span>
+        <span class="n">Frees</span> <span class="kt">uint64</span>
+        <span class="c">// 分配的堆对象的字节数.</span>
+        <span class="c">//</span>
+        <span class="c">// 包括所有可访问的对象以及还未被垃圾回收的不可访问的对象.</span>
+        <span class="c">// 所以这个值是变化的，分配对象时会增加，垃圾回收对象时会减少.</span>
+        <span class="n">HeapAlloc</span> <span class="kt">uint64</span>
+        <span class="c">// 从操作系统获得的堆内存大小.</span>
+        <span class="c">//</span>
+        <span class="c">// 虚拟内存空间为堆保留的大小，包括还没有被使用的.</span>
+        <span class="c">// HeapSys 可被估算为堆已有的最大尺寸.</span>
+        <span class="n">HeapSys</span> <span class="kt">uint64</span>
+        <span class="c">// HeapIdle是idle(未被使用的) span中的字节数.</span>
+        <span class="c">//</span>
+        <span class="c">// Idle span是指没有任何对象的span,这些span **可以**返还给操作系统，或者它们可以被重用,</span>
+        <span class="c">// 或者它们可以用做栈内存.</span>
+        <span class="c">//</span>
+        <span class="c">// HeapIdle 减去 HeapReleased 的值可以当作"可以返回到操作系统但由运行时保留的内存量".</span>
+        <span class="c">// 以便在不向操作系统请求更多内存的情况下增加堆，也就是运行时的"小金库".</span>
+        <span class="c">//</span>
+        <span class="c">// 如果这个差值明显比堆的大小大很多，说明最近在活动堆的上有一次尖峰.</span>
+        <span class="n">HeapIdle</span> <span class="kt">uint64</span>
+        <span class="c">// 正在使用的span的字节大小.</span>
+        <span class="c">//</span>
+        <span class="c">// 正在使用的span是值它至少包含一个对象在其中.</span>
+        <span class="c">// HeapInuse 减去 HeapAlloc的值是为特殊大小保留的内存，但是当前还没有被使用.</span>
+        <span class="n">HeapInuse</span> <span class="kt">uint64</span>
+        <span class="c">// HeapReleased 是返还给操作系统的物理内存的字节数.</span>
+        <span class="c">//</span>
+        <span class="c">// 它统计了从idle span中返还给操作系统，没有被重新获取的内存大小.</span>
+        <span class="n">HeapReleased</span> <span class="kt">uint64</span>
+        <span class="c">// HeapObjects 实时统计的分配的堆对象的数量,类似HeapAlloc.</span>
+        <span class="n">HeapObjects</span> <span class="kt">uint64</span>
+        <span class="c">// 栈span使用的字节数。</span>
+        <span class="c">// 正在使用的栈span是指至少有一个栈在其中.</span>
+        <span class="c">//</span>
+        <span class="c">// 注意并没有idle的栈span,因为未使用的栈span会被返还给堆(HeapIdle).</span>
+        <span class="n">StackInuse</span> <span class="kt">uint64</span>
+        <span class="c">// 从操作系统取得的栈内存大小.</span>
+        <span class="c">// 等于StackInuse 再加上为操作系统线程栈获得的内存.</span>
+        <span class="n">StackSys</span> <span class="kt">uint64</span>
+        <span class="c">// 分配的mspan数据结构的字节数.</span>
+        <span class="n">MSpanInuse</span> <span class="kt">uint64</span>
+        <span class="c">// 从操作系统为mspan获取的内存字节数.</span>
+        <span class="n">MSpanSys</span> <span class="kt">uint64</span>
+        <span class="c">// 分配的mcache数据结构的字节数.</span>
+        <span class="n">MCacheInuse</span> <span class="kt">uint64</span>
+        <span class="c">// 从操作系统为mcache获取的内存字节数.</span>
+        <span class="n">MCacheSys</span> <span class="kt">uint64</span>
+        <span class="c">// 在profiling bucket hash tables中的内存字节数.</span>
+        <span class="n">BuckHashSys</span> <span class="kt">uint64</span>
+        <span class="c">// 垃圾回收元数据使用的内存字节数.</span>
+        <span class="n">GCSys</span> <span class="kt">uint64</span> <span class="c">// Go 1.2</span>
+        <span class="c">// off-heap的杂项内存字节数.</span>
+        <span class="n">OtherSys</span> <span class="kt">uint64</span> <span class="c">// Go 1.2</span>
+        <span class="c">// 下一次垃圾回收的目标大小，保证 HeapAlloc ≤ NextGC.</span>
+        <span class="c">// 基于当前可访问的数据和GOGC的值计算而得.</span>
+        <span class="n">NextGC</span> <span class="kt">uint64</span>
+        <span class="c">// 上一次垃圾回收的时间.</span>
+        <span class="n">LastGC</span> <span class="kt">uint64</span>
+        <span class="c">// 自程序开始 STW 暂停的累积纳秒数.</span>
+        <span class="c">// STW的时候除了垃圾回收器之外所有的goroutine都会暂停.</span>
+        <span class="n">PauseTotalNs</span> <span class="kt">uint64</span>
+        <span class="c">// 一个循环buffer，用来记录最近的256个GC STW的暂停时间.</span>
+        <span class="n">PauseNs</span> <span class="p">[</span><span class="m">256</span><span class="p">]</span><span class="kt">uint64</span>
+        <span class="c">// 最近256个GC暂停截止的时间.</span>
+        <span class="n">PauseEnd</span> <span class="p">[</span><span class="m">256</span><span class="p">]</span><span class="kt">uint64</span> <span class="c">// Go 1.4</span>
+        <span class="c">// GC的总次数.</span>
+        <span class="n">NumGC</span> <span class="kt">uint32</span>
+        <span class="c">// 强制GC的次数.</span>
+        <span class="n">NumForcedGC</span> <span class="kt">uint32</span> <span class="c">// Go 1.8</span>
+        <span class="c">// 自程序启动后由GC占用的CPU可用时间，数值在 0 到 1 之间.</span>
+        <span class="c">// 0代表GC没有消耗程序的CPU. GOMAXPROCS * 程序运行时间等于程序的CPU可用时间.</span>
+        <span class="n">GCCPUFraction</span> <span class="kt">float64</span> <span class="c">// Go 1.5</span>
+        <span class="c">// 是否允许GC.</span>
+        <span class="n">EnableGC</span> <span class="kt">bool</span>
+        <span class="c">// 未使用.</span>
+        <span class="n">DebugGC</span> <span class="kt">bool</span>
+        <span class="c">// 按照大小进行的内存分配的统计,具体可以看Go内存分配的文章介绍.</span>
+        <span class="n">BySize</span> <span class="p">[</span><span class="m">61</span><span class="p">]</span><span class="k">struct</span> <span class="p">{</span>
+                <span class="c">// Size is the maximum byte size of an object in this</span>
+                <span class="c">// size class.</span>
+                <span class="n">Size</span> <span class="kt">uint32</span>
+                <span class="c">// Mallocs is the cumulative count of heap objects</span>
+                <span class="c">// allocated in this size class. The cumulative bytes</span>
+                <span class="c">// of allocation is Size*Mallocs. The number of live</span>
+                <span class="c">// objects in this size class is Mallocs - Frees.</span>
+                <span class="n">Mallocs</span> <span class="kt">uint64</span>
+                <span class="c">// Frees is the cumulative count of heap objects freed</span>
+                <span class="c">// in this size class.</span>
+                <span class="n">Frees</span> <span class="kt">uint64</span>
+        <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
 
   </div><a class="u-url" href="/go/2019/03/30/go-memstats.html" hidden></a>

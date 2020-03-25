@@ -2,20 +2,20 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Go string rune template | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Go string rune template" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Go string rune &amp; template" />
-<meta property="og:description" content="Go string rune &amp; template" />
+<meta name="description" content="Go string rune template" />
+<meta property="og:description" content="Go string rune template" />
 <link rel="canonical" href="https://xiehaowei.github.io//go/2019/03/09/go-string.html" />
 <meta property="og:url" content="https://xiehaowei.github.io//go/2019/03/09/go-string.html" />
 <meta property="og:site_name" content="Xie Haowei" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-03-09T12:23:19+00:00" />
 <script type="application/ld+json">
-{"headline":"Go string rune template","dateModified":"2019-03-09T12:23:19+00:00","datePublished":"2019-03-09T12:23:19+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/03/09/go-string.html"},"description":"Go string rune &amp; template","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/03/09/go-string.html","@context":"http://schema.org"}</script>
+{"datePublished":"2019-03-09T12:23:19+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/03/09/go-string.html"},"dateModified":"2019-03-09T12:23:19+00:00","description":"Go string rune template","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/03/09/go-string.html","headline":"Go string rune template","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -48,33 +48,33 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">package</span> <span class="n">main</span>
 
-</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
-	</span><span class="s">"fmt"</span><span class="x">
-	</span><span class="s">"strings"</span><span class="x">
-</span><span class="p">)</span><span class="x">
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"strings"</span>
+<span class="p">)</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">str</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"我的abc你的"</span><span class="x">
-	</span><span class="n">str2</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">str</span><span class="p">)</span><span class="x">
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">str</span> <span class="o">:=</span> <span class="s">"我的abc你的"</span>
+	<span class="n">str2</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
 
-	</span><span class="k">for</span><span class="x"> </span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">str</span><span class="p">{</span><span class="x">
-		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="x">
-	</span><span class="p">}</span><span class="x">
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">str</span><span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+	<span class="p">}</span>
 
-	</span><span class="k">for</span><span class="x"> </span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">str2</span><span class="p">{</span><span class="x">
-		</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="x">
-	</span><span class="p">}</span><span class="x">
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">str2</span><span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+	<span class="p">}</span>
 
-	</span><span class="n">need</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"abc"</span><span class="x">
-	</span><span class="k">for</span><span class="x"> </span><span class="n">k</span><span class="p">,</span><span class="n">_</span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">str2</span><span class="p">{</span><span class="x">
-		</span><span class="k">if</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">HasPrefix</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">str2</span><span class="p">[</span><span class="n">k</span><span class="o">:</span><span class="p">]),</span><span class="n">need</span><span class="p">){</span><span class="x">
-			</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"at"</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="x">
-		</span><span class="p">}</span><span class="x">
-	</span><span class="p">}</span><span class="x">
+	<span class="n">need</span> <span class="o">:=</span> <span class="s">"abc"</span>
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">_</span><span class="o">:=</span> <span class="k">range</span> <span class="n">str2</span><span class="p">{</span>
+		<span class="k">if</span> <span class="n">strings</span><span class="o">.</span><span class="n">HasPrefix</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">str2</span><span class="p">[</span><span class="n">k</span><span class="o">:</span><span class="p">]),</span><span class="n">need</span><span class="p">){</span>
+			<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"at"</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 
-	</span><span class="k">const</span><span class="x"> </span><span class="n">letter</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">`
+	<span class="k">const</span> <span class="n">letter</span> <span class="o">=</span> <span class="s">`
 Dear ,
 
 It was a pleasure to see you at the wedding.
@@ -83,30 +83,30 @@ Thank you for the lovely .
 
 Best wishes,
 Josie
-`</span><span class="x">
-	</span><span class="c">// Prepare some data to insert into the template.</span><span class="x">
-	</span><span class="k">type</span><span class="x"> </span><span class="n">Recipient</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-		</span><span class="n">Name</span><span class="p">,</span><span class="x"> </span><span class="n">Gift</span><span class="x"> </span><span class="kt">string</span><span class="x">
-		</span><span class="n">Attended</span><span class="x">   </span><span class="kt">bool</span><span class="x">
-	</span><span class="p">}</span><span class="x">
-	</span><span class="k">var</span><span class="x"> </span><span class="n">recipients</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="p">[]</span><span class="n">Recipient</span><span class="p">{</span><span class="x">
-		</span><span class="p">{</span><span class="s">"Aunt Mildred"</span><span class="p">,</span><span class="x"> </span><span class="s">"bone china tea set"</span><span class="p">,</span><span class="x"> </span><span class="no">true</span><span class="p">},</span><span class="x">
-		</span><span class="p">{</span><span class="s">"Uncle John"</span><span class="p">,</span><span class="x"> </span><span class="s">"moleskin pants"</span><span class="p">,</span><span class="x"> </span><span class="no">false</span><span class="p">},</span><span class="x">
-		</span><span class="p">{</span><span class="s">"Cousin Rodney"</span><span class="p">,</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="no">false</span><span class="p">},</span><span class="x">
-	</span><span class="p">}</span><span class="x">
+`</span>
+	<span class="c">// Prepare some data to insert into the template.</span>
+	<span class="k">type</span> <span class="n">Recipient</span> <span class="k">struct</span> <span class="p">{</span>
+		<span class="n">Name</span><span class="p">,</span> <span class="n">Gift</span> <span class="kt">string</span>
+		<span class="n">Attended</span>   <span class="kt">bool</span>
+	<span class="p">}</span>
+	<span class="k">var</span> <span class="n">recipients</span> <span class="o">=</span> <span class="p">[]</span><span class="n">Recipient</span><span class="p">{</span>
+		<span class="p">{</span><span class="s">"Aunt Mildred"</span><span class="p">,</span> <span class="s">"bone china tea set"</span><span class="p">,</span> <span class="no">true</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">"Uncle John"</span><span class="p">,</span> <span class="s">"moleskin pants"</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">"Cousin Rodney"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span>
+	<span class="p">}</span>
 
-	</span><span class="c">// Create a new template and parse the letter into it.</span><span class="x">
-	</span><span class="n">t</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">template</span><span class="o">.</span><span class="n">Must</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"aaa"</span><span class="p">)</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">letter</span><span class="p">))</span><span class="x">
+	<span class="c">// Create a new template and parse the letter into it.</span>
+	<span class="n">t</span> <span class="o">:=</span> <span class="n">template</span><span class="o">.</span><span class="n">Must</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"aaa"</span><span class="p">)</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">letter</span><span class="p">))</span>
 
-	</span><span class="c">// Execute the template for each recipient.</span><span class="x">
-	</span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">recipients</span><span class="x"> </span><span class="p">{</span><span class="x">
-		</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">t</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span><span class="x"> </span><span class="n">r</span><span class="p">)</span><span class="x">
-		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-			</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"executing template:"</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="p">)</span><span class="x">
-		</span><span class="p">}</span><span class="x">
-	</span><span class="p">}</span><span class="x">
+	<span class="c">// Execute the template for each recipient.</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">recipients</span> <span class="p">{</span>
+		<span class="n">err</span> <span class="o">:=</span> <span class="n">t</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+			<span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"executing template:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 	
-</span><span class="p">}</span></code></pre></figure>
+<span class="p">}</span></code></pre></figure>
 
 
   </div><a class="u-url" href="/go/2019/03/09/go-string.html" hidden></a>

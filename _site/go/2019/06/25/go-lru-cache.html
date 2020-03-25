@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Go LRU Cache | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Go LRU Cache" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="用go 实现 lru 用于缓存" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-06-25T07:10:00+00:00" />
 <script type="application/ld+json">
-{"headline":"Go LRU Cache","dateModified":"2019-06-25T07:10:00+00:00","datePublished":"2019-06-25T07:10:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/06/25/go-lru-cache.html"},"description":"用go 实现 lru 用于缓存","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/06/25/go-lru-cache.html","@context":"http://schema.org"}</script>
+{"datePublished":"2019-06-25T07:10:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/06/25/go-lru-cache.html"},"dateModified":"2019-06-25T07:10:00+00:00","description":"用go 实现 lru 用于缓存","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/06/25/go-lru-cache.html","headline":"Go LRU Cache","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -59,81 +59,81 @@
 
 <h4 id="代码实现">代码实现</h4>
 
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span><span class="x"> </span><span class="n">Node</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">Key</span><span class="x"> </span><span class="kt">int</span><span class="x">
-    </span><span class="n">Value</span><span class="x"> </span><span class="kt">int</span><span class="x">
-    </span><span class="n">pre</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="x">
-    </span><span class="n">next</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span> <span class="n">Node</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">Key</span> <span class="kt">int</span>
+    <span class="n">Value</span> <span class="kt">int</span>
+    <span class="n">pre</span> <span class="o">*</span><span class="n">Node</span>
+    <span class="n">next</span> <span class="o">*</span><span class="n">Node</span>
+<span class="p">}</span>
 
-</span><span class="k">type</span><span class="x"> </span><span class="n">LRUCache</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">limit</span><span class="x"> </span><span class="kt">int</span><span class="x">
-    </span><span class="n">HashMap</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="n">Node</span><span class="x">
-    </span><span class="n">head</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="x">
-    </span><span class="n">end</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">type</span> <span class="n">LRUCache</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">limit</span> <span class="kt">int</span>
+    <span class="n">HashMap</span> <span class="k">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="n">Node</span>
+    <span class="n">head</span> <span class="o">*</span><span class="n">Node</span>
+    <span class="n">end</span> <span class="o">*</span><span class="n">Node</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="n">Constructor</span><span class="p">(</span><span class="n">capacity</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="n">LRUCache</span><span class="p">{</span><span class="x">
-    </span><span class="n">lruCache</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">LRUCache</span><span class="p">{</span><span class="n">limit</span><span class="o">:</span><span class="n">capacity</span><span class="p">}</span><span class="x">
-    </span><span class="n">lruCache</span><span class="o">.</span><span class="n">HashMap</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="n">Node</span><span class="p">,</span><span class="x"> </span><span class="n">capacity</span><span class="p">)</span><span class="x">
-    </span><span class="k">return</span><span class="x"> </span><span class="n">lruCache</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="n">Constructor</span><span class="p">(</span><span class="n">capacity</span> <span class="kt">int</span><span class="p">)</span> <span class="n">LRUCache</span><span class="p">{</span>
+    <span class="n">lruCache</span> <span class="o">:=</span> <span class="n">LRUCache</span><span class="p">{</span><span class="n">limit</span><span class="o">:</span><span class="n">capacity</span><span class="p">}</span>
+    <span class="n">lruCache</span><span class="o">.</span><span class="n">HashMap</span> <span class="o">=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="n">Node</span><span class="p">,</span> <span class="n">capacity</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lruCache</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">l</span><span class="x"> </span><span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span><span class="x"> </span><span class="n">Get</span><span class="p">(</span><span class="n">key</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="kt">int</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">v</span><span class="p">,</span><span class="n">ok</span><span class="o">:=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">];</span><span class="n">ok</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">refreshNode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="x">
-        </span><span class="k">return</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Value</span><span class="x">
-    </span><span class="p">}</span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="k">return</span><span class="x"> </span><span class="o">-</span><span class="m">1</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span> <span class="n">Get</span><span class="p">(</span><span class="n">key</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">,</span><span class="n">ok</span><span class="o">:=</span> <span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">];</span><span class="n">ok</span> <span class="p">{</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">refreshNode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">Value</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">l</span><span class="x"> </span><span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span><span class="x"> </span><span class="n">Put</span><span class="p">(</span><span class="n">key</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="x"> </span><span class="n">value</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">v</span><span class="p">,</span><span class="n">ok</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">];</span><span class="o">!</span><span class="n">ok</span><span class="p">{</span><span class="x">
-        </span><span class="k">if</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">)</span><span class="x"> </span><span class="o">&gt;=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">limit</span><span class="p">{</span><span class="x">
-            </span><span class="n">oldKey</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="p">)</span><span class="x">
-            </span><span class="nb">delete</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">,</span><span class="x"> </span><span class="n">oldKey</span><span class="p">)</span><span class="x">
-        </span><span class="p">}</span><span class="x">
-        </span><span class="n">node</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Node</span><span class="p">{</span><span class="n">Key</span><span class="o">:</span><span class="n">key</span><span class="p">,</span><span class="x"> </span><span class="n">Value</span><span class="o">:</span><span class="n">value</span><span class="p">}</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="p">)</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">node</span><span class="x">
-    </span><span class="p">}</span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">v</span><span class="o">.</span><span class="n">Value</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">value</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">refreshNode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span> <span class="n">Put</span><span class="p">(</span><span class="n">key</span> <span class="kt">int</span><span class="p">,</span> <span class="n">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">,</span><span class="n">ok</span> <span class="o">:=</span> <span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">];</span><span class="o">!</span><span class="n">ok</span><span class="p">{</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">l</span><span class="o">.</span><span class="n">limit</span><span class="p">{</span>
+            <span class="n">oldKey</span> <span class="o">:=</span> <span class="n">l</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+            <span class="nb">delete</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">,</span> <span class="n">oldKey</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">node</span> <span class="o">:=</span> <span class="n">Node</span><span class="p">{</span><span class="n">Key</span><span class="o">:</span><span class="n">key</span><span class="p">,</span> <span class="n">Value</span><span class="o">:</span><span class="n">value</span><span class="p">}</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">HashMap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">node</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">refreshNode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">l</span><span class="x"> </span><span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span><span class="x"> </span><span class="n">refreshNode</span><span class="p">(</span><span class="n">node</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="p">){</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">node</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="k">return</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="n">l</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="x">
-    </span><span class="n">l</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span> <span class="n">refreshNode</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">Node</span><span class="p">){</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">l</span><span class="o">.</span><span class="n">end</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">l</span><span class="x"> </span><span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span><span class="x"> </span><span class="n">removeNode</span><span class="p">(</span><span class="n">node</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="p">)</span><span class="x"> </span><span class="kt">int</span><span class="p">{</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">node</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x">  </span><span class="p">{</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">pre</span><span class="x">
-    </span><span class="p">}</span><span class="k">else</span><span class="x"> </span><span class="k">if</span><span class="x"> </span><span class="n">node</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="x">
-    </span><span class="p">}</span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">node</span><span class="o">.</span><span class="n">pre</span><span class="o">.</span><span class="n">next</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="x">
-        </span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">pre</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">node</span><span class="o">.</span><span class="n">pre</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="k">return</span><span class="x"> </span><span class="n">node</span><span class="o">.</span><span class="n">Key</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span> <span class="n">removeNode</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">Node</span><span class="p">)</span> <span class="kt">int</span><span class="p">{</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">l</span><span class="o">.</span><span class="n">end</span>  <span class="p">{</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">pre</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">l</span><span class="o">.</span><span class="n">head</span> <span class="p">{</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">pre</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">pre</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">Key</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">l</span><span class="x"> </span><span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span><span class="x"> </span><span class="n">addNode</span><span class="p">(</span><span class="n">node</span><span class="x"> </span><span class="o">*</span><span class="n">Node</span><span class="p">){</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">next</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">node</span><span class="x">
-        </span><span class="n">node</span><span class="o">.</span><span class="n">pre</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x">
-        </span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="no">nil</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">node</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">node</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-</span><span class="p">}</span></code></pre></figure>
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LRUCache</span><span class="p">)</span> <span class="n">addNode</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">Node</span><span class="p">){</span>
+    <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">end</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">end</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="no">nil</span>
+    <span class="p">}</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
 
   </div><a class="u-url" href="/go/2019/06/25/go-lru-cache.html" hidden></a>

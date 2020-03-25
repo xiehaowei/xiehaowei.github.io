@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Page 5 of 6 for Xie Haowei | A Blog for Study &amp; Record</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Xie Haowei" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A Blog for Study &amp; Record" />
@@ -15,7 +15,7 @@
 <link rel="prev" href="https://xiehaowei.github.io//page4" />
 <link rel="next" href="https://xiehaowei.github.io//page6" />
 <script type="application/ld+json">
-{"headline":"Xie Haowei","description":"A Blog for Study &amp; Record","@type":"WebPage","url":"https://xiehaowei.github.io//page5/","@context":"http://schema.org"}</script>
+{"description":"A Blog for Study &amp; Record","@type":"WebPage","url":"https://xiehaowei.github.io//page5/","headline":"Xie Haowei","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -52,7 +52,6 @@
     按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。
 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：
 
-
 </div>
 <br />
 <a href="/mysql/2018/06/24/MySQL-transaction.html"> >>> Read More </a>
@@ -68,7 +67,6 @@
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">ps|awk <span class="s1">'{print "'</span><span class="se">\'</span><span class="s1">'"}'</span>    
 <span class="c">#使用一个双引号""，然后在双引号里面加入两个单引号''</span>
 <span class="c">#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</span></code></pre></figure>
-
 
 </div>
 <br />
@@ -86,9 +84,9 @@
   * @param ip   
   * @return   
   */</span>    
- <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">ip2long</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">)</span> <span class="o">{</span>     
-     <span class="n">String</span><span class="o">[]</span> <span class="n">ips</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"[.]"</span><span class="o">);</span>     
-     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span>  <span class="mi">16777216L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">+</span> <span class="mi">65536L</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">+</span> <span class="mi">256</span><span class="o">*</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span> <span class="o">+</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>     
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">ip2long</span><span class="o">(</span><span class="nc">String</span> <span class="n">ip</span><span class="o">)</span> <span class="o">{</span>     
+     <span class="nc">String</span><span class="o">[]</span> <span class="n">ips</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"[.]"</span><span class="o">);</span>     
+     <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span>  <span class="mi">16777216L</span><span class="o">*</span><span class="nc">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">+</span> <span class="mi">65536L</span><span class="o">*</span><span class="nc">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">+</span> <span class="mi">256</span><span class="o">*</span><span class="nc">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span> <span class="o">+</span> <span class="nc">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">ips</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>     
      <span class="k">return</span> <span class="n">num</span><span class="o">;</span>     
  <span class="o">}</span>     
       
@@ -97,15 +95,15 @@
   * @param ipLong   
   * @return   
   */</span>    
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">long2ip</span><span class="o">(</span><span class="kt">long</span> <span class="n">ipLong</span><span class="o">)</span> <span class="o">{</span>     
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">long2ip</span><span class="o">(</span><span class="kt">long</span> <span class="n">ipLong</span><span class="o">)</span> <span class="o">{</span>     
      <span class="c1">//long ipLong = 1037591503;     </span>
      <span class="kt">long</span> <span class="n">mask</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mh">0x000000FF</span><span class="o">,</span><span class="mh">0x0000FF00</span><span class="o">,</span><span class="mh">0x00FF0000</span><span class="o">,</span><span class="mh">0xFF000000</span><span class="o">};</span>     
      <span class="kt">long</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>     
-     <span class="n">StringBuffer</span> <span class="n">ipInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>     
+     <span class="nc">StringBuffer</span> <span class="n">ipInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>     
      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>     
          <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="n">ipLong</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;&gt;(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="o">);</span>     
          <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"."</span><span class="o">);</span>     
-         <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">,</span><span class="mi">10</span><span class="o">));</span>     
+         <span class="n">ipInfo</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="nc">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">,</span><span class="mi">10</span><span class="o">));</span>     
      <span class="o">}</span>     
      <span class="k">return</span> <span class="n">ipInfo</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>     
 <span class="o">}</span> </code></pre></figure>
@@ -160,7 +158,6 @@
 </p>
 <div class="content" style="">
     一个TCP连接的过程中，会经历一系列的状态变化，这些变化包括：
-
 
 </div>
 <br />

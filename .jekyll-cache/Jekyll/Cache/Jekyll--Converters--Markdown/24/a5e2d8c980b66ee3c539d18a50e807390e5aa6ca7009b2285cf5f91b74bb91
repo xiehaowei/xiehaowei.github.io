@@ -1,0 +1,26 @@
+I"<h4 id="快速获取字符串-utf8字符个数">快速获取字符串 utf8字符个数</h4>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">import</span> <span class="s">"unicode/utf8"</span>
+<span class="n">utf8</span><span class="o">.</span><span class="n">RuneCountInString</span><span class="p">()</span></code></pre></figure>
+
+<h4 id="判断一个utf8-字符是含汉字-字母-还是数字">判断一个utf8 字符是含汉字 字母 还是数字</h4>
+
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">import</span> <span class="s">"unicode/utf8"</span>
+
+
+  <span class="n">str</span> <span class="o">:=</span> <span class="s">"判断一个utf8 字符是含汉字 字母 还是数字 （）《》- ="</span>
+	<span class="n">inSlice</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+	<span class="n">outSlice</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">rune</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">15</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">inSlice</span><span class="p">{</span>
+		<span class="k">if</span> <span class="n">unicode</span><span class="o">.</span><span class="n">Is</span><span class="p">(</span><span class="n">unicode</span><span class="o">.</span><span class="n">Han</span><span class="p">,</span><span class="n">v</span><span class="p">){</span>
+			<span class="n">outSlice</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">outSlice</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+		<span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="m">128</span><span class="p">{</span>
+			<span class="n">outSlice</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">outSlice</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">unicode</span><span class="o">.</span><span class="n">IsDigit</span><span class="p">(</span><span class="n">v</span><span class="p">){</span>
+				<span class="n">outSlice</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">outSlice</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">unicode</span><span class="o">.</span><span class="n">IsLetter</span><span class="p">(</span><span class="n">v</span><span class="p">){</span>
+				<span class="n">outSlice</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">outSlice</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+ 	<span class="p">}</span></code></pre></figure>
+:ET

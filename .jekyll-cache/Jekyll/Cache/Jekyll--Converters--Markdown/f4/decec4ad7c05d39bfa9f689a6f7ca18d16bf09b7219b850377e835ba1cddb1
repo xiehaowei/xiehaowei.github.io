@@ -1,0 +1,62 @@
+I"P
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"strings"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">str</span> <span class="o">:=</span> <span class="s">"我的abc你的"</span>
+	<span class="n">str2</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">str</span><span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">str2</span><span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"k:"</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">" v:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="n">need</span> <span class="o">:=</span> <span class="s">"abc"</span>
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">_</span><span class="o">:=</span> <span class="k">range</span> <span class="n">str2</span><span class="p">{</span>
+		<span class="k">if</span> <span class="n">strings</span><span class="o">.</span><span class="n">HasPrefix</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">str2</span><span class="p">[</span><span class="n">k</span><span class="o">:</span><span class="p">]),</span><span class="n">need</span><span class="p">){</span>
+			<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"at"</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">const</span> <span class="n">letter</span> <span class="o">=</span> <span class="s">`
+Dear ,
+
+It was a pleasure to see you at the wedding.
+It is a shame you couldn't make it to the wedding.
+Thank you for the lovely .
+
+Best wishes,
+Josie
+`</span>
+	<span class="c">// Prepare some data to insert into the template.</span>
+	<span class="k">type</span> <span class="n">Recipient</span> <span class="k">struct</span> <span class="p">{</span>
+		<span class="n">Name</span><span class="p">,</span> <span class="n">Gift</span> <span class="kt">string</span>
+		<span class="n">Attended</span>   <span class="kt">bool</span>
+	<span class="p">}</span>
+	<span class="k">var</span> <span class="n">recipients</span> <span class="o">=</span> <span class="p">[]</span><span class="n">Recipient</span><span class="p">{</span>
+		<span class="p">{</span><span class="s">"Aunt Mildred"</span><span class="p">,</span> <span class="s">"bone china tea set"</span><span class="p">,</span> <span class="no">true</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">"Uncle John"</span><span class="p">,</span> <span class="s">"moleskin pants"</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">"Cousin Rodney"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="c">// Create a new template and parse the letter into it.</span>
+	<span class="n">t</span> <span class="o">:=</span> <span class="n">template</span><span class="o">.</span><span class="n">Must</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"aaa"</span><span class="p">)</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">letter</span><span class="p">))</span>
+
+	<span class="c">// Execute the template for each recipient.</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">recipients</span> <span class="p">{</span>
+		<span class="n">err</span> <span class="o">:=</span> <span class="n">t</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+			<span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"executing template:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span></code></pre></figure>
+
+:ET

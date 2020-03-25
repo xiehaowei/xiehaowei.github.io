@@ -1,0 +1,44 @@
+I"><h3 id="输出单引号">输出单引号</h3>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ps|awk <span class="s1">'{print "'</span><span class="se">\'</span><span class="s1">'"}'</span>    
+<span class="c">#使用一个双引号""，然后在双引号里面加入两个单引号''</span>
+<span class="c">#接着在两个单引号里面加入一个转义的单引号\'，输出单引号。</span></code></pre></figure>
+
+<h3 id="输出双引号">输出双引号</h3>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ps|awk <span class="s1">'{print "\""}'</span>
+
+<span class="c">#使用""双引号把一个双引号括起来</span>
+<span class="c"># 然后用转义字符\对双引号进行转义，输出双引号。</span></code></pre></figure>
+
+<h3 id="把一个文件合并成一行">把一个文件合并成一行</h3>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">awk </span>BEGIN<span class="o">{</span><span class="nv">RS</span><span class="o">=</span>EOF<span class="o">}</span><span class="s1">'{gsub(/\n/,",");print}'</span> aa.txt
+<span class="c">#awk默认将记录分隔符（record separator即RS）设置为\n</span>
+<span class="c">#此行代码将RS设置为EOF（文件结束），也就是把文件视为一个记录</span>
+<span class="c">#然后通过gsub函数将\n替换成","，最后输出</span></code></pre></figure>
+
+<h3 id="两个文件相同key-累加并倒序输出">两个文件，相同key 累加，并倒序输出</h3>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cat </span>a1 a2 | <span class="nb">awk</span>  <span class="s1">'{a[$2]+=$1;}END{for(i in a){print a[i]" "i;}}'</span> |sort <span class="nt">-k1</span> <span class="nt">-nr</span>
+<span class="c"># END</span></code></pre></figure>
+
+<h4 id="示例">示例</h4>
+<p>file a1:</p>
+<ul>
+  <li>1 A</li>
+  <li>2 B</li>
+</ul>
+
+<p>file a2:</p>
+<ul>
+  <li>2 A</li>
+  <li>3 B</li>
+</ul>
+
+<h4 id="输出">输出</h4>
+<ul>
+  <li>5 B</li>
+  <li>3 A</li>
+</ul>
+:ET

@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>dynamic programming | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="dynamic programming" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-07-11T09:27:13+00:00" />
 <script type="application/ld+json">
-{"headline":"dynamic programming","dateModified":"2019-07-11T09:27:13+00:00","datePublished":"2019-07-11T09:27:13+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//algorithm/2019/07/11/dynamic-programming.html"},"description":"动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法","@type":"BlogPosting","url":"https://xiehaowei.github.io//algorithm/2019/07/11/dynamic-programming.html","@context":"http://schema.org"}</script>
+{"datePublished":"2019-07-11T09:27:13+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//algorithm/2019/07/11/dynamic-programming.html"},"dateModified":"2019-07-11T09:27:13+00:00","description":"动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法","@type":"BlogPosting","url":"https://xiehaowei.github.io//algorithm/2019/07/11/dynamic-programming.html","headline":"dynamic programming","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -150,7 +150,7 @@
 <p>动态规划解法：先创建一个解空间即数组，因为给定的是两个字符串即两个一维数组存储的数据，所以要创建一个二维数组，设字符串X有n个值，字符串Y有m个值，需要创建一个m+1*n+1的二维数组，二维数组每个位置（i，j）代表当长度为i的X子串与长度为j的Y的子串他们的最长公共子串，之所以要多创建一个是为了将边界值填入进去，边界值就是第一行跟第一列，指X长度为0或者Y长度为0时，自然需要填0，其他位置填数字时，当这两个位置数字相同，dp[i][j] = dp[i-1][j-1]+1；当这两个位置数字不相同时，dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j])。最后二维数组最右下角的值就是最大子串。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MaxTwoArraySameOrder</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">MaxTwoArraySameOrderMethod</span><span class="o">(</span><span class="n">String</span> <span class="n">str1</span><span class="o">,</span><span class="n">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">MaxTwoArraySameOrderMethod</span><span class="o">(</span><span class="nc">String</span> <span class="n">str1</span><span class="o">,</span><span class="nc">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
 		<span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
 		<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">str2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
 		<span class="cm">/*
@@ -185,17 +185,17 @@
 					 * 表现在二维数组中就是c[i][j]上方的点或者左方的点
 					 */</span>
 				<span class="o">}</span><span class="k">else</span><span class="o">{</span>
-					<span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]);</span>
+					<span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]);</span>
 				<span class="o">}</span>
 			<span class="o">}</span>
 		<span class="o">}</span>
 		<span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"BDCABA"</span><span class="o">;</span>
-		<span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"ABCBDAB"</span><span class="o">;</span>
-		<span class="kt">int</span> <span class="n">array</span> <span class="o">=</span> <span class="n">MaxTwoArraySameOrderMethod</span><span class="o">(</span><span class="n">str1</span><span class="o">,</span><span class="n">str2</span><span class="o">);</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">array</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"BDCABA"</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"ABCBDAB"</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">array</span> <span class="o">=</span> <span class="nc">MaxTwoArraySameOrderMethod</span><span class="o">(</span><span class="n">str1</span><span class="o">,</span><span class="n">str2</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">array</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

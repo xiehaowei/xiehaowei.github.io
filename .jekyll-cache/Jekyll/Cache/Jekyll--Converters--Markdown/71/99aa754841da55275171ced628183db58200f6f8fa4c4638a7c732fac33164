@@ -1,0 +1,29 @@
+I"3
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">file</span><span class="o">=</span>/dir1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">#*/</span><span class="k">}</span>：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">##*/</span><span class="k">}</span>：删掉最后一个 /  及其左边的字符串：my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">#*.</span><span class="k">}</span>：删掉第一个 <span class="nb">.</span>  及其左边的字符串：file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">##*.</span><span class="k">}</span>：删掉最后一个 <span class="nb">.</span>  及其左边的字符串：txt
+<span class="k">${</span><span class="nv">file</span><span class="p">%/*</span><span class="k">}</span>：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+<span class="k">${</span><span class="nv">file</span><span class="p">%%/*</span><span class="k">}</span>：删掉第一个 /  及其右边的字符串：<span class="o">(</span>空值<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">%.*</span><span class="k">}</span>：删掉最后一个  <span class="nb">.</span>  及其右边的字符串：/dir1/dir2/dir3/my.file
+<span class="k">${</span><span class="nv">file</span><span class="p">%%.*</span><span class="k">}</span>：删掉第一个  <span class="nb">.</span>   及其右边的字符串：/dir1/dir2/dir3/my
+ <span class="c"># 是 去掉左边（键盘上#在 $ 的左边）</span>
+%是去掉右边（键盘上% 在<span class="nv">$ </span>的右边）
+单一符号是最小匹配；两个符号是最大匹配
+<span class="k">${</span><span class="nv">file</span>:0:5<span class="k">}</span>：提取最左边的 5 个字节：/dir1
+<span class="k">${</span><span class="nv">file</span>:5:5<span class="k">}</span>：提取第 5 个字节右边的连续5个字节：/dir2
+<span class="k">${</span><span class="nv">file</span><span class="p">/dir/path</span><span class="k">}</span>：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">//dir/path</span><span class="k">}</span>：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
+<span class="k">${</span><span class="nv">file</span><span class="p">-my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有设定，則使用 my.file.txt 作传回值。<span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="k">:-</span><span class="nv">my</span><span class="p">.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 沒有設定或為空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">+my.file.txt</span><span class="k">}</span> ：假如 <span class="nv">$file</span> 設為空值或非空值，均使用 my.file.txt 作傳回值。<span class="o">(</span>沒設定時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:+my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 為非空值，則使用 my.file.txt 作傳回值。 <span class="o">(</span>沒設定及空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為 my.file.txt 。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:<span class="p">=my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 <span class="nv">$file</span> 賦值為my.file.txt 。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span><span class="p">?my.file.txt</span><span class="k">}</span> ：若 <span class="nv">$file</span> 沒設定，則將 my.file.txt 輸出至 STDERR。 <span class="o">(</span>空值及非空值時不作处理<span class="o">)</span>
+<span class="k">${</span><span class="nv">file</span>:?my.file.txt<span class="k">}</span> ：若 <span class="nv">$file</span> 没设定或为空值，则将 my.file.txt 输出至 STDERR。 <span class="o">(</span>非空值時不作处理<span class="o">)</span>
+<span class="k">${#</span><span class="nv">var</span><span class="k">}</span> 可计算出变量值的长度：
+<span class="k">${#</span><span class="nv">file</span><span class="k">}</span> 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节</code></pre></figure>
+
+:ET

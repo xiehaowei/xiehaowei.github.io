@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Go strings Replacer &amp; Join | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Go strings Replacer &amp; Join" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Go strings.Replacer &amp; strings.Join" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-02-17T06:37:21+00:00" />
 <script type="application/ld+json">
-{"headline":"Go strings Replacer &amp; Join","dateModified":"2019-02-17T06:37:21+00:00","datePublished":"2019-02-17T06:37:21+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/02/17/go-replacer.html"},"description":"Go strings.Replacer &amp; strings.Join","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/02/17/go-replacer.html","@context":"http://schema.org"}</script>
+{"datePublished":"2019-02-17T06:37:21+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//go/2019/02/17/go-replacer.html"},"dateModified":"2019-02-17T06:37:21+00:00","description":"Go strings.Replacer &amp; strings.Join","@type":"BlogPosting","url":"https://xiehaowei.github.io//go/2019/02/17/go-replacer.html","headline":"Go strings Replacer &amp; Join","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -49,43 +49,43 @@
   <div class="post-content e-content" itemprop="articleBody">
     <h3 id="stringsreplacer">strings.Replacer</h3>
 
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span><span class="x"> </span><span class="n">Replacer</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-    		</span><span class="n">r</span><span class="x"> </span><span class="n">replacer</span><span class="x">    </span><span class="c">//接口类型</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">type</span> <span class="n">Replacer</span> <span class="k">struct</span> <span class="p">{</span>
+    		<span class="n">r</span> <span class="n">replacer</span>    <span class="c">//接口类型</span>
+<span class="p">}</span>
 
-</span><span class="c">// replacer is the interface that a replacement algorithm needs to implement.</span><span class="x">
-</span><span class="k">type</span><span class="x"> </span><span class="n">replacer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">Replace</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
-    </span><span class="n">WriteString</span><span class="p">(</span><span class="n">w</span><span class="x"> </span><span class="n">io</span><span class="o">.</span><span class="n">Writer</span><span class="p">,</span><span class="x"> </span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="n">n</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
+<span class="c">// replacer is the interface that a replacement algorithm needs to implement.</span>
+<span class="k">type</span> <span class="n">replacer</span> <span class="k">interface</span> <span class="p">{</span>
+    <span class="n">Replace</span><span class="p">(</span><span class="n">s</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
+    <span class="n">WriteString</span><span class="p">(</span><span class="n">w</span> <span class="n">io</span><span class="o">.</span><span class="n">Writer</span><span class="p">,</span> <span class="n">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="n">n</span> <span class="kt">int</span><span class="p">,</span> <span class="n">err</span> <span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="n">nl2br</span><span class="p">(</span><span class="n">originalStr</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">relpacer</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">NewReplacer</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="x"> </span><span class="s">"&lt;br /&gt;"</span><span class="p">,</span><span class="x"> </span><span class="s">"</span><span class="se">\r</span><span class="s">"</span><span class="p">,</span><span class="x"> </span><span class="s">""</span><span class="p">)</span><span class="x">
-	</span><span class="k">return</span><span class="x"> </span><span class="n">relpacer</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">originalStr</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span></code></pre></figure>
+<span class="k">func</span> <span class="n">nl2br</span><span class="p">(</span><span class="n">originalStr</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="n">relpacer</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReplacer</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"&lt;br /&gt;"</span><span class="p">,</span> <span class="s">"</span><span class="se">\r</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">relpacer</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">originalStr</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
 
 <h3 id="stringsjoin">strings.Join</h3>
 
-<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span><span class="x"> </span><span class="n">Join</span><span class="p">(</span><span class="n">a</span><span class="x"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">sep</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="m">0</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="k">return</span><span class="x"> </span><span class="n">a</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="n">n</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="x"> </span><span class="o">-</span><span class="x"> </span><span class="m">1</span><span class="p">)</span><span class="x">
-    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">n</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+<figure class="highlight"><pre><code class="language-go" data-lang="go"><span class="k">func</span> <span class="n">Join</span><span class="p">(</span><span class="n">a</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">""</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="p">}</span>
 
-    </span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="x"> </span><span class="n">n</span><span class="p">)</span><span class="x">       </span><span class="c">//借助 字节切片实现</span><span class="x">
-    </span><span class="n">bp</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="x"> </span><span class="n">a</span><span class="p">[</span><span class="m">0</span><span class="p">])</span><span class="x">        
-    </span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">a</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="p">]</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="n">bp</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">bp</span><span class="o">:</span><span class="p">],</span><span class="x"> </span><span class="n">sep</span><span class="p">)</span><span class="x">
-        </span><span class="n">bp</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">bp</span><span class="o">:</span><span class="p">],</span><span class="x"> </span><span class="n">s</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="k">return</span><span class="x"> </span><span class="n">str</span><span class="x">
-    </span></code></pre></figure>
+    <span class="n">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>       <span class="c">//借助 字节切片实现</span>
+    <span class="n">bp</span> <span class="o">:=</span> <span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="m">0</span><span class="p">])</span>        
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">s</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">a</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="p">]</span> <span class="p">{</span>
+        <span class="n">bp</span> <span class="o">+=</span> <span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">bp</span><span class="o">:</span><span class="p">],</span> <span class="n">sep</span><span class="p">)</span>
+        <span class="n">bp</span> <span class="o">+=</span> <span class="nb">copy</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">bp</span><span class="o">:</span><span class="p">],</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">str</span>
+    </code></pre></figure>
 
   </div><a class="u-url" href="/go/2019/02/17/go-replacer.html" hidden></a>
 </article>

@@ -2,9 +2,9 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>MySQL 事务隔离级别 | Xie Haowei</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="MySQL 事务隔离级别" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-06-24T11:34:23+00:00" />
 <script type="application/ld+json">
-{"headline":"MySQL 事务隔离级别","dateModified":"2018-06-24T11:34:23+00:00","datePublished":"2018-06-24T11:34:23+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//mysql/2018/06/24/MySQL-transaction.html"},"description":"按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：","@type":"BlogPosting","url":"https://xiehaowei.github.io//mysql/2018/06/24/MySQL-transaction.html","@context":"http://schema.org"}</script>
+{"datePublished":"2018-06-24T11:34:23+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiehaowei.github.io//mysql/2018/06/24/MySQL-transaction.html"},"dateModified":"2018-06-24T11:34:23+00:00","description":"按照SQL:1992 事务隔离级别，InnoDB默认是可重复读的（REPEATABLE READ）。MySQL/InnoDB 提供SQL标准所描述的所有四个事务隔离级别。你可以在命令行用–transaction-isolation选项，或在选项文件里，为所有连接设置默认隔离级别。 例如，你可以在my.inf文件的[mysqld]节里类似如下设置该选项：","@type":"BlogPosting","url":"https://xiehaowei.github.io//mysql/2018/06/24/MySQL-transaction.html","headline":"MySQL 事务隔离级别","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -327,8 +327,8 @@
 <p>第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`t_bitfly`</span> <span class="p">(</span>
-<span class="nv">`id`</span> <span class="n">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">default</span> <span class="s1">'0'</span><span class="p">,</span>
-<span class="nv">`value`</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="k">default</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="nv">`id`</span> <span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">default</span> <span class="s1">'0'</span><span class="p">,</span>
+<span class="nv">`value`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="k">default</span> <span class="k">NULL</span><span class="p">,</span>
 <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
 <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span>
 
