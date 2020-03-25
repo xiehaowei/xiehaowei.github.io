@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xiehaowei.github.io//index.md2" />
 <meta property="og:site_name" content="Xie Haowei" />
 <script type="application/ld+json">
-{"url":"https://xiehaowei.github.io//index.md2","description":"A Blog for Study &amp; Record","@type":"WebPage","headline":"Xie Haowei","@context":"http://schema.org"}</script>
+{"headline":"Xie Haowei","description":"A Blog for Study &amp; Record","@type":"WebPage","url":"https://xiehaowei.github.io//index.md2","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -34,7 +34,17 @@
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="home"><h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Sep 7, 2019</span>
+    <ul class="post-list"><li><span class="post-meta">Sep 16, 2019</span>
+        <h3>
+          <a class="post-link" href="/vim/2019/09/16/vim-column-edit.html">
+            vim column edit
+          </a>
+        </h3></li><li><span class="post-meta">Sep 7, 2019</span>
+        <h3>
+          <a class="post-link" href="/go/2019/09/07/go-unicode.html">
+            Go Module (Go 1.13)
+          </a>
+        </h3></li><li><span class="post-meta">Sep 7, 2019</span>
         <h3>
           <a class="post-link" href="/go/2019/09/07/go-module.html">
             Go Module (Go 1.13)

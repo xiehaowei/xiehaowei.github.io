@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Xie Haowei" />
 <link rel="prev" href="https://xiehaowei.github.io//page5" />
 <script type="application/ld+json">
-{"url":"https://xiehaowei.github.io//page6/","description":"A Blog for Study &amp; Record","@type":"WebPage","headline":"Xie Haowei","@context":"http://schema.org"}</script>
+{"headline":"Xie Haowei","description":"A Blog for Study &amp; Record","@type":"WebPage","url":"https://xiehaowei.github.io//page6/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://xiehaowei.github.io//feed.xml" title="Xie Haowei" /></head>
 <body><header class="site-header" role="banner">
@@ -42,6 +42,53 @@
 
   <div class="post-content">
     <!-- 遍历分页后的文章 -->
+
+<h1><a href="/algorithm/2016/09/18/algorithm.html">algorithm</a></h1>
+<p class="author">
+<span class="date">2016-09-18</span>
+</p>
+<div class="content" style="">
+    <h3 id="1-合并排序将两个已经排序的数组合并成一个数组其中一个数组能容下两个数组的所有元素">1. 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素</h3>
+
+
+</div>
+<br />
+<a href="/algorithm/2016/09/18/algorithm.html"> >>> Read More </a>
+<br /><br />
+
+<h1><a href="/nginx/2016/09/17/nginx-X-sendfile.html">Nginx X-Sendfile</a></h1>
+<p class="author">
+<span class="date">2016-09-17</span>
+</p>
+<div class="content" style="">
+    <h3 id="常见php-下载文件">常见PHP 下载文件</h3>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 用户身份认证，若验证失败跳转</span>
+<span class="nx">authenticate</span><span class="p">();</span>
+<span class="c1">// 获取需要下载的文件，若文件不存在跳转</span>
+<span class="nv">$file</span><span class="o">=</span> <span class="nx">determine_file</span><span class="p">();</span>
+<span class="c1">// 读取文件内容</span>
+<span class="nv">$content</span><span class="o">=</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+<span class="c1">// 发送合适的 HTTP 头</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/octet-stream"</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename="'</span><span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span><span class="s1">'"'</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Length: "</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
+<span class="k">echo</span><span class="nv">$content</span><span class="p">;</span> <span class="c1">// 或者 readfile($file);</span>
+<span class="cp">?&gt;</span></code></pre></figure>
+
+<h3 id="开启nginx-x-sendfile">开启Nginx X-Sendfile</h3>
+
+<figure class="highlight"><pre><code class="language-conf" data-lang="conf"><span class="n">location</span> /<span class="n">protected</span>/ {
+ <span class="n">internal</span>;
+ <span class="n">root</span>  /<span class="n">some</span>/<span class="n">path</span>;
+}</code></pre></figure>
+
+
+</div>
+<br />
+<a href="/nginx/2016/09/17/nginx-X-sendfile.html"> >>> Read More </a>
+<br /><br />
 
 <h1><a href="/algorithm/2016/09/17/quicksort.html">quicksort</a></h1>
 <p class="author">
