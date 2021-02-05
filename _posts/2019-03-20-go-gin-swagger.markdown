@@ -36,19 +36,16 @@ package main
 import (
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	_ "gitlab.luojilab.com/igetserver/evaluation/docs"
+	_ "xxx/docs"
 )
 
 func main() {
-	conf := artemis.LoadConfig(*confPath)
-	artemis.App = artemis.New(conf)
-	time.LoadLocation("Asia/Shanghai")
-	api.RouteAPI(artemis.App.Router, Version)
-	// @title DeDao evaluation API
+	
+	// @title Go swagger API
 	// @version 1.0
-	// @description This is a sample server DeDao evaluation server.
-	// @host http://127.0.0.1:6641
-	// @BasePath /evaluation/v1
+	// @description 
+	// @host http://127.0.0.1:6666
+	// @BasePath /demo/v1
 	artemis.App.Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	artemis.App.Run()
 
@@ -60,16 +57,16 @@ func main() {
 #### 7.  Declarative Comments Format
 
 {% highlight go %}
-// Get Commodity Detail godoc
-// @Summary 获取 commodity detail
-// @Description 通过id 获取 commodity detail
-// @Tags commodity
+// Get Demo Detail godoc
+// @Summary 获取  detail
+// @Description 通过id 获取 object detail
+// @Tags demo
 // @Accept  x-www-form-urlencoded,json
 // @Param id path int true "id" default(1)
 // @Produce  json
-// @Success 200 {object} models.CommodityItem
-// @Router /commodity/{id}/detail [get]
-func (endpoint *CommodityEndpoint) getCommodity(c *gin.Context) {
+// @Success 200 {object} models.Demo
+// @Router /demo/{id}/detail [get]
+func (endpoint *ep) getDetail(c *gin.Context) {
 	idStr := c.Param("id")
 	...
 }
